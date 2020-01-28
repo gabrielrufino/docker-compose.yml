@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: tests
+      MYSQL_USER: gabrielrufino
+      MYSQL_PASSWORD: 12345678
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: gabrielrufino
+      PMA_PASSWORD: 12345678
+    ports:
+      - "80"
+    depends_on:
+      - mysql
