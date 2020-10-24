@@ -12,7 +12,7 @@ Service with MongoDB server.
 $ docker-compose up -d mongo
 ```
 
-**User:** root
+**User:** root 
 **Password:** root
 
 Getting in the container bash:
