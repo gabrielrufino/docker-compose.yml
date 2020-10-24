@@ -12,6 +12,19 @@ Service with MongoDB server.
 $ docker-compose up -d mongo
 ```
 
+**User:** root
+**Password:** root
+
+Getting in the container bash:
+
+```bash
+$ docker-compose exec mongo /bin/bash
+```
+
+```bash
+$ docker-compose exec mongo mongo -u root -p root
+```
+
 ### Mongo Express
 
 Service with Mongo Express interface.
