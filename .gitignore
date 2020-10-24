@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Volumes files
+/volumes/mongo/*
+!/volumes/mongo/.gitkeep
+/volumes/mysql/*
+!/volumes/mysql/.gitkeep

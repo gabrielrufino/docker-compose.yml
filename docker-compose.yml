@@ -8,6 +8,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
+    volumes:
+      - ./volumes/mongo/:/home/shared
   mongo-express:
     image: mongo-express
     ports:
@@ -26,6 +28,8 @@ services:
       MYSQL_ROOT_PASSWORD: password
     ports:
       - "3306:3306"
+    volumes:
+      - ./volumes/mysql/:/home/shared
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
