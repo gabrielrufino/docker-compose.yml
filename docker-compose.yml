@@ -40,3 +40,8 @@ services:
       - "80"
     depends_on:
       - mysql
+  ubuntu:
+    image: ubuntu
+    tty: true
+    volumes:
+      - ./volumes/ubuntu/:/home/shared

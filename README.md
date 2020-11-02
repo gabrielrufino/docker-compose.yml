@@ -62,6 +62,23 @@ Service with phpMyAdmin interface.
 $ docker-compose up -d phpmyadmin
 ```
 
+### Ubuntu
+
+Service running Ubuntu.
+
+```bash
+$ docker-compose up -d ubuntu
+```
+
+Getting in the container bash:
+```bash
+$ docker-compose exec ubuntu /bin/bash
+```
+
+#### Volume
+
+`./volumes/ubuntu` => `/home/shared`
+
 ## Volumes
 
 Some of the services has a volume in `./volumes/[service]`.
