@@ -108,3 +108,6 @@ dist
 !/volumes/mongo/.gitkeep
 /volumes/mysql/*
 !/volumes/mysql/.gitkeep
+/volumes/ubuntu/*
+!/volumes/ubuntu/.gitkeep
+
