@@ -62,6 +62,14 @@ Service with phpMyAdmin interface.
 $ docker-compose up -d phpmyadmin
 ```
 
+### SQL Server
+
+Service with Microsoft SQL Server
+
+```bash
+$ docker-compose up -d sqlserver
+```
+
 ### Ubuntu
 
 Service running Ubuntu.

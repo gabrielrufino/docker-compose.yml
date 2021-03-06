@@ -40,6 +40,13 @@ services:
       - "80"
     depends_on:
       - mysql
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+        SA_PASSWORD: "password@123"
+        ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
   ubuntu:
     image: ubuntu
     tty: true
