@@ -62,6 +62,14 @@ Service with phpMyAdmin interface.
 $ docker-compose up -d phpmyadmin
 ```
 
+### Postgres SQL
+
+Service with Postgres SQL
+
+```bash
+$ docker-compose up -d postgres
+```
+
 ### SQL Server
 
 Service with Microsoft SQL Server
