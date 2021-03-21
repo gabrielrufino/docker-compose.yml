@@ -49,6 +49,13 @@ services:
       - "5432:5432"
     volumes:
       - ./volumes/postgres/:/home/shared
+  rethinkdb:
+    image: rethinkdb
+    ports:
+      - "28015:28015"
+      - "28016:8080"
+    volumes:
+      - ./volumes/rethinkdb/:/home/shared
   sqlserver:
     image: mcr.microsoft.com/mssql/server
     environment:

@@ -70,6 +70,19 @@ Service with Postgres SQL
 $ docker-compose up -d postgres
 ```
 
+### RethinkDB
+
+Service with RethinkDB
+
+```bash
+$ docker-compose up -d rethinkdb
+```
+
+#### Volume
+
+`./volumes/rethinkdb` => `/home/shared`
+
+
 ### SQL Server
 
 Service with Microsoft SQL Server
