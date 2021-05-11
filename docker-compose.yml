@@ -68,3 +68,11 @@ services:
     tty: true
     volumes:
       - ./volumes/ubuntu/:/home/shared
+  verdaccio:
+    image: verdaccio/verdaccio
+    environment:
+      - "4873:4873"
+    volumes:
+      - "./verdaccio/storage:/verdaccio/storage"
+      - "./verdaccio/config:/verdaccio/conf"
+      - "./verdaccio/plugins:/verdaccio/plugins"  
