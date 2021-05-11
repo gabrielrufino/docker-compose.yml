@@ -108,6 +108,20 @@ $ docker-compose exec ubuntu /bin/bash
 
 `./volumes/ubuntu` => `/home/shared`
 
+### Verdaccio
+
+Service running Verdaccio.
+
+```bash
+$ docker-compose up -d verdaccio
+```
+
+#### Volumes
+
+`./verdaccio/storage` => `/verdaccio/storage`
+`./verdaccio/config`  => `/verdaccio/conf`
+`./verdaccio/plugins` => `/verdaccio/plugins`
+
 ## Volumes
 
 Some of the services has a volume in `./volumes/[service]`.
