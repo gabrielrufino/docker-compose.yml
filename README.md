@@ -91,6 +91,18 @@ Service with Microsoft SQL Server
 $ docker-compose up -d sqlserver
 ```
 
+### Strapi
+
+Service with Strapi
+
+```bash
+$ docker-compose up -d strapi
+```
+
+#### Volume
+
+`./volumes/strapi` => `/srv/app`
+
 ### Ubuntu
 
 Service running Ubuntu.

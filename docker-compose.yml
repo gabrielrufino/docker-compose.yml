@@ -63,6 +63,12 @@ services:
         ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
+  strapi:
+    image: strapi/strapi
+    volumes:
+      - ./volumes/strapi:/srv/app
+    ports:
+      - "1337:1337"
   ubuntu:
     image: ubuntu
     tty: true
