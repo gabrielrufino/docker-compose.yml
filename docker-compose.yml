@@ -20,7 +20,7 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: root
   mysql:
-    image: mysql:5.7
+    image: mysql:8.0.25
     environment:
       MYSQL_DATABASE: tests
       MYSQL_USER: gabrielrufino
