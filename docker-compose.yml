@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   mongo:
-    image: mongo
+    image: mongo:4
     ports:
       - 27017:27017
     environment:
@@ -20,7 +20,7 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: root
   mysql:
-    image: mysql:8.0.25
+    image: mysql:8
     environment:
       MYSQL_DATABASE: tests
       MYSQL_USER: gabrielrufino
@@ -41,7 +41,7 @@ services:
     depends_on:
       - mysql
   postgres:
-    image: postgres
+    image: postgres:13
     environment:
       POSTGRES_USER: gabrielrufino
       POSTGRES_PASSWORD: 12345678
@@ -50,7 +50,7 @@ services:
     volumes:
       - ./volumes/postgres/:/home/shared
   rethinkdb:
-    image: rethinkdb
+    image: rethinkdb:2
     ports:
       - "28015:28015"
       - "28016:8080"
@@ -64,18 +64,18 @@ services:
     ports:
       - "1433:1433"
   strapi:
-    image: strapi/strapi
+    image: strapi/strapi:3
     volumes:
       - ./volumes/strapi:/srv/app
     ports:
       - "1337:1337"
   ubuntu:
-    image: ubuntu
+    image: ubuntu:20.04
     tty: true
     volumes:
       - ./volumes/ubuntu/:/home/shared
   verdaccio:
-    image: verdaccio/verdaccio
+    image: verdaccio/verdaccio:4
     environment:
       - VERDACCIO_PORT=4873
     ports:
