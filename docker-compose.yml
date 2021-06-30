@@ -30,6 +30,10 @@ services:
       - "3306:3306"
     volumes:
       - ./volumes/mysql/:/home/shared
+  nginx:
+    image: nginx:1
+    ports:
+      - "8080:80"
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:

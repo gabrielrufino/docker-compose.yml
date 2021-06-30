@@ -54,6 +54,19 @@ $ docker-compose exec mongo /bin/bash
 
 `./volumes/mysql` => `/home/shared`
 
+### Nginx
+
+Service with MySQL Server.
+
+```bash
+$ docker-compose up -d nginx
+```
+
+Getting in the container bash:
+```bash
+$ docker-compose exec nginx /bin/bash
+```
+
 ### phpMyAdmin
 
 Service with phpMyAdmin interface.
