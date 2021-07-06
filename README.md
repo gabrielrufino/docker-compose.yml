@@ -67,6 +67,14 @@ Getting in the container bash:
 $ docker-compose exec nginx /bin/bash
 ```
 
+### pgAdmin4
+
+Service with pgAdmin4 interface.
+
+```bash
+$ docker-compose up -d phpmyadmin
+```
+
 ### phpMyAdmin
 
 Service with phpMyAdmin interface.
