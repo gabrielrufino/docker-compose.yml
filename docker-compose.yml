@@ -75,6 +75,12 @@ services:
       - "5432:5432"
     volumes:
       - ./volumes/postgres/:/home/shared
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./volumes/prometheus:/etc/prometheus
   rabbitmq:
     image: rabbitmq:3-management
     environment:

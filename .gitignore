@@ -106,3 +106,4 @@ dist
 # Volumes files
 /volumes/*/*
 !/volumes/**/.gitkeep
+!/volumes/prometheus/prometheus.yml
