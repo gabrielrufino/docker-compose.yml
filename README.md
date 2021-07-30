@@ -99,6 +99,18 @@ Service with Postgres SQL
 $ docker-compose up -d postgres
 ```
 
+### Prometheus
+
+Service with Prometheus
+
+```bash
+docker-compose up -d prometheus
+```
+
+#### Volume
+
+`./volumes/prometheus` => `/etc/prometheus`
+
 ### RethinkDB
 
 Service with RethinkDB
