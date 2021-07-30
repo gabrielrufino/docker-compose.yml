@@ -4,6 +4,14 @@ My docker development environment
 
 ## Services
 
+### Grafana
+
+Service with Grafana.
+
+```bash
+docker-compose up -d grafana
+```
+
 ### Mongo
 
 Service with MongoDB server.
