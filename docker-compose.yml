@@ -82,7 +82,7 @@ services:
     volumes:
       - ./volumes/prometheus:/etc/prometheus
   rabbitmq:
-    image: rabbitmq:3-management
+    image: rabbitmq:3.8-management
     environment:
       RABBITMQ_DEFAULT_USER: root
       RABBITMQ_DEFAULT_PASS: root
