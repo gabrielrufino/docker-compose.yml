@@ -111,6 +111,14 @@ docker-compose up -d prometheus
 
 `./volumes/prometheus` => `/etc/prometheus`
 
+### RabbitMQ
+
+Service with rabbitmq
+
+```bash
+docker-compose up -d rabbitmq
+```
+
 ### RethinkDB
 
 Service with RethinkDB
