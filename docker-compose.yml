@@ -5,6 +5,11 @@ services:
     image: grafana/grafana
     ports:
       - 3000:3000
+  loki:
+    image: grafana/loki:2.3.0
+    ports:
+      - 3100:3100
+    command: -config.file=/etc/loki/local-config.yaml
   mongo:
     image: mongo:4
     ports:
@@ -81,6 +86,11 @@ services:
       - 9090:9090
     volumes:
       - ./volumes/prometheus:/etc/prometheus
+  promtail:
+    image: grafana/promtail:2.3.0
+    volumes:
+      - ./volumes/promtail/log:/var/log
+    command: -config.file=/etc/promtail/config.yml
   rabbitmq:
     image: rabbitmq:3.8-management
     environment:
