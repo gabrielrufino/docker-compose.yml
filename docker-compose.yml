@@ -5,11 +5,15 @@ services:
     image: grafana/grafana
     ports:
       - 3000:3000
+    volumes:
+      - grafana:/var/lib/grafana
+    # restart: always
   loki:
     image: grafana/loki:2.3.0
     ports:
       - 3100:3100
     command: -config.file=/etc/loki/local-config.yaml
+    # restart: always
   mongo:
     image: mongo:4
     ports:
@@ -86,11 +90,16 @@ services:
       - 9090:9090
     volumes:
       - ./volumes/prometheus:/etc/prometheus
+    # restart: always
   promtail:
     image: grafana/promtail:2.3.0
+    ports:
+      - 9080:9080
     volumes:
-      - ./volumes/promtail/log:/var/log
-    command: -config.file=/etc/promtail/config.yml
+      - ./config/promtail/config.yaml:/etc/promtail/config.yaml
+      - /var/log:/var/log
+    command: -config.file=/etc/promtail/config.yaml
+    # restart: always
   rabbitmq:
     image: rabbitmq:3.8-management
     environment:
@@ -135,3 +144,6 @@ services:
       - "4873:4873"
     volumes:
       - "./volumes/verdaccio/storage:/verdaccio/storage"
+
+volumes:
+  grafana:
