@@ -107,3 +107,4 @@ dist
 /volumes/*/*
 !/volumes/**/.gitkeep
 !/volumes/prometheus/prometheus.yml
+!/volumes/promtail/log/
