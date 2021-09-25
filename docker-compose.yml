@@ -5,6 +5,8 @@ services:
     image: grafana/grafana
     ports:
       - 3000:3000
+    volumes:
+      - grafana:/var/lib/grafana
     # restart: always
   loki:
     image: grafana/loki:2.3.0
@@ -142,3 +144,6 @@ services:
       - "4873:4873"
     volumes:
       - "./volumes/verdaccio/storage:/verdaccio/storage"
+
+volumes:
+  grafana:
