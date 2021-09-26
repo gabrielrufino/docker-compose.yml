@@ -67,7 +67,7 @@ services:
     depends_on:
       - mysql
   portainer:
-    image: portainer/portainer-ce
+    image: portainer/portainer-ce:2.9.0
     ports:
       - 8000:8000
       - 9000:9000
