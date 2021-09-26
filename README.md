@@ -91,6 +91,14 @@ Service with phpMyAdmin interface.
 $ docker-compose up -d phpmyadmin
 ```
 
+### Portainer
+
+Service with Portainer
+
+```bash
+docker-compose up -d portainer
+```
+
 ### Postgres SQL
 
 Service with Postgres SQL
