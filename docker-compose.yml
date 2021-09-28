@@ -87,12 +87,13 @@ services:
       - 5432:5432
     volumes:
       - ./volumes/postgres/:/home/shared
+    # restart: always
   prometheus:
     image: prom/prometheus
     ports:
       - 9090:9090
     volumes:
-      - ./volumes/prometheus:/etc/prometheus
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     # restart: always
   promtail:
     image: grafana/promtail:2.3.0

@@ -104,7 +104,9 @@ dist
 .tern-port
 
 # Config files
-/config/promtail/config.yaml
+/config/*/*
+!/config/promtail/config.example.yaml
+!/config/prometheus/prometheus.example.yaml
 
 # Volumes files
 /volumes/*/*
