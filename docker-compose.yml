@@ -93,7 +93,7 @@ services:
     ports:
       - 9090:9090
     volumes:
-      - ./volumes/prometheus:/etc/prometheus
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     # restart: always
   promtail:
     image: grafana/promtail:2.3.0

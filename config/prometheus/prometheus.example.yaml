@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: Prometheus
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          namespace: 'Prometheus'
+  # - job_name: Something
+  #   static_configs:
+  #     - targets: ['localhost:3000']
+  #       labels:
+  #         namespace: 'Something'
