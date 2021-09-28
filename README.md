@@ -115,10 +115,6 @@ Service with Prometheus
 docker-compose up -d prometheus
 ```
 
-#### Volume
-
-`./volumes/prometheus` => `/etc/prometheus`
-
 ### RabbitMQ
 
 Service with rabbitmq
