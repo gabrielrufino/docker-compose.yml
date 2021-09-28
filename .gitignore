@@ -106,7 +106,7 @@ dist
 # Config files
 /config/*/*
 !/config/promtail/config.example.yaml
-!/config/prometheus/prometheus.example.yaml
+!/config/prometheus/prometheus.example.yml
 
 # Volumes files
 /volumes/*/*
