@@ -77,12 +77,14 @@ services:
     # restart: always
   postgres:
     image: postgres:13
+    # [Use the image bellow for postgres with ssl]
+    # image: fantix/postgres-ssl:13.1
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: postgres
     ports:
-      - "5432:5432"
+      - 5432:5432
     volumes:
       - ./volumes/postgres/:/home/shared
   prometheus:
