@@ -123,6 +123,14 @@ Service with rabbitmq
 docker-compose up -d rabbitmq
 ```
 
+### RabbitMQ
+
+Redis service
+
+```bash
+docker-compose up -d redis
+```
+
 ### RethinkDB
 
 Service with RethinkDB

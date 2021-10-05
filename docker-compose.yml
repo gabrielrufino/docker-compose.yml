@@ -115,6 +115,11 @@ services:
     volumes:
       - ./volumes/rabbitmq/data/:/var/lib/rabbitmq
       - ./volumes/rabbitmq/log/:/var/log/rabbitmq
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    # restart: always
   rethinkdb:
     image: rethinkdb:2
     ports:
