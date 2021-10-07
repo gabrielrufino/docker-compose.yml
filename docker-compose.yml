@@ -14,6 +14,20 @@ services:
       - 3100:3100
     command: -config.file=/etc/loki/local-config.yaml
     # restart: always
+  mautic:
+    image: mautic/mautic
+    ports:
+      - 8080:80
+    environment:
+      MAUTIC_DB_HOST: mysql
+      MAUTIC_DB_USER: root
+      MAUTIC_DB_PASSWORD: password
+      MAUTIC_DB_NAME: mautic
+      MAUTIC_RUN_CRON_JOBS: 'true'
+      MAUTIC_TRUSTED_PROXIES: 0.0.0.0/0
+    depends_on:
+      - mysql
+    # restart: always
   mongo:
     image: mongo:4
     ports:
@@ -34,6 +48,7 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: root
   mysql:
     image: mysql:8
+    command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_DATABASE: tests
       MYSQL_USER: gabrielrufino
