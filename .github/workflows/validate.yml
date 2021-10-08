@@ -9,13 +9,28 @@ on:
     - cron: '0 7 * * *'
 
 jobs:
-  build:
-
+  Testing:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
+    - run: exit 1
     - run: cp ./config/prometheus/prometheus.example.yml ./config/prometheus/prometheus.yml
     - run: docker-compose pull
     - run: docker-compose up -d
     - run: docker-compose down
+    - name: Send mail
+      if: failure() 
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{secrets.MAIL_USERNAME}}
+        password: ${{secrets.MAIL_PASSWORD}}
+        subject: Github Actions job result
+        to: obiwan@example.com,yoda@example.com
+        from: Luke Skywalker
+        secure: true
+        body: Build job of ${{github.repository}} completed successfully!
+        ignore_cert: true
+        priority: high
