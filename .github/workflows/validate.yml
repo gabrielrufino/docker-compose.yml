@@ -14,6 +14,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Smoke
+      run: sh ./tests/smoke/main.sh
     - name: Integration
       run: sh ./tests/integration/main.sh
     - name: Send email in case of failure
