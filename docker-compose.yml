@@ -17,7 +17,7 @@ services:
   mautic:
     image: mautic/mautic
     ports:
-      - 8080:80
+      - 8082:80
     environment:
       MAUTIC_DB_HOST: mysql
       MAUTIC_DB_USER: root
