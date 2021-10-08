@@ -15,6 +15,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - run: cp ./config/prometheus/prometheus.example.yml ./config/prometheus/prometheus.yml
     - run: docker-compose pull
     - run: docker-compose up -d
     - run: docker-compose down
