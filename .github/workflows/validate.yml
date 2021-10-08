@@ -14,10 +14,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - run: cp ./config/prometheus/prometheus.example.yml ./config/prometheus/prometheus.yml
-    - run: docker-compose pull
-    - run: docker-compose up -d
-    - run: docker-compose down
+    - name: Integration
+      run: sh ./tests/integration/main.sh
     - name: Send email in case of failure
       if: failure() 
       uses: dawidd6/action-send-mail@v3
