@@ -37,6 +37,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root
     volumes:
       - ./volumes/mongo/:/home/shared
+    # restart: always
   mongo-express:
     image: mongo-express
     ports:
@@ -46,6 +47,7 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: root
+    # restart: always
   mysql:
     image: mysql:8
     command: |
@@ -67,6 +69,7 @@ services:
     image: nginx:1
     ports:
       - 8080:80
+    # restart: always
   pgadmin:
     image: dpage/pgadmin4:5
     environment:
@@ -76,6 +79,7 @@ services:
       - 16543:80
     depends_on:
       - postgres
+    # restart: always
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
@@ -86,6 +90,7 @@ services:
       - 80
     depends_on:
       - mysql
+    # restart: always
   portainer:
     image: portainer/portainer-ce:2.9.0
     ports:
@@ -135,6 +140,7 @@ services:
     volumes:
       - ./volumes/rabbitmq/data/:/var/lib/rabbitmq
       - ./volumes/rabbitmq/log/:/var/log/rabbitmq
+    # restart: always
   redis:
     image: redis
     ports:
@@ -147,6 +153,7 @@ services:
       - 28016:8080
     volumes:
       - ./volumes/rethinkdb/:/home/shared
+    # restart: always
   sqlserver:
     image: mcr.microsoft.com/mssql/server
     environment:
@@ -154,12 +161,14 @@ services:
         ACCEPT_EULA: Y
     ports:
       - 1433:1433
+    # restart: always
   strapi:
     image: strapi/strapi:3
     volumes:
       - ./volumes/strapi:/srv/app
     ports:
       - 1337:1337
+    # restart: always
   ubuntu:
     image: ubuntu:20.04
     tty: true
@@ -173,6 +182,7 @@ services:
       - 4873:4873
     volumes:
       - ./volumes/verdaccio/storage:/verdaccio/storage
+    # restart: always
 
 volumes:
   grafana:
