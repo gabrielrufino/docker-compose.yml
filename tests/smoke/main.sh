@@ -9,3 +9,4 @@ sh $FILEDIR/loki.sh
 sh $FILEDIR/mongo.sh
 sh $FILEDIR/mongo-express.sh
 sh $FILEDIR/verdaccio.sh
+sh $FILEDIR/strapi.sh
