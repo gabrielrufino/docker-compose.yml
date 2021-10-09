@@ -59,21 +59,21 @@ services:
       MYSQL_PASSWORD: 12345678
       MYSQL_ROOT_PASSWORD: password
     ports:
-      - "3306:3306"
+      - 3306:3306
     volumes:
       - ./volumes/mysql/:/home/shared
     # restart: always
   nginx:
     image: nginx:1
     ports:
-      - "8080:80"
+      - 8080:80
   pgadmin:
     image: dpage/pgadmin4:5
     environment:
       PGADMIN_DEFAULT_EMAIL: root@gabrielrufino.com
       PGADMIN_DEFAULT_PASSWORD: root
     ports:
-      - "16543:80"
+      - 16543:80
     depends_on:
       - postgres
   phpmyadmin:
@@ -83,7 +83,7 @@ services:
       PMA_USER: gabrielrufino
       PMA_PASSWORD: 12345678
     ports:
-      - "80"
+      - 80
     depends_on:
       - mysql
   portainer:
@@ -130,8 +130,8 @@ services:
       RABBITMQ_DEFAULT_USER: root
       RABBITMQ_DEFAULT_PASS: root
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - 5672:5672
+      - 15672:15672
     volumes:
       - ./volumes/rabbitmq/data/:/var/lib/rabbitmq
       - ./volumes/rabbitmq/log/:/var/log/rabbitmq
@@ -143,23 +143,23 @@ services:
   rethinkdb:
     image: rethinkdb:2
     ports:
-      - "28015:28015"
-      - "28016:8080"
+      - 28015:28015
+      - 28016:8080
     volumes:
       - ./volumes/rethinkdb/:/home/shared
   sqlserver:
     image: mcr.microsoft.com/mssql/server
     environment:
-        SA_PASSWORD: "password@123"
-        ACCEPT_EULA: "Y"
+        SA_PASSWORD: password@123
+        ACCEPT_EULA: Y
     ports:
-      - "1433:1433"
+      - 1433:1433
   strapi:
     image: strapi/strapi:3
     volumes:
       - ./volumes/strapi:/srv/app
     ports:
-      - "1337:1337"
+      - 1337:1337
   ubuntu:
     image: ubuntu:20.04
     tty: true
@@ -170,9 +170,9 @@ services:
     environment:
       - VERDACCIO_PORT=4873
     ports:
-      - "4873:4873"
+      - 4873:4873
     volumes:
-      - "./volumes/verdaccio/storage:/verdaccio/storage"
+      - ./volumes/verdaccio/storage:/verdaccio/storage
 
 volumes:
   grafana:
