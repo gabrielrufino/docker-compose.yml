@@ -7,3 +7,4 @@ sh $FILEDIR/mautic.sh
 sh $FILEDIR/grafana.sh
 sh $FILEDIR/loki.sh
 sh $FILEDIR/mongo.sh
+sh $FILEDIR/mongo-express.sh
