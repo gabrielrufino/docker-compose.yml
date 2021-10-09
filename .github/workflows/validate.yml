@@ -28,8 +28,8 @@ jobs:
         password: ${{secrets.MAIL_PASSWORD}}
         subject: Github Actions job result
         to: email@gabrielrufino.com
-        from: Luke Skywalker
+        from: Github - gabrielrufino/docker-compose.yml
         secure: true
-        body: Build job of ${{github.repository}} completed successfully!
+        body: Validation job of ${{github.repository}} has failed!
         ignore_cert: true
         priority: high
