@@ -1,5 +1,7 @@
 # docker-compose.yml
 
+[![Validation workflow](https://github.com/gabrielrufino/docker-compose.yml/actions/workflows/validate.yml/badge.svg)](https://github.com/gabrielrufino/docker-compose.yml/actions/workflows/validate.yml)
+
 My docker development environment
 
 ## Services
