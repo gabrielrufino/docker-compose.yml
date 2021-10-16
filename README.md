@@ -125,12 +125,20 @@ Service with rabbitmq
 docker-compose up -d rabbitmq
 ```
 
-### RabbitMQ
+### Redis
 
 Redis service
 
 ```bash
 docker-compose up -d redis
+```
+
+### RedisInsight
+
+Redis service
+
+```bash
+docker-compose up -d redisinsight
 ```
 
 ### RethinkDB
