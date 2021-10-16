@@ -4,6 +4,19 @@
 
 My docker development environment
 
+## Installing
+
+0. Requirements
+
+* docker
+* docker-compose
+
+1. Clone repository
+
+```bash
+git clone https://github.com/gabrielrufino/docker-compose.yml "[Folder name]"
+```
+
 ## Services
 
 ### Grafana
