@@ -27,6 +27,14 @@ Service with Grafana.
 docker-compose up -d grafana
 ```
 
+### Metabase
+
+Service with Metabase.
+
+```bash
+docker-compose up -d metabase
+```
+
 ### Mongo
 
 Service with MongoDB server.
