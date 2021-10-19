@@ -6,6 +6,7 @@ FILEDIR=$(dirname $FILEPATH)
 sh $FILEDIR/grafana.sh
 sh $FILEDIR/loki.sh
 sh $FILEDIR/mautic.sh
+sh $FILEDIR/metabase.sh
 sh $FILEDIR/mongo.sh
 sh $FILEDIR/mongo-express.sh
 sh $FILEDIR/nginx.sh
