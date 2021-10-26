@@ -87,6 +87,8 @@ services:
       PGADMIN_DEFAULT_PASSWORD: root
     ports:
       - 16543:80
+    volumes:
+      - pgadmin:/var/lib/pgadmin
     depends_on:
       - postgres
     # restart: always
@@ -122,6 +124,7 @@ services:
       - 5432:5432
     volumes:
       - ./volumes/postgres/:/home/shared
+      - postgres:/var/lib/postgresql/data
     # restart: always
   prometheus:
     image: prom/prometheus
@@ -206,4 +209,6 @@ services:
 volumes:
   grafana:
   metabase:
+  pgadmin:
+  postgres:
   redisinsight:
