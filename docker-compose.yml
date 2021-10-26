@@ -74,6 +74,7 @@ services:
       - 3306:3306
     volumes:
       - ./volumes/mysql/:/home/shared
+      - mysql:/var/lib/mysql
     # restart: always
   nginx:
     image: nginx:1
@@ -209,6 +210,7 @@ services:
 volumes:
   grafana:
   metabase:
+  mysql:
   pgadmin:
   postgres:
   redisinsight:
