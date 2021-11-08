@@ -76,6 +76,13 @@ services:
       - ./volumes/mysql/:/home/shared
       - mysql:/var/lib/mysql
     # restart: always
+  nextcloud:
+    image: nextcloud:22
+    ports:
+      - 8083:80
+    volumes:
+      - nextcloud:/var/www/html
+    # restart: always
   nginx:
     image: nginx:1
     ports:
@@ -211,6 +218,7 @@ volumes:
   grafana:
   metabase:
   mysql:
+  nextcloud:
   pgadmin:
   postgres:
   redisinsight:
