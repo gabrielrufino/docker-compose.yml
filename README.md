@@ -85,6 +85,14 @@ $ docker-compose exec mongo /bin/bash
 
 `./volumes/mysql` => `/home/shared`
 
+### Nextcloud
+
+Service with Nextcloud.
+
+```
+docker-compose up -d nextcloud
+```
+
 ### Nginx
 
 Service with MySQL Server.
