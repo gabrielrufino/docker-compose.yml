@@ -1,6 +1,17 @@
 version: '3.9'
 
 services:
+  appsmith:
+    image: index.docker.io/appsmith/appsmith-ce:v1.6.0
+    ports:
+      - 8084:80
+      - 443:443
+      - 9001:9001
+    volumes:
+      - appsmith:/appsmith-stacks
+    labels:
+      com.centurylinklabs.watchtower.enable: 'true'
+    # restart: always
   grafana:
     image: grafana/grafana
     ports:
@@ -215,6 +226,7 @@ services:
     # restart: always
 
 volumes:
+  appsmith:
   grafana:
   metabase:
   mysql:

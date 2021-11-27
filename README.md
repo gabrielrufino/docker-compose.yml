@@ -19,6 +19,14 @@ git clone https://github.com/gabrielrufino/docker-compose.yml "[Folder name]"
 
 ## Services
 
+### Appsmith
+
+Service with Appsmith.
+
+```bash
+docker-compose up -d appsmith
+```
+
 ### Grafana
 
 Service with Grafana.
