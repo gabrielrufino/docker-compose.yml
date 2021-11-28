@@ -3,6 +3,7 @@ echo "---- Smoke tests ----"
 FILEPATH=$(realpath $0)
 FILEDIR=$(dirname $FILEPATH)
 
+sh $FILEDIR/appsmith.sh
 sh $FILEDIR/grafana.sh
 sh $FILEDIR/loki.sh
 sh $FILEDIR/mautic.sh
