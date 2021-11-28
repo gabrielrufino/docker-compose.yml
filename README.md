@@ -19,6 +19,14 @@ git clone https://github.com/gabrielrufino/docker-compose.yml "[Folder name]"
 
 ## Services
 
+### Appsmith
+
+Service with Appsmith.
+
+```bash
+docker-compose up -d appsmith
+```
+
 ### Grafana
 
 Service with Grafana.
@@ -60,7 +68,7 @@ $ docker-compose exec mongo mongo -u root -p root
 
 `./volumes/mongo` => `/home/shared`
 
-### Mongo Express
+### Mongo Express (Under Maintenance)
 
 Service with Mongo Express interface.
 

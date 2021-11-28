@@ -1,7 +1,7 @@
 echo "[Smoke] - Metabase\n"
 
 docker-compose up -d metabase
-sleep 15
+sleep 30
 
 HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}\n" http://localhost:3001/setup)
 if [ $HTTP_STATUS -ne 200  ];
