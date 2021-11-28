@@ -1,6 +1,6 @@
 echo "[Smoke] - Appsmith\n"
 
-exit 1
+return 1
 
 docker-compose up -d appsmith
 sleep 30
