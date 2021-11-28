@@ -9,7 +9,7 @@ sh $FILEDIR/appsmith.sh \
 && sh $FILEDIR/mautic.sh \
 && sh $FILEDIR/metabase.sh \
 && sh $FILEDIR/mongo.sh \
-&& sh $FILEDIR/mongo-express.sh \
+# && sh $FILEDIR/mongo-express.sh \
 && sh $FILEDIR/nextcloud.sh \
 && sh $FILEDIR/nginx.sh \
 && sh $FILEDIR/strapi.sh \
