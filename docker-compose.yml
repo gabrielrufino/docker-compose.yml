@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   appsmith:
-    image: index.docker.io/appsmith/appsmith-ce:v1.6.0
+    image: appsmith/appsmith-ce:v1.6.0
     ports:
       - 8085:80
       - 443:443
@@ -11,6 +11,19 @@ services:
       - appsmith:/appsmith-stacks
     labels:
       com.centurylinklabs.watchtower.enable: 'true'
+    # restart: always
+  gitea:
+    image: gitea/gitea:1.15.6
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    volumes:
+      - gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3002:3000"
+      - "222:22"
     # restart: always
   grafana:
     image: grafana/grafana
@@ -230,6 +243,7 @@ services:
 
 volumes:
   appsmith:
+  gitea:
   grafana:
   metabase:
   mysql:
