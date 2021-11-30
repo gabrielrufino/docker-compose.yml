@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   appsmith:
-    image: index.docker.io/appsmith/appsmith-ce:v1.6.0
+    image: appsmith/appsmith-ce:v1.6.0
     ports:
       - 8085:80
       - 443:443
