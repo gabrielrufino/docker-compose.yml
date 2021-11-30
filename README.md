@@ -27,6 +27,14 @@ Service with Appsmith.
 docker-compose up -d appsmith
 ```
 
+### Gitea
+
+Service with Gitea.
+
+```bash
+docker-compose up -d gitea
+```
+
 ### Grafana
 
 Service with Grafana.
