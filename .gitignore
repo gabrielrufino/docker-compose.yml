@@ -113,3 +113,5 @@ dist
 !/volumes/**/.gitkeep
 !/volumes/prometheus/prometheus.yml
 !/volumes/promtail/log/
+!/volumes/sonic/store
+!/volumes/sonic/sonic.cfg

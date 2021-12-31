@@ -211,6 +211,13 @@ services:
     volumes:
       - ./volumes/rethinkdb/:/home/shared
     # restart: always
+  sonic:
+    image: valeriansaliou/sonic:v1.3.2
+    ports:
+      - 1491:1491
+    volumes:
+      - ./volumes/sonic/sonic.cfg:/etc/sonic.cfg
+      - ./volumes/sonic/store/:/var/lib/sonic/store/
   sqlserver:
     image: mcr.microsoft.com/mssql/server
     environment:
