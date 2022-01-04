@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   appsmith:
-    image: appsmith/appsmith-ce:v1.6.0
+    image: appsmith/appsmith-ce:v1.6.2
     ports:
       - 8085:80
       - 443:443
@@ -211,6 +211,13 @@ services:
     volumes:
       - ./volumes/rethinkdb/:/home/shared
     # restart: always
+  sonic:
+    image: valeriansaliou/sonic:v1.3.2
+    ports:
+      - 1491:1491
+    volumes:
+      - ./volumes/sonic/sonic.cfg:/etc/sonic.cfg
+      - ./volumes/sonic/store/:/var/lib/sonic/store/
   sqlserver:
     image: mcr.microsoft.com/mssql/server
     environment:

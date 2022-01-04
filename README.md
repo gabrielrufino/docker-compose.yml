@@ -198,6 +198,13 @@ $ docker-compose up -d rethinkdb
 
 `./volumes/rethinkdb` => `/home/shared`
 
+### Sonic
+
+Sonic service
+
+```bash
+$ docker-compose up -d sonic
+```
 
 ### SQL Server
 
