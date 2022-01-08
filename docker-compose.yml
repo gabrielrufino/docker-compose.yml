@@ -162,7 +162,7 @@ services:
       - postgres:/var/lib/postgresql/data
     # restart: always
   prometheus:
-    image: prom/prometheus
+    image: prom/prometheus:v2.32.1
     ports:
       - 9090:9090
     volumes:
