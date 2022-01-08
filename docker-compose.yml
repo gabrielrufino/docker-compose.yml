@@ -39,7 +39,7 @@ services:
     command: -config.file=/etc/loki/local-config.yaml
     # restart: always
   mautic:
-    image: mautic/mautic:v4
+    image: mautic/mautic
     ports:
       - 8082:80
     environment:
