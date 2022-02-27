@@ -1,5 +1,6 @@
 echo "[Smoke] - Nginx\n"
 
+cp ./config/nginx/default.example.conf ./config/nginx/default.conf
 docker-compose up -d nginx
 sleep 10
 
