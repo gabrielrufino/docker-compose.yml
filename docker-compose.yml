@@ -41,7 +41,7 @@ services:
   matomo:
     image: matomo
     ports:
-      - 8084:80
+      - 8086:80
     environment:
       MATOMO_DATABASE_HOST: mysql
       MATOMO_DATABASE_USERNAME: root
