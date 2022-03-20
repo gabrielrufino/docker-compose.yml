@@ -43,6 +43,14 @@ Service with Grafana.
 docker-compose up -d grafana
 ```
 
+### Matomo
+
+Service with Matomo
+
+```bash
+docker-compose up -d matomo
+```
+
 ### Metabase
 
 Service with Metabase.
