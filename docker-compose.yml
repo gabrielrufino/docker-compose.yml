@@ -39,7 +39,7 @@ services:
     command: -config.file=/etc/loki/local-config.yaml
     # restart: always
   matomo:
-    image: matomo
+    image: matomo:4
     ports:
       - 8086:80
     environment:
@@ -49,6 +49,7 @@ services:
       MATOMO_DATABASE_DBNAME: matomo_db
     depends_on:
       - mysql
+    # restart: always
   mautic:
     image: mautic/mautic
     ports:
