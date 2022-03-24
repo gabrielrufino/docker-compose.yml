@@ -138,8 +138,6 @@ services:
       - 16543:80
     volumes:
       - pgadmin:/var/lib/pgadmin
-    depends_on:
-      - postgres
     # restart: always
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
