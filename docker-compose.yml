@@ -130,7 +130,7 @@ services:
       - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf
     # restart: always
   pgadmin:
-    image: dpage/pgadmin4:5
+    image: dpage/pgadmin4:6
     environment:
       PGADMIN_DEFAULT_EMAIL: root@gabrielrufino.com
       PGADMIN_DEFAULT_PASSWORD: root
