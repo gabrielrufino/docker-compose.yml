@@ -147,8 +147,6 @@ services:
       PMA_PASSWORD: 12345678
     ports:
       - 80
-    depends_on:
-      - mysql
     # restart: always
   portainer:
     image: portainer/portainer-ce:2.11.1
