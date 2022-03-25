@@ -12,6 +12,11 @@ services:
     labels:
       com.centurylinklabs.watchtower.enable: 'true'
     # restart: always
+  fedora:
+    image: fedora
+    tty: true
+    volumes:
+      - ./volumes/ubuntu/:/home/shared
   gitea:
     image: gitea/gitea:1
     environment:
