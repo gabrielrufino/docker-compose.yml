@@ -27,6 +27,14 @@ Service with Appsmith.
 docker-compose up -d appsmith
 ```
 
+### Debian
+
+Service with Debian.
+
+```bash
+docker-compose up -d debian
+```
+
 ### Fedora
 
 Service with Fedora

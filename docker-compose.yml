@@ -12,6 +12,11 @@ services:
     labels:
       com.centurylinklabs.watchtower.enable: 'true'
     # restart: always
+  debian:
+    image: debian
+    tty: true
+    volumes:
+      - ./volumes/debian/:/home/shared
   fedora:
     image: fedora
     tty: true
