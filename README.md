@@ -27,6 +27,14 @@ Service with Appsmith.
 docker-compose up -d appsmith
 ```
 
+### Fedora
+
+Service with Fedora
+
+```bash
+docker-compose up -d fedora
+```
+
 ### Gitea
 
 Service with Gitea.
