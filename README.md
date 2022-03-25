@@ -27,6 +27,30 @@ Service with Appsmith.
 docker-compose up -d appsmith
 ```
 
+### Arch Linux
+
+Service with Arch Linux
+
+```bash
+docker-compose up -d archlinux
+```
+
+### Debian
+
+Service with Debian.
+
+```bash
+docker-compose up -d debian
+```
+
+### Fedora
+
+Service with Fedora
+
+```bash
+docker-compose up -d fedora
+```
+
 ### Gitea
 
 Service with Gitea.

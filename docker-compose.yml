@@ -12,6 +12,21 @@ services:
     labels:
       com.centurylinklabs.watchtower.enable: 'true'
     # restart: always
+  archlinux:
+    image: archlinux
+    tty: true
+    volumes:
+      - ./volumes/archlinux/:/home/shared
+  debian:
+    image: debian
+    tty: true
+    volumes:
+      - ./volumes/debian/:/home/shared
+  fedora:
+    image: fedora
+    tty: true
+    volumes:
+      - ./volumes/fedora/:/home/shared
   gitea:
     image: gitea/gitea:1
     environment:
@@ -203,13 +218,11 @@ services:
       - 6379:6379
     # restart: always
   redisinsight:
-    image: redislabs/redisinsight:latest
+    image: redislabs/redisinsight:1.11.1
     ports:
       - 8001:8001
     volumes:
       - redisinsight:/db
-    depends_on:
-      - redis
     # restart: always
   rethinkdb:
     image: rethinkdb:2
