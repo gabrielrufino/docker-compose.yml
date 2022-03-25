@@ -208,8 +208,6 @@ services:
       - 8001:8001
     volumes:
       - redisinsight:/db
-    depends_on:
-      - redis
     # restart: always
   rethinkdb:
     image: rethinkdb:2
