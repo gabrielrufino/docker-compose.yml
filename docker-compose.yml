@@ -26,7 +26,7 @@ services:
     image: fedora
     tty: true
     volumes:
-      - ./volumes/ubuntu/:/home/shared
+      - ./volumes/fedora/:/home/shared
   gitea:
     image: gitea/gitea:1
     environment:
