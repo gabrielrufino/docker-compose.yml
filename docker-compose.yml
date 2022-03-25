@@ -12,6 +12,11 @@ services:
     labels:
       com.centurylinklabs.watchtower.enable: 'true'
     # restart: always
+  archlinux:
+    image: archlinux
+    tty: true
+    volumes:
+      - ./volumes/archlinux/:/home/shared
   debian:
     image: debian
     tty: true

@@ -27,6 +27,14 @@ Service with Appsmith.
 docker-compose up -d appsmith
 ```
 
+### Arch Linux
+
+Service with Arch Linux
+
+```bash
+docker-compose up -d archlinux
+```
+
 ### Debian
 
 Service with Debian.
