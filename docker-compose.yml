@@ -144,6 +144,14 @@ services:
     volumes:
       - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf
     # restart: always
+  openvscode:
+    image: gitpod/openvscode-server:1.65.2
+    init: true
+    tty: true
+    ports:
+      - 3003:3000
+    volumes:
+      - ./volumes/openvscode:/home/workspace:cached
   pgadmin:
     image: dpage/pgadmin4:6
     environment:
