@@ -154,6 +154,16 @@ Getting in the container bash:
 $ docker-compose exec nginx /bin/bash
 ```
 
+### OpenVSCode
+
+Service with OpenVSCode.
+
+```bash
+$ docker-compose up -d openvscode
+```
+
+**Port:** 3003
+
 ### pgAdmin4
 
 Service with pgAdmin4 interface.
