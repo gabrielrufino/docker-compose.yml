@@ -23,7 +23,7 @@ services:
     volumes:
       - ./volumes/debian/:/home/shared
   fedora:
-    image: fedora
+    image: fedora:35
     tty: true
     volumes:
       - ./volumes/fedora/:/home/shared
