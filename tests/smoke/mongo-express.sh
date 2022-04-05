@@ -1,7 +1,8 @@
 echo "[Smoke] - Mongo Express\n"
 
 docker-compose up -d mongo-express
-sleep 30
+
+wait-on http://localhost:8081 --timeout 60000
 
 HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}\n" http://localhost:8081)
 if [ $HTTP_STATUS -ne 200  ];

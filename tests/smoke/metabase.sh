@@ -1,7 +1,8 @@
 echo "[Smoke] - Metabase\n"
 
 docker-compose up -d metabase
-sleep 30
+
+wait-on http://localhost:3001/setup --timeout 60000
 
 HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}\n" http://localhost:3001/setup)
 if [ $HTTP_STATUS -ne 200  ];

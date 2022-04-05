@@ -1,7 +1,8 @@
 echo "[Smoke] - Loki\n"
 
 docker-compose up -d loki
-sleep 60
+
+wait-on http://localhost:3100/ready --timeout 60000
 
 HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}\n" http://localhost:3100/ready)
 if [ $HTTP_STATUS -ne 200  ];

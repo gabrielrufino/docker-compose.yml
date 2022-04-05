@@ -1,7 +1,8 @@
 echo "[Smoke] - phpmyadmin\n"
 
 docker-compose up -d phpmyadmin
-sleep 10
+
+wait-on http://localhost:8087 --timeout 60000
 
 HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}\n" http://localhost:8087/)
 if [ $HTTP_STATUS -ne 200  ];
