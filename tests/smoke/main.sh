@@ -1,5 +1,7 @@
 echo "---- Smoke tests ----"
 
+npm i -g wait-on
+
 FILEPATH=$(realpath $0)
 FILEDIR=$(dirname $FILEPATH)
 
