@@ -2,7 +2,7 @@ echo "[Smoke] - Appsmith\n"
 
 docker-compose up -d appsmith
 
-timeout 60 sh -c 'until nc -z localhost 8085; do sleep 1; done'
+timeout 120 sh -c 'until nc -z localhost 8085; do sleep 1; done'
 
 HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}\n" http://localhost:8085/setup/welcome)
 if [ $HTTP_STATUS -ne 200  ];
