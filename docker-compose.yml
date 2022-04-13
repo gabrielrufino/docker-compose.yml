@@ -47,6 +47,9 @@ services:
     volumes:
       - grafana:/var/lib/grafana
     # restart: always
+  kali:
+    image: kalilinux/kali-rolling
+    tty: true
   loki:
     image: grafana/loki:2.3.0
     ports:
