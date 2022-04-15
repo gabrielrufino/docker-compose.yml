@@ -50,6 +50,8 @@ services:
   kali:
     image: kalilinux/kali-rolling
     tty: true
+    ports:
+      - 2200:22
   loki:
     image: grafana/loki:2.3.0
     ports:
