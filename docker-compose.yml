@@ -50,8 +50,8 @@ services:
   kali:
     image: kalilinux/kali-rolling
     tty: true
-    # ports:
-    #   - 2222:22
+    ports:
+      - "22000:22"
   loki:
     image: grafana/loki:2.3.0
     ports:
