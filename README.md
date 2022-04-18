@@ -67,6 +67,14 @@ Service with Grafana.
 docker-compose up -d grafana
 ```
 
+### Kali
+
+Service with Kali.
+
+```bash
+docker-compose up -d kali
+```
+
 ### Matomo
 
 Service with Matomo
