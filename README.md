@@ -75,6 +75,12 @@ Service with Kali.
 docker-compose up -d kali
 ```
 
+#### Installing kali tools
+
+```bash
+apt update && apt -y install kali-linux-headless
+```
+
 ### Matomo
 
 Service with Matomo
