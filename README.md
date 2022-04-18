@@ -67,6 +67,20 @@ Service with Grafana.
 docker-compose up -d grafana
 ```
 
+### Kali
+
+Service with Kali.
+
+```bash
+docker-compose up -d kali
+```
+
+#### Installing kali tools
+
+```bash
+apt update && apt -y install kali-linux-headless
+```
+
 ### Matomo
 
 Service with Matomo
