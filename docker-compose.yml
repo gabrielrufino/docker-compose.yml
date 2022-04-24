@@ -19,6 +19,7 @@ services:
     #   - "22002:22"
     volumes:
       - ./volumes/archlinux/:/home/shared
+    # restart: always
   debian:
     image: debian
     tty: true
@@ -26,6 +27,7 @@ services:
     #   - "22003:22"
     volumes:
       - ./volumes/debian/:/home/shared
+    # restart: always
   fedora:
     image: fedora:35
     tty: true
@@ -33,6 +35,7 @@ services:
     #   - "22004:22"
     volumes:
       - ./volumes/fedora/:/home/shared
+    # restart: always
   gitea:
     image: gitea/gitea:1
     environment:
@@ -163,6 +166,7 @@ services:
       - 3003:3000
     volumes:
       - ./volumes/openvscode:/home/workspace:cached
+    # restart: always
   pgadmin:
     image: dpage/pgadmin4:6.8
     environment:
@@ -258,6 +262,7 @@ services:
     volumes:
       - ./volumes/sonic/sonic.cfg:/etc/sonic.cfg
       - ./volumes/sonic/store/:/var/lib/sonic/store/
+    # restart: always
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
@@ -280,6 +285,7 @@ services:
     #   - "22001:22"
     volumes:
       - ./volumes/ubuntu/:/home/shared
+    # restart: always
   verdaccio:
     image: verdaccio/verdaccio:4
     environment:
