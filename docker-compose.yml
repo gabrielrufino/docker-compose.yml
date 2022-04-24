@@ -15,26 +15,26 @@ services:
   archlinux:
     image: archlinux
     tty: true
-    # ports:
-    #   - "22002:22"
     volumes:
       - ./volumes/archlinux/:/home/shared
+    # ports:
+    #   - "22002:22"
     # restart: always
   debian:
     image: debian
     tty: true
-    # ports:
-    #   - "22003:22"
     volumes:
       - ./volumes/debian/:/home/shared
+    # ports:
+    #   - "22003:22"
     # restart: always
   fedora:
     image: fedora:35
     tty: true
-    # ports:
-    #   - "22004:22"
     volumes:
       - ./volumes/fedora/:/home/shared
+    # ports:
+    #   - "22004:22"
     # restart: always
   gitea:
     image: gitea/gitea:1
@@ -281,10 +281,10 @@ services:
   ubuntu:
     image: ubuntu:20.04
     tty: true
-    # ports:
-    #   - "22001:22"
     volumes:
       - ./volumes/ubuntu/:/home/shared
+    # ports:
+    #   - "22001:22"
     # restart: always
   verdaccio:
     image: verdaccio/verdaccio:4
