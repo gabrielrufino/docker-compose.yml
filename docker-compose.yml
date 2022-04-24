@@ -15,24 +15,27 @@ services:
   archlinux:
     image: archlinux
     tty: true
-    # ports:
-    #   - "22002:22"
     volumes:
       - ./volumes/archlinux/:/home/shared
+    # ports:
+    #   - "22002:22"
+    # restart: always
   debian:
     image: debian
     tty: true
-    # ports:
-    #   - "22003:22"
     volumes:
       - ./volumes/debian/:/home/shared
+    # ports:
+    #   - "22003:22"
+    # restart: always
   fedora:
     image: fedora:35
     tty: true
-    # ports:
-    #   - "22004:22"
     volumes:
       - ./volumes/fedora/:/home/shared
+    # ports:
+    #   - "22004:22"
+    # restart: always
   gitea:
     image: gitea/gitea:1
     environment:
@@ -163,6 +166,7 @@ services:
       - 3003:3000
     volumes:
       - ./volumes/openvscode:/home/workspace:cached
+    # restart: always
   pgadmin:
     image: dpage/pgadmin4:6.8
     environment:
@@ -258,6 +262,7 @@ services:
     volumes:
       - ./volumes/sonic/sonic.cfg:/etc/sonic.cfg
       - ./volumes/sonic/store/:/var/lib/sonic/store/
+    # restart: always
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
@@ -276,10 +281,11 @@ services:
   ubuntu:
     image: ubuntu:20.04
     tty: true
-    # ports:
-    #   - "22001:22"
     volumes:
       - ./volumes/ubuntu/:/home/shared
+    # ports:
+    #   - "22001:22"
+    # restart: always
   verdaccio:
     image: verdaccio/verdaccio:4
     environment:
