@@ -19,4 +19,3 @@ sh $FILEDIR/openvscode.sh && \
 sh $FILEDIR/phpmyadmin.sh && \
 sh $FILEDIR/strapi.sh && \
 sh $FILEDIR/verdaccio.sh
-# && sh $FILEDIR/mongo-express.sh \

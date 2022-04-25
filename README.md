@@ -122,14 +122,6 @@ $ docker-compose exec mongo mongo -u root -p root
 
 `./volumes/mongo` => `/home/shared`
 
-### Mongo Express (Under Maintenance)
-
-Service with Mongo Express interface.
-
-```
-$ docker-compose up -d mongo-express
-```
-
 ### MySQL
 
 Service with MySQL Server.
