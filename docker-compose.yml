@@ -131,7 +131,7 @@ services:
       - mysql:/var/lib/mysql
     # restart: always
   nextcloud:
-    image: nextcloud:22
+    image: nextcloud:23.0.3-apache
     ports:
       - 8083:80
     volumes:
