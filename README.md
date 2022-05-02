@@ -8,6 +8,7 @@ My docker development environment
 
 0. Requirements
 
+* git
 * docker
 * docker-compose
 
@@ -15,6 +16,12 @@ My docker development environment
 
 ```bash
 git clone https://github.com/gabrielrufino/docker-compose.yml "[Folder name]"
+```
+
+## Updating
+
+```bash
+git pull
 ```
 
 ## Services
