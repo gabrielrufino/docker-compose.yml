@@ -20,6 +20,14 @@ git clone https://github.com/gabrielrufino/docker-compose.yml "[Folder name]"
 
 ## Updating
 
+0. Get in the folder
+
+```bash
+cd "[Folder name]"
+```
+
+1. Pull the updates
+
 ```bash
 git pull
 ```
