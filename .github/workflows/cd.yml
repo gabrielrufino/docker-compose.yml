@@ -1,4 +1,4 @@
-name: Validation workflow
+name: CD Workflow
 
 on:
   push:
