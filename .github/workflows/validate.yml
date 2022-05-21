@@ -37,3 +37,7 @@ jobs:
         body: Validation job of ${{github.repository}} has failed!
         ignore_cert: true
         priority: high
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
