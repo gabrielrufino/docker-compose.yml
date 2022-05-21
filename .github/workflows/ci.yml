@@ -1,0 +1,28 @@
+name: CI Workflow
+
+on:
+  push:
+    branches: [ master, dev ]
+  pull_request:
+    branches: [ master, dev ]
+  schedule:
+    - cron: '0 7 * * *'
+
+jobs:
+  Testing:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 16
+      uses: actions/setup-node@v1
+      with:
+        node-version: 16
+    - name: Smoke
+      run: sh ./tests/smoke/main.sh
+    - name: Integration
+      run: sh ./tests/integration/main.sh
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true

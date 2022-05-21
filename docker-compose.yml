@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   appsmith:
-    image: appsmith/appsmith-ce:v1.6.16
+    image: appsmith/appsmith-ce:v1.7.0
     ports:
       - 8085:80
       - 443:443
@@ -29,7 +29,7 @@ services:
     #   - "22003:22"
     # restart: always
   fedora:
-    image: fedora:35
+    image: fedora:36
     tty: true
     volumes:
       - ./volumes/fedora/:/home/shared
@@ -37,7 +37,7 @@ services:
     #   - "22004:22"
     # restart: always
   gitea:
-    image: gitea/gitea:1
+    image: gitea/gitea:1.16.8
     environment:
       - USER_UID=1000
       - USER_GID=1000
@@ -50,7 +50,7 @@ services:
       - 222:22
     # restart: always
   grafana:
-    image: grafana/grafana:8.4.4
+    image: grafana/grafana:8.5.3
     ports:
       - 3000:3000
     volumes:
@@ -68,7 +68,7 @@ services:
     command: -config.file=/etc/loki/local-config.yaml
     # restart: always
   matomo:
-    image: matomo:4
+    image: matomo:4.10.0
     ports:
       - 8086:80
     environment:
@@ -94,7 +94,7 @@ services:
       - mysql
     # restart: always
   metabase:
-    image: metabase/metabase:v0.42.4
+    image: metabase/metabase:v0.43.1
     ports:
       - 3001:3000
     environment: 
@@ -103,7 +103,7 @@ services:
       - metabase:/metabase-data
     # restart: always
   mongo:
-    image: mongo:4
+    image: mongo:4.4.14
     ports:
       - 27017:27017
     environment:
@@ -113,7 +113,7 @@ services:
       - ./volumes/mongo/:/home/shared
     # restart: always
   mysql:
-    image: mysql:8
+    image: mysql:8.0.29
     command: |
       --default-authentication-plugin=mysql_native_password
       --character-set-server=utf8mb4
@@ -131,21 +131,21 @@ services:
       - mysql:/var/lib/mysql
     # restart: always
   nextcloud:
-    image: nextcloud:23.0.3-apache
+    image: nextcloud:24.0.1
     ports:
       - 8083:80
     volumes:
       - nextcloud:/var/www/html
     # restart: always
   nginx:
-    image: nginx:1
+    image: nginx:1.21.6
     ports:
       - 8080:80
     volumes:
       - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf
     # restart: always
   openvscode:
-    image: gitpod/openvscode-server:1.65.2
+    image: gitpod/openvscode-server:1.67.1
     init: true
     tty: true
     ports:
@@ -154,7 +154,7 @@ services:
       - ./volumes/openvscode:/home/workspace:cached
     # restart: always
   pgadmin:
-    image: dpage/pgadmin4:6.8
+    image: dpage/pgadmin4:6.9
     environment:
       PGADMIN_DEFAULT_EMAIL: root@gabrielrufino.com
       PGADMIN_DEFAULT_PASSWORD: root
@@ -164,7 +164,7 @@ services:
       - pgadmin:/var/lib/pgadmin
     # restart: always
   phpmyadmin:
-    image: phpmyadmin:5.1.3
+    image: phpmyadmin:5.2.0
     environment:
       PMA_ARBITRARY: 1
     ports:
@@ -194,14 +194,14 @@ services:
       - postgres:/var/lib/postgresql/data
     # restart: always
   prometheus:
-    image: prom/prometheus:v2.32.1
+    image: prom/prometheus:v2.35.0
     ports:
       - 9090:9090
     volumes:
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     # restart: always
   promtail:
-    image: grafana/promtail:2.3.0
+    image: grafana/promtail:2.5.0
     ports:
       - 9080:9080
     volumes:
@@ -210,7 +210,7 @@ services:
     command: -config.file=/etc/promtail/config.yaml
     # restart: always
   rabbitmq:
-    image: rabbitmq:3.8-management
+    image: rabbitmq:3.9.18-management
     environment:
       RABBITMQ_DEFAULT_USER: root
       RABBITMQ_DEFAULT_PASS: root
@@ -222,7 +222,7 @@ services:
       - ./volumes/rabbitmq/log/:/var/log/rabbitmq
     # restart: always
   redis:
-    image: redis:6
+    image: redis:7.0.0
     ports:
       - 6379:6379
     # restart: always
@@ -234,7 +234,7 @@ services:
       - redisinsight:/db
     # restart: always
   rethinkdb:
-    image: rethinkdb:2
+    image: rethinkdb:2.4.2
     ports:
       - 28015:28015
       - 28016:8080
@@ -258,14 +258,14 @@ services:
       - 1433:1433
     # restart: always
   strapi:
-    image: strapi/strapi:3
+    image: strapi/strapi:3.6.8
     volumes:
       - ./volumes/strapi:/srv/app
     ports:
       - 1337:1337
     # restart: always
   ubuntu:
-    image: ubuntu:20.04
+    image: ubuntu:22.10
     tty: true
     volumes:
       - ./volumes/ubuntu/:/home/shared
@@ -273,7 +273,7 @@ services:
     #   - "22001:22"
     # restart: always
   verdaccio:
-    image: verdaccio/verdaccio:4
+    image: verdaccio/verdaccio:5.10
     environment:
       - VERDACCIO_PORT=4873
     ports:
