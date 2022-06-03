@@ -3,9 +3,9 @@ echo "[Smoke] - Nginx\n"
 cp ./config/nginx/default.example.conf ./config/nginx/default.conf
 docker-compose up -d nginx
 
-wait-on http://localhost:8080 --timeout 60000
+wait-on http://localhost:80 --timeout 60000
 
-HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}\n" http://localhost:8080)
+HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}\n" http://localhost:80)
 if [ $HTTP_STATUS -ne 200  ];
   then
     docker-compose down
