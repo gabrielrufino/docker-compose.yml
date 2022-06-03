@@ -1,6 +1,6 @@
 # docker-compose.yml
 
-[![Validation workflow](https://github.com/gabrielrufino/docker-compose.yml/actions/workflows/validate.yml/badge.svg)](https://github.com/gabrielrufino/docker-compose.yml/actions/workflows/validate.yml)
+[![CI](https://github.com/gabrielrufino/docker-compose.yml/actions/workflows/ci.yml/badge.svg)](https://github.com/gabrielrufino/docker-compose.yml/actions/workflows/ci.yml)
 
 My docker development environment
 
