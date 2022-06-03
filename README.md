@@ -301,7 +301,6 @@ Service running Verdaccio.
 $ docker-compose up -d verdaccio
 ```
 
-* [Certbot](./docs/certbot.md)
 * [Nginx](./docs/nginx.md)
 
 #### Volumes
