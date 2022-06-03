@@ -147,7 +147,7 @@ services:
       # - ./config/nginx/letsencrypt:/etc/letsencrypt
     # restart: always
   openvscode:
-    image: gitpod/openvscode-server:1.67.1
+    image: gitpod/openvscode-server:1.67.2
     init: true
     tty: true
     ports:
