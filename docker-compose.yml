@@ -20,6 +20,12 @@ services:
     # ports:
     #   - "22002:22"
     # restart: always
+  certbot:
+    image: certbot/certbot:v1.27.0
+    command: certonly --webroot --webroot-path /var/www/certbot/ --dry-run
+    # command: reniew
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
   debian:
     image: debian
     tty: true
@@ -140,9 +146,11 @@ services:
   nginx:
     image: nginx:1.21.6
     ports:
-      - 8080:80
+      - 80:80
+      - 443:433
     volumes:
       - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      # - certbot:/var/www/certbot/:ro
     # restart: always
   openvscode:
     image: gitpod/openvscode-server:1.67.1
@@ -284,6 +292,7 @@ services:
 
 volumes:
   appsmith:
+  certbot:
   gitea:
   grafana:
   metabase:
