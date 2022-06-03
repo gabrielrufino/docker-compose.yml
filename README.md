@@ -162,16 +162,6 @@ Service with Nextcloud.
 docker-compose up -d nextcloud
 ```
 
-### OpenVSCode
-
-Service with OpenVSCode.
-
-```bash
-$ docker-compose up -d openvscode
-```
-
-**Port:** 3003
-
 ### pgAdmin4
 
 Service with pgAdmin4 interface.
@@ -302,6 +292,7 @@ $ docker-compose up -d verdaccio
 ```
 
 * [Nginx](./docs/nginx.md)
+* [VSCode](./docs/vscode.md)
 
 #### Volumes
 
