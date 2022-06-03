@@ -162,19 +162,6 @@ Service with Nextcloud.
 docker-compose up -d nextcloud
 ```
 
-### Nginx
-
-Service with MySQL Server.
-
-```bash
-$ docker-compose up -d nginx
-```
-
-Getting in the container bash:
-```bash
-$ docker-compose exec nginx /bin/bash
-```
-
 ### OpenVSCode
 
 Service with OpenVSCode.
@@ -313,6 +300,9 @@ Service running Verdaccio.
 ```bash
 $ docker-compose up -d verdaccio
 ```
+
+* [Certbot](./docs/certbot.md)
+* [Nginx](./docs/nginx.md)
 
 #### Volumes
 
