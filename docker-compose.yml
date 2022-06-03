@@ -22,7 +22,7 @@ services:
     # restart: always
   certbot:
     image: certbot/certbot:v1.27.0
-    command: certonly --webroot --webroot-path /var/www/certbot/ --dry-run
+    command: certonly --webroot --webroot-path /var/www/certbot/ --email contato@gabrielrufino.com
     # command: reniew
     volumes:
       - certbot-www:/var/www/certbot/:rw
@@ -145,10 +145,10 @@ services:
       - nextcloud:/var/www/html
     # restart: always
   nginx:
-    image: nginx:1.21.6
+    image: nginx:1.22.0
     ports:
       - 80:80
-      - 443:433
+      # - 443:433
     volumes:
       - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf
       # - certbot-www:/var/www/certbot/:ro
