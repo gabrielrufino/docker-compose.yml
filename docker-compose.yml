@@ -25,7 +25,7 @@ services:
     command: certonly --webroot --webroot-path /var/www/certbot/ --dry-run
     # command: reniew
     volumes:
-      - certbot/www/:/var/www/certbot/:rw
+      - certbot:/var/www/certbot/:rw
   debian:
     image: debian
     tty: true
