@@ -25,7 +25,8 @@ services:
     command: certonly --webroot --webroot-path /var/www/certbot/ --dry-run
     # command: reniew
     volumes:
-      - certbot:/var/www/certbot/:rw
+      - certbot-www:/var/www/certbot/:rw
+      - certbot-conf:/etc/letsencrypt/:rw
   debian:
     image: debian
     tty: true
@@ -150,7 +151,8 @@ services:
       - 443:433
     volumes:
       - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf
-      # - certbot:/var/www/certbot/:ro
+      # - certbot-www:/var/www/certbot/:ro
+      # - certbot-conf:/etc/nginx/ssl/:ro
     # restart: always
   openvscode:
     image: gitpod/openvscode-server:1.67.1
@@ -292,7 +294,8 @@ services:
 
 volumes:
   appsmith:
-  certbot:
+  certbot-www:
+  certbot-conf:
   gitea:
   grafana:
   metabase:
