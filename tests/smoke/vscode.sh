@@ -1,6 +1,6 @@
-echo "[Smoke] - OpenVSCode\n"
+echo "[Smoke] - VSCode\n"
 
-docker-compose up -d openvscode
+docker-compose up -d vscode
 
 wait-on http://localhost:3003 --timeout 60000
 

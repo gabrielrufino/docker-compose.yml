@@ -80,7 +80,7 @@ services:
       - mysql
     # restart: always
   mautic:
-    image: mautic/mautic
+    image: mautic/mautic:v4
     ports:
       - 8082:80
     environment:
@@ -89,7 +89,6 @@ services:
       MAUTIC_DB_PASSWORD: password
       MAUTIC_DB_NAME: mautic
       MAUTIC_RUN_CRON_JOBS: 'true'
-      MAUTIC_TRUSTED_PROXIES: 0.0.0.0/0
     depends_on:
       - mysql
     # restart: always
@@ -145,15 +144,6 @@ services:
     volumes:
       - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf
       # - ./config/nginx/letsencrypt:/etc/letsencrypt
-    # restart: always
-  openvscode:
-    image: gitpod/openvscode-server:1.67.1
-    init: true
-    tty: true
-    ports:
-      - 3003:3000
-    volumes:
-      - ./volumes/openvscode:/home/workspace:cached
     # restart: always
   pgadmin:
     image: dpage/pgadmin4:6.10
@@ -282,6 +272,15 @@ services:
       - 4873:4873
     volumes:
       - ./volumes/verdaccio/storage:/verdaccio/storage
+    # restart: always
+  vscode:
+    image: gitpod/openvscode-server:1.67.2
+    init: true
+    tty: true
+    ports:
+      - 3003:3000
+    volumes:
+      - ./volumes/vscode:/home/workspace:cached
     # restart: always
 
 volumes:
