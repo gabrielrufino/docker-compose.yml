@@ -80,7 +80,7 @@ services:
       - mysql
     # restart: always
   mautic:
-    image: mautic/mautic
+    image: mautic/mautic:v4
     ports:
       - 8082:80
     environment:
@@ -89,7 +89,6 @@ services:
       MAUTIC_DB_PASSWORD: password
       MAUTIC_DB_NAME: mautic
       MAUTIC_RUN_CRON_JOBS: 'true'
-      MAUTIC_TRUSTED_PROXIES: 0.0.0.0/0
     depends_on:
       - mysql
     # restart: always
