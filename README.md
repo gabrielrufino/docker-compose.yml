@@ -291,6 +291,7 @@ Service running Verdaccio.
 $ docker-compose up -d verdaccio
 ```
 
+* [Mautic](./docs/mautic.md)
 * [Nginx](./docs/nginx.md)
 * [VSCode](./docs/vscode.md)
 
