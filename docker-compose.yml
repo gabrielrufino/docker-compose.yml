@@ -145,15 +145,6 @@ services:
       - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf
       # - ./config/nginx/letsencrypt:/etc/letsencrypt
     # restart: always
-  vscode:
-    image: gitpod/openvscode-server:1.67.2
-    init: true
-    tty: true
-    ports:
-      - 3003:3000
-    volumes:
-      - ./volumes/vscode:/home/workspace:cached
-    # restart: always
   pgadmin:
     image: dpage/pgadmin4:6.10
     environment:
@@ -281,6 +272,15 @@ services:
       - 4873:4873
     volumes:
       - ./volumes/verdaccio/storage:/verdaccio/storage
+    # restart: always
+  vscode:
+    image: gitpod/openvscode-server:1.67.2
+    init: true
+    tty: true
+    ports:
+      - 3003:3000
+    volumes:
+      - ./volumes/vscode:/home/workspace:cached
     # restart: always
 
 volumes:
