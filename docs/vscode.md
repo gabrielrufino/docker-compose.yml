@@ -1,4 +1,4 @@
-# VSCode
+# docker-compose.yml - VSCode
 
 Service with OpenVSCode.
 
