@@ -1,6 +1,6 @@
-# Nginx
+# docker-compose.yml - Nginx
 
-Service with Nginx.
+Service running Nginx
 
 ```bash
 docker-compose up -d nginx

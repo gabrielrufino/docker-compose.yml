@@ -1,4 +1,4 @@
-# Mautic
+# docker-compose.yml - Mautic
 
 Service with Mautic
 
