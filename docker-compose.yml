@@ -126,7 +126,6 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./volumes/mysql/:/home/shared
       - mysql:/var/lib/mysql
     # restart: always
   nextcloud:
