@@ -93,7 +93,7 @@ services:
       - mysql
     # restart: always
   metabase:
-    image: metabase/metabase:v0.43.1
+    image: metabase/metabase:v0.43.2
     ports:
       - 3001:3000
     environment: 
