@@ -231,7 +231,7 @@ services:
       - 28015:28015
       - 28016:8080
     volumes:
-      - ./volumes/rethinkdb/:/home/shared
+      - rethinkdb:/data
     # restart: always
   sonic:
     image: valeriansaliou/sonic:v1.3.2
@@ -293,3 +293,4 @@ volumes:
   pgadmin:
   postgres:
   redisinsight:
+  rethinkdb:
