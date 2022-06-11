@@ -109,7 +109,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
     volumes:
-      - ./volumes/mongo/:/home/shared
+      - mongo:/data/db
     # restart: always
   mysql:
     image: mysql:8.0.29
@@ -289,6 +289,7 @@ volumes:
   grafana:
   metabase:
   mysql:
+  mongo:
   nextcloud:
   pgadmin:
   postgres:
