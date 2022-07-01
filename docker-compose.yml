@@ -109,7 +109,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
     volumes:
-      - ./volumes/mongo/:/home/shared
+      - mongo:/data/db
     # restart: always
   mysql:
     image: mysql:8.0.29
@@ -126,7 +126,6 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./volumes/mysql/:/home/shared
       - mysql:/var/lib/mysql
     # restart: always
   nextcloud:
@@ -146,7 +145,7 @@ services:
       # - ./config/nginx/letsencrypt:/etc/letsencrypt
     # restart: always
   pgadmin:
-    image: dpage/pgadmin4:6.10
+    image: dpage/pgadmin4:6.11
     environment:
       PGADMIN_DEFAULT_EMAIL: root@gabrielrufino.com
       PGADMIN_DEFAULT_PASSWORD: root
@@ -231,7 +230,7 @@ services:
       - 28015:28015
       - 28016:8080
     volumes:
-      - ./volumes/rethinkdb/:/home/shared
+      - rethinkdb:/data
     # restart: always
   sonic:
     image: valeriansaliou/sonic:v1.3.2
@@ -289,7 +288,9 @@ volumes:
   grafana:
   metabase:
   mysql:
+  mongo:
   nextcloud:
   pgadmin:
   postgres:
   redisinsight:
+  rethinkdb:
