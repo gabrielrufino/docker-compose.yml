@@ -1,6 +1,6 @@
 # Config files
 /config/*/*
-!/config/*/*.example*
+!/config/nginx/sites-available
 
 # Volumes files
 /volumes/*/*
