@@ -50,7 +50,7 @@ services:
       - 222:22
     # restart: always
   grafana:
-    image: grafana/grafana:8.5.3
+    image: grafana/grafana:9.1.6
     ports:
       - 3000:3000
     volumes:
