@@ -264,7 +264,7 @@ services:
     #   - "22001:22"
     # restart: always
   verdaccio:
-    image: verdaccio/verdaccio:5.10
+    image: verdaccio/verdaccio:5.15
     environment:
       - VERDACCIO_PORT=4873
     ports:
