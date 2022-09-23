@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   appsmith:
-    image: appsmith/appsmith-ce:v1.7.0
+    image: appsmith/appsmith-ce:v1.8.1
     ports:
       - 8085:80
       - 443:443
@@ -37,7 +37,7 @@ services:
     #   - "22004:22"
     # restart: always
   gitea:
-    image: gitea/gitea:1.16.8
+    image: gitea/gitea:1.17.2
     environment:
       - USER_UID=1000
       - USER_GID=1000
@@ -50,7 +50,7 @@ services:
       - 222:22
     # restart: always
   grafana:
-    image: grafana/grafana:8.5.3
+    image: grafana/grafana:9.1.6
     ports:
       - 3000:3000
     volumes:
@@ -62,13 +62,13 @@ services:
     # ports:
     #   - "22000:22"
   loki:
-    image: grafana/loki:2.3.0
+    image: grafana/loki:2.6.1
     ports:
       - 3100:3100
     command: -config.file=/etc/loki/local-config.yaml
     # restart: always
   matomo:
-    image: matomo:4.10.0
+    image: matomo:4.11.0
     ports:
       - 8086:80
     environment:
@@ -93,7 +93,7 @@ services:
       - mysql
     # restart: always
   metabase:
-    image: metabase/metabase:v0.43.2
+    image: metabase/metabase:v0.44.3
     ports:
       - 3001:3000
     environment: 
@@ -129,7 +129,7 @@ services:
       - mysql:/var/lib/mysql
     # restart: always
   nextcloud:
-    image: nextcloud:24.0.1
+    image: nextcloud:24.0.5
     ports:
       - 8083:80
     volumes:
