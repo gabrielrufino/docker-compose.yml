@@ -273,7 +273,7 @@ services:
       - ./volumes/verdaccio/storage:/verdaccio/storage
     # restart: always
   vscode:
-    image: gitpod/openvscode-server:1.67.2
+    image: gitpod/openvscode-server:1.71.2
     init: true
     tty: true
     ports:
