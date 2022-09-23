@@ -145,7 +145,7 @@ services:
       # - ./config/nginx/letsencrypt:/etc/letsencrypt
     # restart: always
   pgadmin:
-    image: dpage/pgadmin4:6.12
+    image: dpage/pgadmin4:6.14
     environment:
       PGADMIN_DEFAULT_EMAIL: root@gabrielrufino.com
       PGADMIN_DEFAULT_PASSWORD: root
@@ -162,7 +162,7 @@ services:
       - 8087:80
     # restart: always
   portainer:
-    image: portainer/portainer-ce:2.14.2
+    image: portainer/portainer-ce:2.15.1
     ports:
       - 8000:8000
       - 9000:9000
@@ -185,14 +185,14 @@ services:
       - postgres:/var/lib/postgresql/data
     # restart: always
   prometheus:
-    image: prom/prometheus:v2.35.0
+    image: prom/prometheus:v2.37.1
     ports:
       - 9090:9090
     volumes:
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     # restart: always
   promtail:
-    image: grafana/promtail:2.5.0
+    image: grafana/promtail:2.6.1
     ports:
       - 9080:9080
     volumes:
@@ -201,7 +201,7 @@ services:
     command: -config.file=/etc/promtail/config.yaml
     # restart: always
   rabbitmq:
-    image: rabbitmq:3.9.18-management
+    image: rabbitmq:3.9.22-management
     environment:
       RABBITMQ_DEFAULT_USER: root
       RABBITMQ_DEFAULT_PASS: root
@@ -213,12 +213,12 @@ services:
       - ./volumes/rabbitmq/log/:/var/log/rabbitmq
     # restart: always
   redis:
-    image: redis:7.0.0
+    image: redis:7.0.5
     ports:
       - 6379:6379
     # restart: always
   redisinsight:
-    image: redislabs/redisinsight:1.11.1
+    image: redislabs/redisinsight:1.13.0
     ports:
       - 8001:8001
     volumes:
@@ -233,7 +233,7 @@ services:
       - rethinkdb:/data
     # restart: always
   sonic:
-    image: valeriansaliou/sonic:v1.3.2
+    image: valeriansaliou/sonic:v1.3.5
     ports:
       - 1491:1491
     volumes:
@@ -264,7 +264,7 @@ services:
     #   - "22001:22"
     # restart: always
   verdaccio:
-    image: verdaccio/verdaccio:5.10
+    image: verdaccio/verdaccio:5.15
     environment:
       - VERDACCIO_PORT=4873
     ports:
@@ -273,7 +273,7 @@ services:
       - ./volumes/verdaccio/storage:/verdaccio/storage
     # restart: always
   vscode:
-    image: gitpod/openvscode-server:1.67.2
+    image: gitpod/openvscode-server:1.71.2
     init: true
     tty: true
     ports:
