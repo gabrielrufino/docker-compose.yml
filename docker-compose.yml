@@ -233,7 +233,7 @@ services:
       - rethinkdb:/data
     # restart: always
   sonic:
-    image: valeriansaliou/sonic:v1.3.2
+    image: valeriansaliou/sonic:v1.3.5
     ports:
       - 1491:1491
     volumes:
