@@ -145,7 +145,7 @@ services:
       # - ./config/nginx/letsencrypt:/etc/letsencrypt
     # restart: always
   pgadmin:
-    image: dpage/pgadmin4:6.12
+    image: dpage/pgadmin4:6.14
     environment:
       PGADMIN_DEFAULT_EMAIL: root@gabrielrufino.com
       PGADMIN_DEFAULT_PASSWORD: root
