@@ -68,7 +68,7 @@ services:
     command: -config.file=/etc/loki/local-config.yaml
     # restart: always
   matomo:
-    image: matomo:4.10.0
+    image: matomo:4.11.0
     ports:
       - 8086:80
     environment:
