@@ -218,7 +218,7 @@ services:
       - 6379:6379
     # restart: always
   redisinsight:
-    image: redislabs/redisinsight:1.11.1
+    image: redislabs/redisinsight:1.13.0
     ports:
       - 8001:8001
     volumes:
