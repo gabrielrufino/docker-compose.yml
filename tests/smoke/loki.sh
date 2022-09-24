@@ -2,7 +2,7 @@ echo "[Smoke] - Loki\n"
 
 docker-compose up -d loki
 
-wait-on http://localhost:3100/ready
+npx wait-on http-get://localhost:3100/ready --interval 5000
 
 HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}\n" http://localhost:3100/ready)
 if [ $HTTP_STATUS -ne 200  ];
