@@ -219,29 +219,7 @@ services:
     # restart: always
   redisinsight:
     image: redislabs/redisinsight:1.13.0
-    ports:
-      - 8001:8001
-    volumes:
-      - redisinsight:/db
-    # restart: always
-  rethinkdb:
-    image: rethinkdb:2.4.2
-    ports:
-      - 28015:28015
-      - 28016:8080
-    volumes:
-      - rethinkdb:/data
-    # restart: always
-  sonic:
-    image: valeriansaliou/sonic:v1.3.5
-    ports:
-      - 1491:1491
-    volumes:
-      - ./volumes/sonic/sonic.cfg:/etc/sonic.cfg
-      - ./volumes/sonic/store/:/var/lib/sonic/store/
-    # restart: always
-  sqlserver:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:link mssql/server:2019-latest
     environment:
         SA_PASSWORD: password@123
         ACCEPT_EULA: Y
@@ -281,6 +259,13 @@ services:
     volumes:
       - ./volumes/vscode:/home/workspace:cached
     # restart: always
+  wordpress:
+    image: wordpress
+    ports:
+      - 8081:80
+    volumes:
+      - wordpress:/var/www/html
+    # restart: always
 
 volumes:
   appsmith:
@@ -294,3 +279,4 @@ volumes:
   postgres:
   redisinsight:
   rethinkdb:
+  wordpress:
