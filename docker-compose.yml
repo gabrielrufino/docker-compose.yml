@@ -281,6 +281,13 @@ services:
     volumes:
       - ./volumes/vscode:/home/workspace:cached
     # restart: always
+  wordpress:
+    image: wordpress
+    ports:
+      - 8081:80
+    volumes:
+      - wordpress:/var/www/html
+    # restart: always
 
 volumes:
   appsmith:
@@ -294,3 +301,4 @@ volumes:
   postgres:
   redisinsight:
   rethinkdb:
+  wordpress:
