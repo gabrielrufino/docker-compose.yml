@@ -232,6 +232,11 @@ services:
     volumes:
       - rethinkdb:/data
     # restart: always
+  sonarqube:
+    image: sonarqube
+    ports:
+      - 9001:9000
+    # restart: always
   sonic:
     image: valeriansaliou/sonic:v1.3.5
     ports:
