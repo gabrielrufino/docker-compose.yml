@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   appsmith:
-    image: appsmith/appsmith-ce:v1.8.1
+    image: appsmith/appsmith-ce:v1.8.9
     ports:
       - 8085:80
       - 443:443
@@ -278,7 +278,7 @@ services:
       - ./volumes/verdaccio/storage:/verdaccio/storage
     # restart: always
   vscode:
-    image: gitpod/openvscode-server:1.71.2
+    image: gitpod/openvscode-server:1.73.1
     init: true
     tty: true
     ports:
