@@ -162,7 +162,7 @@ services:
       - 8087:80
     # restart: always
   portainer:
-    image: portainer/portainer-ce:2.15.1
+    image: portainer/portainer-ce:2.16.2
     ports:
       - 8000:8000
       - 9000:9000
