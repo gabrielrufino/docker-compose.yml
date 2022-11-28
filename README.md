@@ -59,7 +59,6 @@ git pull
 * [RethinkDB](./docs/rethinkdb.md)
 * [Sonic](./docs/sonic.md)
 * [SQL Server](./docs/sql-server.md)
-* [Strapi](./docs/strapi.md)
 * [Ubuntu](./docs/ubuntu.md)
 * [Verdaccio](./docs/verdaccio.md)
 * [VSCode](./docs/vscode.md)

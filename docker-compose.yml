@@ -253,13 +253,6 @@ services:
     ports:
       - 1433:1433
     # restart: always
-  strapi:
-    image: strapi/strapi:3.6.8
-    volumes:
-      - ./volumes/strapi:/srv/app
-    ports:
-      - 1337:1337
-    # restart: always
   ubuntu:
     image: ubuntu:22.10
     tty: true
