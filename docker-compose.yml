@@ -171,13 +171,12 @@ services:
       - ./volumes/portainer:/data
     # restart: always
   postgres:
-    image: postgres:13
-    # [Use the image bellow for postgres with ssl]
-    # image: fantix/postgres-ssl:13.1
+    image: bitnami/postgresql:15.1.0
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
-      POSTGRES_DB: postgres
+      POSTGRESQL_USER: root
+      POSTGRESQL_PASSWORD: root
+      POSTGRESQL_DB: postgres
+      POSTGRESQL_ENABLE_TLS: 'no'
     ports:
       - 5432:5432
     volumes:
