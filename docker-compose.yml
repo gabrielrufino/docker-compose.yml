@@ -237,7 +237,7 @@ services:
       - 9001:9000
     # restart: always
   sonic:
-    image: valeriansaliou/sonic:v1.3.5
+    image: valeriansaliou/sonic:v1.4.0
     ports:
       - 1491:1491
     volumes:
