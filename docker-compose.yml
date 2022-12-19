@@ -277,7 +277,6 @@ services:
       - 3003:3000
     volumes:
       - ./volumes/vscode:/home/workspace:cached
-      - vscode
     # restart: always
   wordpress:
     image: wordpress
@@ -299,5 +298,4 @@ volumes:
   postgres:
   redisinsight:
   rethinkdb:
-  vscode:
   wordpress:
