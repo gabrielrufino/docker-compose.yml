@@ -3,7 +3,7 @@
 Service running RethinkDB
 
 ```bash
-docker-compose up -d rethinkdb
+docker compose up -d rethinkdb
 ```
 
 ## Volumes

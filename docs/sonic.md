@@ -3,5 +3,5 @@
 Service running Sonic
 
 ```bash
-docker-compose up -d sonic
+docker compose up -d sonic
 ```

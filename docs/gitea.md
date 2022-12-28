@@ -3,5 +3,5 @@
 Service running Gitea
 
 ```bash
-docker-compose up -d gitea
+docker compose up -d gitea
 ```

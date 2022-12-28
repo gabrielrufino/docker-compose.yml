@@ -3,5 +3,5 @@
 Service running RabbitMQ
 
 ```bash
-docker-compose up -d rabbitmq
+docker compose up -d rabbitmq
 ```

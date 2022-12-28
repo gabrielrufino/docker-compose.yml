@@ -3,5 +3,5 @@
 Service running Appsmith
 
 ```bash
-docker-compose up -d appsmith
+docker compose up -d appsmith
 ```

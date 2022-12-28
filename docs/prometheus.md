@@ -3,5 +3,5 @@
 Service running Prometheus
 
 ```bash
-docker-compose up -d prometheus
+docker compose up -d prometheus
 ```

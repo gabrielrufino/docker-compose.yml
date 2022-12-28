@@ -3,5 +3,5 @@
 Service running Grafana
 
 ```bash
-docker-compose up -d grafana
+docker compose up -d grafana
 ```

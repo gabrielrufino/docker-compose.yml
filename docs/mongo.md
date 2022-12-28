@@ -3,7 +3,7 @@
 Service running MongoDB server
 
 ```bash
-docker-compose up -d mongo
+docker compose up -d mongo
 ```
 
 **User:** root<br />
@@ -11,12 +11,12 @@ docker-compose up -d mongo
 
 Getting in the container bash:
 ```bash
-docker-compose exec mongo /bin/bash
+docker compose exec mongo /bin/bash
 ```
 
 Getting in the mongo shell:
 ```bash
-docker-compose exec mongo mongo -u root -p root
+docker compose exec mongo mongo -u root -p root
 ```
 
 ## Volumes

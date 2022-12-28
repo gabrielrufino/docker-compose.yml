@@ -3,5 +3,5 @@
 Service running Arch Linux
 
 ```bash
-docker-compose up -d archlinux
+docker compose up -d archlinux
 ```

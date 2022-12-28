@@ -3,5 +3,5 @@
 Service running Debian
 
 ```bash
-docker-compose up -d debian
+docker compose up -d debian
 ```

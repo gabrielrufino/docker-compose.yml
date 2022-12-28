@@ -3,5 +3,5 @@
 Service running Fedora
 
 ```bash
-docker-compose up -d fedora
+docker compose up -d fedora
 ```

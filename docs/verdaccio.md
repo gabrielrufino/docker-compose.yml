@@ -3,7 +3,7 @@
 Service running Verdaccio
 
 ```bash
-docker-compose up -d verdaccio
+docker compose up -d verdaccio
 ```
 
 ## Volumes

@@ -3,5 +3,5 @@
 Service running Portainer
 
 ```bash
-docker-compose up -d portainer
+docker compose up -d portainer
 ```
