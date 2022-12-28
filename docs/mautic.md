@@ -2,6 +2,6 @@
 
 Service with Mautic
 
-```
-docker-compose up -d mautic
+```bash
+docker compose up -d mautic
 ```

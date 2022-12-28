@@ -3,5 +3,5 @@
 Service running Matomo
 
 ```bash
-docker-compose up -d matomo
+docker compose up -d matomo
 ```

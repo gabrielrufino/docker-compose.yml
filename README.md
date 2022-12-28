@@ -10,7 +10,6 @@ My docker development environment
 
 * git
 * docker
-* docker-compose
 
 1. Clone repository
 

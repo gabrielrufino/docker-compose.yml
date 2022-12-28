@@ -3,5 +3,5 @@
 Service running pgAdmin
 
 ```bash
-docker-compose up -d pgadmin
+docker compose up -d pgadmin
 ```

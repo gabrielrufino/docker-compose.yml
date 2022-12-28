@@ -3,5 +3,5 @@
 Service running Redis
 
 ```bash
-docker-compose up -d redis
+docker compose up -d redis
 ```

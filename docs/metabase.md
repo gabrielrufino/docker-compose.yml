@@ -3,5 +3,5 @@
 Service running Metabase
 
 ```bash
-docker-compose up -d metabase
+docker compose up -d metabase
 ```

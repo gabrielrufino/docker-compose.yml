@@ -3,12 +3,12 @@
 Service running Nginx
 
 ```bash
-docker-compose up -d nginx
+docker compose up -d nginx
 ```
 
 Getting in the container bash:
 ```bash
-docker-compose exec nginx /bin/bash
+docker compose exec nginx /bin/bash
 ```
 
 ### HTTPS

@@ -3,12 +3,12 @@
 Service running Ubuntu
 
 ```bash
-docker-compose up -d ubuntu
+docker compose up -d ubuntu
 ```
 
 Getting in the container bash:
 ```bash
-docker-compose exec ubuntu /bin/bash
+docker compose exec ubuntu /bin/bash
 ```
 
 ## Volumes

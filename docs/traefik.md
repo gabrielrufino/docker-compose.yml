@@ -3,5 +3,5 @@
 Service running Traefik
 
 ```bash
-docker-compose up -d traefik
+docker compose up -d traefik
 ```

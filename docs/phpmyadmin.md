@@ -3,5 +3,5 @@
 Service running phpMyAdmin
 
 ```bash
-docker-compose up -d phpmyadmin
+docker compose up -d phpmyadmin
 ```
