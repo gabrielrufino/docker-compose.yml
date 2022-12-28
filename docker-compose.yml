@@ -138,7 +138,7 @@ services:
   nginx:
     image: nginx:1.23.1
     ports:
-      - 80:80
+      - 8080:80
       # - 443:433
     volumes:
       - ./config/nginx/sites-available:/etc/nginx/sites-available
