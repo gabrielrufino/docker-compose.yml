@@ -1,6 +1,7 @@
 # Config files
 /config/*/*
 !/config/nginx/sites-available
+!/config/traefik/traefik.yml
 
 # Volumes files
 /volumes/*/*

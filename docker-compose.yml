@@ -252,6 +252,14 @@ services:
     ports:
       - 1433:1433
     # restart: always
+  traefik:
+    image: traefik:v2.9.6
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - ./config/traefik/traefik.yml:/etc/traefik/traefik.yml
+      - /var/run/docker.sock:/var/run/docker.sock
   ubuntu:
     image: ubuntu:22.10
     tty: true
