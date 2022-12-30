@@ -153,6 +153,9 @@ services:
       - 16543:80
     volumes:
       - pgadmin:/var/lib/pgadmin
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.pgadmin.rule=HostRegexp(`pgadmin.$TRAEFIK_BASE_HOST`)
     # restart: always
   phpmyadmin:
     image: phpmyadmin:5.2.0
@@ -222,6 +225,9 @@ services:
       - 8001:8001
     volumes:
       - redisinsight:/db
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.redisinsight.rule=HostRegexp(`redisinsight.$TRAEFIK_BASE_HOST`)
     # restart: always
   rethinkdb:
     image: rethinkdb:2.4.2
@@ -253,7 +259,7 @@ services:
       - 1433:1433
     # restart: always
   traefik:
-    image: traefik:v2.9.6
+    image: traefik:$TRAEFIK_VERSION
     ports:
       - 80:80
       - 8080:8080
@@ -286,6 +292,9 @@ services:
     volumes:
       - ./volumes/vscode:/home/workspace:cached
       - vscode-bin:/usr/bin
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.vscode.rule=Host(`vscode.$TRAEFIK_BASE_HOST`)
     # restart: always
   wordpress:
     image: wordpress

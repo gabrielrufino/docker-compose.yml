@@ -1,3 +1,5 @@
+.env
+
 # Config files
 /config/*/*
 !/config/nginx/sites-available
