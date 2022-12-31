@@ -294,7 +294,9 @@ services:
       - vscode-bin:/usr/bin
     labels:
       - traefik.enable=true
+      - traefik.http.middlewares.vscode-auth.basicauth.users=$VSCODE_TRAEFIK_USERNAME:$VSCODE_TRAEFIK_PASSWORD
       - traefik.http.routers.vscode.rule=Host(`vscode.$TRAEFIK_BASE_HOST`)
+      - traefik.http.routers.vscode.middlewares=vscode-auth
     # restart: always
   wordpress:
     image: wordpress
