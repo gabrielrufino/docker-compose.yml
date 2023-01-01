@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   appsmith:
-    image: appsmith/appsmith-ce:v1.8.9
+    image: appsmith/appsmith-ce:$APPSMITH_VERSION
     ports:
       - 8085:80
       - 443:443
