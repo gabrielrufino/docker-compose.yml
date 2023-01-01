@@ -260,12 +260,25 @@ services:
     # restart: always
   traefik:
     image: traefik:$TRAEFIK_VERSION
+    command:
+      - --providers.docker
+      - --providers.docker.exposedByDefault=false
+      - --api.dashboard=true
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --certificatesresolvers.letsencrypt.acme.email=$TRAEFIK_ACME_EMAIL
+      - --certificatesresolvers.letsencrypt.acme.storage=/etc/traefik/acme/acme.json
+      - --certificatesresolvers.letsencrypt.acme.httpchallenge=true
+      - --certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web
+      - --entrypoints.web.http.redirections.entryPoint.to=websecure
+      - --entrypoints.web.http.redirections.entryPoint.scheme=https
     ports:
       - 80:80
+      - 443:443
       - 8080:8080
     volumes:
-      - ./config/traefik/traefik.yml:/etc/traefik/traefik.yml
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./volumes/traefik/acme:/etc/traefik/acme
   ubuntu:
     image: ubuntu:22.10
     tty: true
@@ -297,6 +310,8 @@ services:
       - traefik.http.middlewares.vscode-auth.basicauth.users=$VSCODE_TRAEFIK_USERNAME:$VSCODE_TRAEFIK_PASSWORD
       - traefik.http.routers.vscode.rule=Host(`vscode.$TRAEFIK_BASE_HOST`)
       - traefik.http.routers.vscode.middlewares=vscode-auth
+      - traefik.http.routers.vscode.tls=true
+      - traefik.http.routers.vscode.tls.certresolver=letsencrypt
     # restart: always
   wordpress:
     image: wordpress
