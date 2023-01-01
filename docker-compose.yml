@@ -17,24 +17,18 @@ services:
     tty: true
     volumes:
       - ./volumes/archlinux/:/home/shared
-    # ports:
-    #   - "22002:22"
     # restart: always
   debian:
     image: debian
     tty: true
     volumes:
       - ./volumes/debian/:/home/shared
-    # ports:
-    #   - "22003:22"
     # restart: always
   fedora:
     image: fedora:36
     tty: true
     volumes:
       - ./volumes/fedora/:/home/shared
-    # ports:
-    #   - "22004:22"
     # restart: always
   gitea:
     image: gitea/gitea:1.17.2
@@ -59,8 +53,6 @@ services:
   kali:
     image: kalilinux/kali-rolling
     tty: true
-    # ports:
-    #   - "22000:22"
   loki:
     image: grafana/loki:2.6.1
     ports:
@@ -284,8 +276,6 @@ services:
     tty: true
     volumes:
       - ./volumes/ubuntu/:/home/shared
-    # ports:
-    #   - "22001:22"
     # restart: always
   verdaccio:
     image: verdaccio/verdaccio:5.15
