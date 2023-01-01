@@ -11,7 +11,7 @@ services:
       - appsmith:/appsmith-stacks
     labels:
       com.centurylinklabs.watchtower.enable: 'true'
-    # restart: always
+    restart: $APPSMITH_RESTART_POLICY
   archlinux:
     image: archlinux
     tty: true
@@ -148,7 +148,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.pgadmin.rule=HostRegexp(`pgadmin.$TRAEFIK_BASE_HOST`)
-    # restart: always
+    restart: $PGADMIN_RESTART_POLICY
   phpmyadmin:
     image: phpmyadmin:5.2.0
     environment:
@@ -271,6 +271,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./volumes/traefik/acme:/etc/traefik/acme
+    restart: $TRAEFIK_RESTART_POLICY
   ubuntu:
     image: ubuntu:22.10
     tty: true
@@ -302,7 +303,7 @@ services:
       - traefik.http.routers.vscode.middlewares=vscode-auth
       - traefik.http.routers.vscode.tls=true
       - traefik.http.routers.vscode.tls.certresolver=letsencrypt
-    # restart: always
+    restart: $VSCODE_RESTART_POLICY
   wordpress:
     image: wordpress
     ports:
