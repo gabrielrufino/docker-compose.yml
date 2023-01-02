@@ -19,11 +19,11 @@ services:
       - ./volumes/archlinux/:/home/shared
     restart: $ARCHLINUX_RESTART_POLICY
   debian:
-    image: debian
+    image: debian:$DEBIAN_VERSION
     tty: true
     volumes:
       - ./volumes/debian/:/home/shared
-    # restart: always
+    restart: $DEBIAN_RESTART_POLICY
   fedora:
     image: fedora:36
     tty: true
