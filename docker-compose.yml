@@ -124,14 +124,14 @@ services:
       - nextcloud:/var/www/html
     restart: $NEXTCLOUD_RESTART_POLICY
   nginx:
-    image: nginx:1.23.1
+    image: nginx:$NGINX_VERSION
     ports:
       - 8080:80
       # - 443:433
     volumes:
       - ./config/nginx/sites-available:/etc/nginx/sites-available
       # - ./config/nginx/letsencrypt:/etc/letsencrypt
-    # restart: always
+    restart: $NGINX_RESTART_POLICY
   pgadmin:
     image: dpage/pgadmin4:$PGADMIN_VERSION
     environment:
