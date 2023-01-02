@@ -117,12 +117,12 @@ services:
       - mysql:/var/lib/mysql
     restart: $MYSQL_RESTART_POLICY
   nextcloud:
-    image: nextcloud:24.0.6
+    image: nextcloud:$NEXTCLOUD_VERSION
     ports:
       - 8083:80
     volumes:
       - nextcloud:/var/www/html
-    # restart: always
+    restart: $NEXTCLOUD_RESTART_POLICY
   nginx:
     image: nginx:1.23.1
     ports:
