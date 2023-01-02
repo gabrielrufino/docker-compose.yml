@@ -218,13 +218,13 @@ services:
       - traefik.http.routers.redisinsight.rule=HostRegexp(`redisinsight.$TRAEFIK_BASE_HOST`)
     restart: $REDISINSIGHT_RESTART_POLICY
   rethinkdb:
-    image: rethinkdb:2.4.2
+    image: rethinkdb:$RETHINKDB_VERSION
     ports:
       - 28015:28015
       - 28016:8080
     volumes:
       - rethinkdb:/data
-    # restart: always
+    restart: $RETHINKDB_RESTART_POLICY
   sonarqube:
     image: sonarqube
     ports:
