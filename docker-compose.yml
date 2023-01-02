@@ -126,7 +126,7 @@ services:
   nginx:
     image: nginx:$NGINX_VERSION
     ports:
-      - 8080:80
+      - 8081:80
       # - 443:433
     volumes:
       - ./config/nginx/sites-available:/etc/nginx/sites-available
