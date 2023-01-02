@@ -25,11 +25,11 @@ services:
       - ./volumes/debian/:/home/shared
     restart: $DEBIAN_RESTART_POLICY
   fedora:
-    image: fedora:36
+    image: fedora:$FEDORA_VERSION
     tty: true
     volumes:
       - ./volumes/fedora/:/home/shared
-    # restart: always
+    restart: $FEDORA_RESTART_POLICY
   gitea:
     image: gitea/gitea:1.17.2
     environment:
