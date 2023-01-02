@@ -1,7 +1,9 @@
 echo "[Smoke] - Mautic\n"
 
-docker compose up -d mautic
+docker compose up -d mysql
+wait-on tcp:3306 --timeout 60000
 
+docker compose up -d mautic
 wait-on http://localhost:8082/installer --timeout 60000
 
 HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}\n" http://localhost:8082/installer)
