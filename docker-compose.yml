@@ -44,12 +44,12 @@ services:
       - 222:22
     restart: $GITEA_RESTART_POLICY
   grafana:
-    image: grafana/grafana:9.1.6
+    image: grafana/grafana:$GRAFANA_VERSION
     ports:
       - 3000:3000
     volumes:
       - grafana:/var/lib/grafana
-    # restart: always
+    restart: $GRAFANA_RESTART_POLICY
   kali:
     image: kalilinux/kali-rolling
     tty: true
