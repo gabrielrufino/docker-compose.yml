@@ -226,10 +226,10 @@ services:
       - rethinkdb:/data
     restart: $RETHINKDB_RESTART_POLICY
   sonarqube:
-    image: sonarqube
+    image: sonarqube:$SONARQUBE_VERSION
     ports:
       - 9001:9000
-    # restart: always
+    restart: $SONARQUBE_RESTART_POLICY
   sonic:
     image: valeriansaliou/sonic:v1.4.0
     ports:
