@@ -231,13 +231,13 @@ services:
       - 9001:9000
     restart: $SONARQUBE_RESTART_POLICY
   sonic:
-    image: valeriansaliou/sonic:v1.4.0
+    image: valeriansaliou/sonic:$SONIC_VERSION
     ports:
       - 1491:1491
     volumes:
       - ./volumes/sonic/sonic.cfg:/etc/sonic.cfg
       - ./volumes/sonic/store/:/var/lib/sonic/store/
-    # restart: always
+    restart: $SONIC_RESTART_POLICY
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
