@@ -239,13 +239,13 @@ services:
       - ./volumes/sonic/store/:/var/lib/sonic/store/
     restart: $SONIC_RESTART_POLICY
   sqlserver:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server:$SQLSERVER_VERSION
     environment:
-        SA_PASSWORD: password@123
+        SA_PASSWORD: $SQLSERVER_SA_PASSWORD
         ACCEPT_EULA: Y
     ports:
       - 1433:1433
-    # restart: always
+    restart: $SQLSERVER_RESTART_POLICY
   traefik:
     image: traefik:$TRAEFIK_VERSION
     command:
