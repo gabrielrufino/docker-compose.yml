@@ -90,7 +90,7 @@ services:
       - metabase:/metabase-data
     restart: $METABASE_RESTART_POLICY
   mongo:
-    image: mongo:6.0.2
+    image: mongo:$MONGO_VERSION
     ports:
       - 27017:27017
     environment:
@@ -98,7 +98,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root
     volumes:
       - mongo:/data/db
-    # restart: always
+    restart: $MONGO_RESTART_POLICY
   mysql:
     image: mysql:8.0.29
     command: |
