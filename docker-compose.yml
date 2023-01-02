@@ -146,12 +146,12 @@ services:
       - traefik.http.routers.pgadmin.rule=HostRegexp(`pgadmin.$TRAEFIK_BASE_HOST`)
     restart: $PGADMIN_RESTART_POLICY
   phpmyadmin:
-    image: phpmyadmin:5.2.0
+    image: phpmyadmin:$PHPMYADMIN_VERSION
     environment:
       PMA_ARBITRARY: 1
     ports:
       - 8087:80
-    # restart: always
+    restart: $PHPMYADMIN_RESTART_POLICY
   portainer:
     image: portainer/portainer-ce:2.16.2
     ports:
