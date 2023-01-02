@@ -203,10 +203,10 @@ services:
       - ./volumes/rabbitmq/log/:/var/log/rabbitmq
     restart: $RABBITMQ_RESTART_POLICY
   redis:
-    image: redis:7.0.5
+    image: redis:$REDIS_VERSION
     ports:
       - 6379:6379
-    # restart: always
+    restart: $REDIS_RESTART_POLICY
   redisinsight:
     image: redislabs/redisinsight:1.13.0
     ports:
