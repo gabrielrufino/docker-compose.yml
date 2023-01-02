@@ -153,14 +153,14 @@ services:
       - 8087:80
     restart: $PHPMYADMIN_RESTART_POLICY
   portainer:
-    image: portainer/portainer-ce:2.16.2
+    image: portainer/portainer-ce:$PORTAINER_VERSION
     ports:
       - 8000:8000
       - 9000:9000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./volumes/portainer:/data
-    # restart: always
+    restart: $PORTAINER_RESTART_POLICY
   postgres:
     image: bitnami/postgresql:15.1.0
     environment:
