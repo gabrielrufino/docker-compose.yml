@@ -301,12 +301,12 @@ services:
       - traefik.http.routers.vscode.tls.certresolver=letsencrypt
     restart: $VSCODE_RESTART_POLICY
   wordpress:
-    image: wordpress
+    image: wordpress:$WORDPRESS_VERSION
     ports:
       - 8081:80
     volumes:
       - wordpress:/var/www/html
-    # restart: always
+    restart: $WORDPRESS_RESTART_POLICY
 
 volumes:
   appsmith:
