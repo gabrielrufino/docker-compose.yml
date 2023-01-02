@@ -269,11 +269,11 @@ services:
       - ./volumes/traefik/acme:/etc/traefik/acme
     restart: $TRAEFIK_RESTART_POLICY
   ubuntu:
-    image: ubuntu:22.10
+    image: ubuntu:$UBUNTU_VERSION
     tty: true
     volumes:
       - ./volumes/ubuntu/:/home/shared
-    # restart: always
+    restart: $UBUNTU_RESTART_POLICY
   verdaccio:
     image: verdaccio/verdaccio:5.15
     environment:
