@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   appsmith:
-    image: appsmith/appsmith-ce:v1.8.9
+    image: appsmith/appsmith-ce:$APPSMITH_VERSION
     ports:
       - 8085:80
       - 443:443
@@ -11,33 +11,27 @@ services:
       - appsmith:/appsmith-stacks
     labels:
       com.centurylinklabs.watchtower.enable: 'true'
-    # restart: always
+    restart: $APPSMITH_RESTART_POLICY
   archlinux:
-    image: archlinux
+    image: archlinux:$ARCHLINUX_VERSION
     tty: true
     volumes:
       - ./volumes/archlinux/:/home/shared
-    # ports:
-    #   - "22002:22"
-    # restart: always
+    restart: $ARCHLINUX_RESTART_POLICY
   debian:
-    image: debian
+    image: debian:$DEBIAN_VERSION
     tty: true
     volumes:
       - ./volumes/debian/:/home/shared
-    # ports:
-    #   - "22003:22"
-    # restart: always
+    restart: $DEBIAN_RESTART_POLICY
   fedora:
-    image: fedora:36
+    image: fedora:$FEDORA_VERSION
     tty: true
     volumes:
       - ./volumes/fedora/:/home/shared
-    # ports:
-    #   - "22004:22"
-    # restart: always
+    restart: $FEDORA_RESTART_POLICY
   gitea:
-    image: gitea/gitea:1.17.2
+    image: gitea/gitea:$GITEA_VERSION
     environment:
       - USER_UID=1000
       - USER_GID=1000
@@ -48,61 +42,55 @@ services:
     ports:
       - 3002:3000
       - 222:22
-    # restart: always
+    restart: $GITEA_RESTART_POLICY
   grafana:
-    image: grafana/grafana:9.1.6
+    image: grafana/grafana:$GRAFANA_VERSION
     ports:
       - 3000:3000
     volumes:
       - grafana:/var/lib/grafana
-    # restart: always
+    restart: $GRAFANA_RESTART_POLICY
   kali:
     image: kalilinux/kali-rolling
     tty: true
-    # ports:
-    #   - "22000:22"
   loki:
-    image: grafana/loki:2.6.1
+    image: grafana/loki:$LOKI_VERSION
     ports:
       - 3100:3100
     command: -config.file=/etc/loki/local-config.yaml
-    # restart: always
+    restart: $LOKI_RESTART_POLICY
   matomo:
-    image: matomo:4.11.0
+    image: matomo:$MATOMO_VERSION
     ports:
       - 8086:80
     environment:
-      MATOMO_DATABASE_HOST: mysql
-      MATOMO_DATABASE_USERNAME: root
-      MATOMO_DATABASE_PASSWORD: password
-      MATOMO_DATABASE_DBNAME: matomo_db
-    depends_on:
-      - mysql
-    # restart: always
+      MATOMO_DATABASE_HOST: $MATOMO_DATABASE_HOST
+      MATOMO_DATABASE_USERNAME: $MATOMO_DATABASE_USERNAME
+      MATOMO_DATABASE_PASSWORD: $MATOMO_DATABASE_PASSWORD
+      MATOMO_DATABASE_DBNAME: $MATOMO_DATABASE_DBNAME
+    restart: $MATOMO_RESTART_POLICY
   mautic:
-    image: mautic/mautic:v4
+    image: mautic/mautic:$MAUTIC_VERSION
     ports:
       - 8082:80
     environment:
-      MAUTIC_DB_HOST: mysql
-      MAUTIC_DB_USER: root
-      MAUTIC_DB_PASSWORD: password
-      MAUTIC_DB_NAME: mautic
-      MAUTIC_RUN_CRON_JOBS: 'true'
-    depends_on:
-      - mysql
-    # restart: always
+      MAUTIC_DB_HOST: $MAUTIC_DB_HOST
+      MAUTIC_DB_USER: $MAUTIC_DB_USER
+      MAUTIC_DB_PASSWORD: $MAUTIC_DB_PASSWORD
+      MAUTIC_DB_NAME: $MAUTIC_DB_NAME
+      MAUTIC_RUN_CRON_JOBS: $MAUTIC_RUN_CRON_JOBS
+    restart: $MAUTIC_RESTART_POLICY
   metabase:
-    image: metabase/metabase:v0.44.3
+    image: metabase/metabase:$METABASE_VERSION
     ports:
       - 3001:3000
     environment: 
       MB_DB_FILE: /metabase-data/metabase.db
     volumes:
       - metabase:/metabase-data
-    # restart: always
+    restart: $METABASE_RESTART_POLICY
   mongo:
-    image: mongo:6.0.2
+    image: mongo:$MONGO_VERSION
     ports:
       - 27017:27017
     environment:
@@ -110,40 +98,40 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root
     volumes:
       - mongo:/data/db
-    # restart: always
+    restart: $MONGO_RESTART_POLICY
   mysql:
-    image: mysql:8.0.29
+    image: mysql:$MYSQL_VERSION
     command: |
       --default-authentication-plugin=mysql_native_password
       --character-set-server=utf8mb4
       --collation-server=utf8mb4_general_ci
       --sql-mode=""
     environment:
-      MYSQL_DATABASE: tests
-      MYSQL_USER: gabrielrufino
-      MYSQL_PASSWORD: 12345678
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
     ports:
       - 3306:3306
     volumes:
       - mysql:/var/lib/mysql
-    # restart: always
+    restart: $MYSQL_RESTART_POLICY
   nextcloud:
-    image: nextcloud:24.0.6
+    image: nextcloud:$NEXTCLOUD_VERSION
     ports:
       - 8083:80
     volumes:
       - nextcloud:/var/www/html
-    # restart: always
+    restart: $NEXTCLOUD_RESTART_POLICY
   nginx:
-    image: nginx:1.23.1
+    image: nginx:$NGINX_VERSION
     ports:
-      - 8080:80
+      - 8081:80
       # - 443:433
     volumes:
       - ./config/nginx/sites-available:/etc/nginx/sites-available
       # - ./config/nginx/letsencrypt:/etc/letsencrypt
-    # restart: always
+    restart: $NGINX_RESTART_POLICY
   pgadmin:
     image: dpage/pgadmin4:$PGADMIN_VERSION
     environment:
@@ -156,54 +144,54 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.pgadmin.rule=HostRegexp(`pgadmin.$TRAEFIK_BASE_HOST`)
-    # restart: always
+    restart: $PGADMIN_RESTART_POLICY
   phpmyadmin:
-    image: phpmyadmin:5.2.0
+    image: phpmyadmin:$PHPMYADMIN_VERSION
     environment:
       PMA_ARBITRARY: 1
     ports:
       - 8087:80
-    # restart: always
+    restart: $PHPMYADMIN_RESTART_POLICY
   portainer:
-    image: portainer/portainer-ce:2.16.2
+    image: portainer/portainer-ce:$PORTAINER_VERSION
     ports:
       - 8000:8000
       - 9000:9000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./volumes/portainer:/data
-    # restart: always
+    restart: $PORTAINER_RESTART_POLICY
   postgres:
-    image: bitnami/postgresql:15.1.0
+    image: bitnami/postgresql:$POSTGRESQL_VERSION
     environment:
-      POSTGRESQL_USER: root
-      POSTGRESQL_PASSWORD: root
-      POSTGRESQL_DB: postgres
-      POSTGRESQL_ENABLE_TLS: 'no'
+      POSTGRESQL_USER: $POSTGRESQL_USER
+      POSTGRESQL_PASSWORD: $POSTGRESQL_PASSWORD
+      POSTGRESQL_DB: $POSTGRESQL_DB
+      POSTGRESQL_ENABLE_TLS: $POSTGRESQL_ENABLE_TLS
     ports:
       - 5432:5432
     volumes:
       - ./volumes/postgres/:/home/shared
       - postgres:/var/lib/postgresql/data
-    # restart: always
+    restart: $POSTGRESQL_RESTART_POLICY
   prometheus:
-    image: prom/prometheus:v2.37.1
+    image: prom/prometheus:$PROMETHEUS_VERSION
     ports:
       - 9090:9090
     volumes:
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-    # restart: always
+    restart: $PROMETHEUS_RESTART_POLICY
   promtail:
-    image: grafana/promtail:2.6.1
+    image: grafana/promtail:$PROMTAIL_VERSION
     ports:
       - 9080:9080
     volumes:
       - ./config/promtail/config.yaml:/etc/promtail/config.yaml
       - /var/log:/var/log
     command: -config.file=/etc/promtail/config.yaml
-    # restart: always
+    restart: $PROMTAIL_RESTART_POLICY
   rabbitmq:
-    image: rabbitmq:3.9.22-management
+    image: rabbitmq:$RABBITMQ_VERSION
     environment:
       RABBITMQ_DEFAULT_USER: root
       RABBITMQ_DEFAULT_PASS: root
@@ -213,14 +201,14 @@ services:
     volumes:
       - ./volumes/rabbitmq/data/:/var/lib/rabbitmq
       - ./volumes/rabbitmq/log/:/var/log/rabbitmq
-    # restart: always
+    restart: $RABBITMQ_RESTART_POLICY
   redis:
-    image: redis:7.0.5
+    image: redis:$REDIS_VERSION
     ports:
       - 6379:6379
-    # restart: always
+    restart: $REDIS_RESTART_POLICY
   redisinsight:
-    image: redislabs/redisinsight:1.13.0
+    image: redislabs/redisinsight:$REDISINSIGHT_VERSION
     ports:
       - 8001:8001
     volumes:
@@ -228,36 +216,36 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.redisinsight.rule=HostRegexp(`redisinsight.$TRAEFIK_BASE_HOST`)
-    # restart: always
+    restart: $REDISINSIGHT_RESTART_POLICY
   rethinkdb:
-    image: rethinkdb:2.4.2
+    image: rethinkdb:$RETHINKDB_VERSION
     ports:
       - 28015:28015
       - 28016:8080
     volumes:
       - rethinkdb:/data
-    # restart: always
+    restart: $RETHINKDB_RESTART_POLICY
   sonarqube:
-    image: sonarqube
+    image: sonarqube:$SONARQUBE_VERSION
     ports:
       - 9001:9000
-    # restart: always
+    restart: $SONARQUBE_RESTART_POLICY
   sonic:
-    image: valeriansaliou/sonic:v1.4.0
+    image: valeriansaliou/sonic:$SONIC_VERSION
     ports:
       - 1491:1491
     volumes:
       - ./volumes/sonic/sonic.cfg:/etc/sonic.cfg
       - ./volumes/sonic/store/:/var/lib/sonic/store/
-    # restart: always
+    restart: $SONIC_RESTART_POLICY
   sqlserver:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server:$SQLSERVER_VERSION
     environment:
-        SA_PASSWORD: password@123
+        SA_PASSWORD: $SQLSERVER_SA_PASSWORD
         ACCEPT_EULA: Y
     ports:
       - 1433:1433
-    # restart: always
+    restart: $SQLSERVER_RESTART_POLICY
   traefik:
     image: traefik:$TRAEFIK_VERSION
     command:
@@ -279,23 +267,22 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./volumes/traefik/acme:/etc/traefik/acme
+    restart: $TRAEFIK_RESTART_POLICY
   ubuntu:
-    image: ubuntu:22.10
+    image: ubuntu:$UBUNTU_VERSION
     tty: true
     volumes:
       - ./volumes/ubuntu/:/home/shared
-    # ports:
-    #   - "22001:22"
-    # restart: always
+    restart: $UBUNTU_RESTART_POLICY
   verdaccio:
-    image: verdaccio/verdaccio:5.15
+    image: verdaccio/verdaccio:$VERDACCIO_VERSION
     environment:
       - VERDACCIO_PORT=4873
     ports:
       - 4873:4873
     volumes:
       - ./volumes/verdaccio/storage:/verdaccio/storage
-    # restart: always
+    restart: $VERDACCIO_RESTART_POLICY
   vscode:
     image: gitpod/openvscode-server:$VSCODE_VERSION
     init: true
@@ -312,14 +299,14 @@ services:
       - traefik.http.routers.vscode.middlewares=vscode-auth
       - traefik.http.routers.vscode.tls=true
       - traefik.http.routers.vscode.tls.certresolver=letsencrypt
-    # restart: always
+    restart: $VSCODE_RESTART_POLICY
   wordpress:
-    image: wordpress
+    image: wordpress:$WORDPRESS_VERSION
     ports:
       - 8081:80
     volumes:
       - wordpress:/var/www/html
-    # restart: always
+    restart: $WORDPRESS_RESTART_POLICY
 
 volumes:
   appsmith:
