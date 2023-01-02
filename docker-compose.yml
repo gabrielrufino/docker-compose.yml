@@ -182,14 +182,14 @@ services:
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     restart: $PROMETHEUS_RESTART_POLICY
   promtail:
-    image: grafana/promtail:2.6.1
+    image: grafana/promtail:$PROMTAIL_VERSION
     ports:
       - 9080:9080
     volumes:
       - ./config/promtail/config.yaml:/etc/promtail/config.yaml
       - /var/log:/var/log
     command: -config.file=/etc/promtail/config.yaml
-    # restart: always
+    restart: $PROMTAIL_RESTART_POLICY
   rabbitmq:
     image: rabbitmq:3.9.22-management
     environment:
