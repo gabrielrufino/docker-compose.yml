@@ -162,18 +162,18 @@ services:
       - ./volumes/portainer:/data
     restart: $PORTAINER_RESTART_POLICY
   postgres:
-    image: bitnami/postgresql:15.1.0
+    image: bitnami/postgresql:$POSTGRESQL_VERSION
     environment:
-      POSTGRESQL_USER: root
-      POSTGRESQL_PASSWORD: root
-      POSTGRESQL_DB: postgres
-      POSTGRESQL_ENABLE_TLS: 'no'
+      POSTGRESQL_USER: $POSTGRESQL_USER
+      POSTGRESQL_PASSWORD: $POSTGRESQL_PASSWORD
+      POSTGRESQL_DB: $POSTGRESQL_DB
+      POSTGRESQL_ENABLE_TLS: $POSTGRESQL_ENABLE_TLS
     ports:
       - 5432:5432
     volumes:
       - ./volumes/postgres/:/home/shared
       - postgres:/var/lib/postgresql/data
-    # restart: always
+    restart: $POSTGRESQL_RESTART_POLICY
   prometheus:
     image: prom/prometheus:v2.37.1
     ports:
