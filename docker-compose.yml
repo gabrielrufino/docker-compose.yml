@@ -208,7 +208,7 @@ services:
       - 6379:6379
     restart: $REDIS_RESTART_POLICY
   redisinsight:
-    image: redislabs/redisinsight:1.13.0
+    image: redislabs/redisinsight:$REDISINSIGHT_VERSION
     ports:
       - 8001:8001
     volumes:
@@ -216,7 +216,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.redisinsight.rule=HostRegexp(`redisinsight.$TRAEFIK_BASE_HOST`)
-    # restart: always
+    restart: $REDISINSIGHT_RESTART_POLICY
   rethinkdb:
     image: rethinkdb:2.4.2
     ports:
