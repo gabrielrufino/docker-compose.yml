@@ -143,7 +143,7 @@ services:
       - pgadmin:/var/lib/pgadmin
     labels:
       - traefik.enable=true
-      - traefik.http.routers.pgadmin.rule=HostRegexp(`pgadmin.$TRAEFIK_BASE_HOST`)
+      - traefik.http.routers.pgadmin.rule=Host(`pgadmin.$TRAEFIK_BASE_HOST`)
       - traefik.http.routers.pgadmin.tls=true
       - traefik.http.routers.pgadmin.tls.certresolver=letsencrypt
     restart: $PGADMIN_RESTART_POLICY
