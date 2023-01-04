@@ -143,7 +143,7 @@ services:
       - pgadmin:/var/lib/pgadmin
     labels:
       - traefik.enable=true
-      - traefik.http.routers.pgadmin.rule=HostRegexp(`pgadmin.$TRAEFIK_BASE_HOST`)
+      - traefik.http.routers.pgadmin.rule=Host(`pgadmin.$TRAEFIK_BASE_HOST`)
       - traefik.http.routers.pgadmin.tls=true
       - traefik.http.routers.pgadmin.tls.certresolver=letsencrypt
     restart: $PGADMIN_RESTART_POLICY
@@ -269,6 +269,14 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./volumes/traefik/acme:/etc/traefik/acme
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.traefik.rule=Host(`$TRAEFIK_BASE_HOST`)
+      - traefik.http.routers.traefik.tls=true
+      - traefik.http.routers.traefik.tls.certresolver=letsencrypt
+      - traefik.http.routers.traefik.tls.domains[0].main=$TRAEFIK_BASE_HOST
+      - traefik.http.routers.traefik.tls.domains[0].sans=*.$TRAEFIK_BASE_HOST
+      - traefik.http.services.traefik.loadbalancer.server.port=8080
     restart: $TRAEFIK_RESTART_POLICY
   ubuntu:
     image: ubuntu:$UBUNTU_VERSION
