@@ -199,7 +199,7 @@ services:
       - 5672:5672
       - 15672:15672
     volumes:
-      - ./volumes/rabbitmq/data/:/var/lib/rabbitmq
+      - rabbitmq:/var/lib/rabbitmq
     restart: $RABBITMQ_RESTART_POLICY
   redis:
     image: redis:$REDIS_VERSION
@@ -325,6 +325,7 @@ volumes:
   nextcloud:
   pgadmin:
   postgres:
+  rabbitmq:
   redisinsight:
   rethinkdb:
   vscode-bin:
