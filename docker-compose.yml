@@ -5,8 +5,6 @@ services:
     image: appsmith/appsmith-ce:$APPSMITH_VERSION
     ports:
       - 8085:80
-      - 443:443
-      - 9001:9001
     volumes:
       - appsmith:/appsmith-stacks
     labels:
@@ -195,14 +193,13 @@ services:
   rabbitmq:
     image: rabbitmq:$RABBITMQ_VERSION
     environment:
-      RABBITMQ_DEFAULT_USER: root
-      RABBITMQ_DEFAULT_PASS: root
+      RABBITMQ_DEFAULT_USER: $RABBITMQ_DEFAULT_USER
+      RABBITMQ_DEFAULT_PASS: $RABBITMQ_DEFAULT_PASS
     ports:
       - 5672:5672
       - 15672:15672
     volumes:
-      - ./volumes/rabbitmq/data/:/var/lib/rabbitmq
-      - ./volumes/rabbitmq/log/:/var/log/rabbitmq
+      - rabbitmq:/var/lib/rabbitmq
     restart: $RABBITMQ_RESTART_POLICY
   redis:
     image: redis:$REDIS_VERSION
@@ -328,6 +325,7 @@ volumes:
   nextcloud:
   pgadmin:
   postgres:
+  rabbitmq:
   redisinsight:
   rethinkdb:
   vscode-bin:
