@@ -5,8 +5,6 @@ services:
     image: appsmith/appsmith-ce:$APPSMITH_VERSION
     ports:
       - 8085:80
-      - 443:443
-      - 9001:9001
     volumes:
       - appsmith:/appsmith-stacks
     labels:
