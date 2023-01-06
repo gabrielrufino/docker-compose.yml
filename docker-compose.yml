@@ -193,8 +193,8 @@ services:
   rabbitmq:
     image: rabbitmq:$RABBITMQ_VERSION
     environment:
-      RABBITMQ_DEFAULT_USER: root
-      RABBITMQ_DEFAULT_PASS: root
+      RABBITMQ_DEFAULT_USER: $RABBITMQ_DEFAULT_USER
+      RABBITMQ_DEFAULT_PASS: $RABBITMQ_DEFAULT_PASS
     ports:
       - 5672:5672
       - 15672:15672
