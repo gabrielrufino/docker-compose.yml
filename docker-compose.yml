@@ -287,7 +287,7 @@ services:
     ports:
       - 4873:4873
     volumes:
-      - ./volumes/verdaccio/storage:/verdaccio/storage
+      - verdaccio:/verdaccio/storage
     restart: $VERDACCIO_RESTART_POLICY
   vscode:
     image: gitpod/openvscode-server:$VSCODE_VERSION
@@ -328,5 +328,6 @@ volumes:
   rabbitmq:
   redisinsight:
   rethinkdb:
+  verdaccio:
   vscode-bin:
   wordpress:
