@@ -158,7 +158,7 @@ services:
       - 9000:9000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./volumes/portainer:/data
+      - portainer:/data
     restart: $PORTAINER_RESTART_POLICY
   postgres:
     image: bitnami/postgresql:$POSTGRESQL_VERSION
@@ -323,6 +323,7 @@ volumes:
   mongo:
   nextcloud:
   pgadmin:
+  portainer:
   postgres:
   rabbitmq:
   redisinsight:
