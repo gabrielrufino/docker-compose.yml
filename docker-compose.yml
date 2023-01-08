@@ -31,15 +31,14 @@ services:
   gitea:
     image: gitea/gitea:$GITEA_VERSION
     environment:
-      - USER_UID=1000
-      - USER_GID=1000
+      USER_UID: 1000
+      USER_GID: 1000
     volumes:
       - gitea:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
       - 3002:3000
-      - 222:22
     restart: $GITEA_RESTART_POLICY
   grafana:
     image: grafana/grafana:$GRAFANA_VERSION
@@ -92,8 +91,8 @@ services:
     ports:
       - 27017:27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_ROOT_USERNAME: $MONGO_INITDB_ROOT_USERNAME
+      MONGO_INITDB_ROOT_PASSWORD: $MONGO_INITDB_ROOT_PASSWORD
     volumes:
       - mongo:/data/db
     restart: $MONGO_RESTART_POLICY
@@ -159,7 +158,7 @@ services:
       - 9000:9000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./volumes/portainer:/data
+      - portainer:/data
     restart: $PORTAINER_RESTART_POLICY
   postgres:
     image: bitnami/postgresql:$POSTGRESQL_VERSION
@@ -284,11 +283,11 @@ services:
   verdaccio:
     image: verdaccio/verdaccio:$VERDACCIO_VERSION
     environment:
-      - VERDACCIO_PORT=4873
+      VERDACCIO_PORT: 4873
     ports:
       - 4873:4873
     volumes:
-      - ./volumes/verdaccio/storage:/verdaccio/storage
+      - verdaccio:/verdaccio/storage
     restart: $VERDACCIO_RESTART_POLICY
   vscode:
     image: gitpod/openvscode-server:$VSCODE_VERSION
@@ -324,9 +323,11 @@ volumes:
   mongo:
   nextcloud:
   pgadmin:
+  portainer:
   postgres:
   rabbitmq:
   redisinsight:
   rethinkdb:
+  verdaccio:
   vscode-bin:
   wordpress:
