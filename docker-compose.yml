@@ -248,6 +248,7 @@ services:
     restart: $SQLSERVER_RESTART_POLICY
   traefik:
     image: traefik:$TRAEFIK_VERSION
+    container_name: $TRAEFIK_CONTAINER_NAME
     command:
       - --providers.docker
       - --providers.docker.exposedByDefault=false
