@@ -47,6 +47,17 @@ services:
     volumes:
       - grafana:/var/lib/grafana
     restart: $GRAFANA_RESTART_POLICY
+  hoppscotch:
+    image: hoppscotch/hoppscotch:$HOPPSCOTCH_VERSION
+    container_name: $HOPPSCOTCH_CONTAINER_NAME
+    ports:
+      - 3004:3000
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.pgadmin.rule=Host(`hoppscotch.$TRAEFIK_BASE_HOST`)
+      - traefik.http.routers.pgadmin.tls=true
+      - traefik.http.routers.pgadmin.tls.certresolver=letsencrypt
+    restart: $HOPPSCOTCH_RESTART_POLICY
   kali:
     image: kalilinux/kali-rolling
     tty: true
@@ -131,6 +142,7 @@ services:
     restart: $NGINX_RESTART_POLICY
   pgadmin:
     image: dpage/pgadmin4:$PGADMIN_VERSION
+    container_name: $PGADMIN_CONTAINER_NAME
     environment:
       PGADMIN_DEFAULT_EMAIL: $PGADMIN_DEFAULT_EMAIL
       PGADMIN_DEFAULT_PASSWORD: $PGADMIN_DEFAULT_PASSWORD
@@ -162,6 +174,7 @@ services:
     restart: $PORTAINER_RESTART_POLICY
   postgres:
     image: bitnami/postgresql:$POSTGRESQL_VERSION
+    container_name: $POSTGRESQL_CONTAINER_NAME
     environment:
       POSTGRESQL_USER: $POSTGRESQL_USER
       POSTGRESQL_PASSWORD: $POSTGRESQL_PASSWORD
@@ -207,6 +220,7 @@ services:
     restart: $REDIS_RESTART_POLICY
   redisinsight:
     image: redislabs/redisinsight:$REDISINSIGHT_VERSION
+    container_name: $REDISINSIGHT_CONTAINER_NAME
     ports:
       - 8001:8001
     volumes:
@@ -270,10 +284,12 @@ services:
       - ./volumes/traefik/acme:/etc/traefik/acme
     labels:
       - traefik.enable=true
+      - traefik.http.middlewares.traefik-auth.basicauth.users=$TRAEFIK_DASHBOARD_USERNAME:$TRAEFIK_DASHBOARD_PASSWORD
       - traefik.http.routers.traefik.rule=Host(`$TRAEFIK_BASE_HOST`)
+      - traefik.http.routers.traefik.service=api@internal
+      - traefik.http.routers.traefik.middlewares=traefik-auth
       - traefik.http.routers.traefik.tls=true
       - traefik.http.routers.traefik.tls.certresolver=letsencrypt
-      - traefik.http.services.traefik.loadbalancer.server.port=8080
     restart: $TRAEFIK_RESTART_POLICY
   ubuntu:
     image: ubuntu:$UBUNTU_VERSION
@@ -291,11 +307,14 @@ services:
       - verdaccio:/verdaccio/storage
     restart: $VERDACCIO_RESTART_POLICY
   vscode:
-    image: gitpod/openvscode-server:$VSCODE_VERSION
-    init: true
-    tty: true
+    image: lscr.io/linuxserver/openvscode-server:$VSCODE_VERSION
+    container_name: $VSCODE_CONTAINER_NAME
     ports:
       - 3003:3000
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: Europe/London
     volumes:
       - ./volumes/vscode:/home/workspace:cached
       - vscode-bin:/usr/bin
