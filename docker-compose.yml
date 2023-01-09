@@ -52,6 +52,11 @@ services:
     container_name: $HOPPSCOTCH_CONTAINER_NAME
     ports:
       - 3004:3000
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.pgadmin.rule=Host(`hoppscotch.$TRAEFIK_BASE_HOST`)
+      - traefik.http.routers.pgadmin.tls=true
+      - traefik.http.routers.pgadmin.tls.certresolver=letsencrypt
     restart: $HOPPSCOTCH_RESTART_POLICY
   kali:
     image: kalilinux/kali-rolling
@@ -280,9 +285,9 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.traefik.rule=Host(`$TRAEFIK_BASE_HOST`)
+      - traefik.http.routers.traefik.service=api@internal
       - traefik.http.routers.traefik.tls=true
       - traefik.http.routers.traefik.tls.certresolver=letsencrypt
-      - traefik.http.services.traefik.loadbalancer.server.port=8080
     restart: $TRAEFIK_RESTART_POLICY
   ubuntu:
     image: ubuntu:$UBUNTU_VERSION
