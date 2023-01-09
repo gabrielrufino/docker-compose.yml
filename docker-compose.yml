@@ -284,8 +284,10 @@ services:
       - ./volumes/traefik/acme:/etc/traefik/acme
     labels:
       - traefik.enable=true
+      - traefik.http.middlewares.traefik-auth.basicauth.users=$TRAEFIK_DASHBOARD_USERNAME:$TRAEFIK_DASHBOARD_PASSWORD
       - traefik.http.routers.traefik.rule=Host(`$TRAEFIK_BASE_HOST`)
       - traefik.http.routers.traefik.service=api@internal
+      - traefik.http.routers.traefik.middlewares=traefik-auth
       - traefik.http.routers.traefik.tls=true
       - traefik.http.routers.traefik.tls.certresolver=letsencrypt
     restart: $TRAEFIK_RESTART_POLICY
