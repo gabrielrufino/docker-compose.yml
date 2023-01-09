@@ -47,6 +47,12 @@ services:
     volumes:
       - grafana:/var/lib/grafana
     restart: $GRAFANA_RESTART_POLICY
+  hoppscotch:
+    image: hoppscotch/hoppscotch:$HOPPSCOTCH_VERSION
+    container_name: $HOPPSCOTCH_CONTAINER_NAME
+    ports:
+      - 3004:3000
+    restart: $HOPPSCOTCH_RESTART_POLICY
   kali:
     image: kalilinux/kali-rolling
     tty: true
