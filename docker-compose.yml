@@ -137,6 +137,7 @@ services:
     restart: $NGINX_RESTART_POLICY
   pgadmin:
     image: dpage/pgadmin4:$PGADMIN_VERSION
+    container_name: $PGADMIN_CONTAINER_NAME
     environment:
       PGADMIN_DEFAULT_EMAIL: $PGADMIN_DEFAULT_EMAIL
       PGADMIN_DEFAULT_PASSWORD: $PGADMIN_DEFAULT_PASSWORD
@@ -168,6 +169,7 @@ services:
     restart: $PORTAINER_RESTART_POLICY
   postgres:
     image: bitnami/postgresql:$POSTGRESQL_VERSION
+    container_name: $POSTGRESQL_CONTAINER_NAME
     environment:
       POSTGRESQL_USER: $POSTGRESQL_USER
       POSTGRESQL_PASSWORD: $POSTGRESQL_PASSWORD
@@ -213,6 +215,7 @@ services:
     restart: $REDIS_RESTART_POLICY
   redisinsight:
     image: redislabs/redisinsight:$REDISINSIGHT_VERSION
+    container_name: $REDISINSIGHT_CONTAINER_NAME
     ports:
       - 8001:8001
     volumes:
@@ -298,6 +301,7 @@ services:
     restart: $VERDACCIO_RESTART_POLICY
   vscode:
     image: lscr.io/linuxserver/openvscode-server:$VSCODE_VERSION
+    container_name: $VSCODE_CONTAINER_NAME
     ports:
       - 3003:3000
     environment:
