@@ -297,11 +297,13 @@ services:
       - verdaccio:/verdaccio/storage
     restart: $VERDACCIO_RESTART_POLICY
   vscode:
-    image: gitpod/openvscode-server:$VSCODE_VERSION
-    init: true
-    tty: true
+    image: lscr.io/linuxserver/openvscode-server:$VSCODE_VERSION
     ports:
       - 3003:3000
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: Europe/London
     volumes:
       - ./volumes/vscode:/home/workspace:cached
       - vscode-bin:/usr/bin
