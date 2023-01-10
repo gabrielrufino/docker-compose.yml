@@ -316,8 +316,7 @@ services:
       PGID: 1000
       TZ: Europe/London
     volumes:
-      - ./volumes/vscode:/home/workspace:cached
-      - vscode-bin:/usr/bin
+      - ./volumes/vscode:/config
     labels:
       - traefik.enable=true
       - traefik.http.middlewares.vscode-auth.basicauth.users=$VSCODE_TRAEFIK_USERNAME:$VSCODE_TRAEFIK_PASSWORD
@@ -349,5 +348,4 @@ volumes:
   redisinsight:
   rethinkdb:
   verdaccio:
-  vscode-bin:
   wordpress:
