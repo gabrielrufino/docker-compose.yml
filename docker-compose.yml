@@ -227,7 +227,7 @@ services:
       - redisinsight:/db
     labels:
       - traefik.enable=true
-      - traefik.http.routers.redisinsight.rule=HostRegexp(`redisinsight.$TRAEFIK_BASE_HOST`)
+      - traefik.http.routers.redisinsight.rule=Host(`redisinsight.$TRAEFIK_BASE_HOST`)
       - traefik.http.routers.redisinsight.tls=true
       - traefik.http.routers.redisinsight.tls.certresolver=letsencrypt
     restart: $REDISINSIGHT_RESTART_POLICY
