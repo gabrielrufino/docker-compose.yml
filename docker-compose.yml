@@ -309,8 +309,8 @@ services:
       - verdaccio:/verdaccio/storage
     restart: $VERDACCIO_RESTART_POLICY
   vscode:
-    image: lscr.io/linuxserver/openvscode-server:$VSCODE_VERSION
-    container_name: $VSCODE_CONTAINER_NAME
+    image: lscr.io/linuxserver/openvscode-server:${VSCODE_VERSION:-1.74.2}
+    container_name: ${VSCODE_CONTAINER_NAME:-}
     ports:
       - 3003:3000
     environment:
@@ -321,12 +321,12 @@ services:
       - ./volumes/vscode:/config
     labels:
       - traefik.enable=true
-      - traefik.http.middlewares.vscode-auth.basicauth.users=$VSCODE_TRAEFIK_USERNAME:$VSCODE_TRAEFIK_PASSWORD
+      - traefik.http.middlewares.vscode-auth.basicauth.users=${VSCODE_TRAEFIK_USERNAME-}:${VSCODE_TRAEFIK_PASSWORD-}
       - traefik.http.routers.vscode.rule=Host(`vscode.$TRAEFIK_BASE_HOST`)
       - traefik.http.routers.vscode.middlewares=vscode-auth
       - traefik.http.routers.vscode.tls=true
       - traefik.http.routers.vscode.tls.certresolver=letsencrypt
-    restart: $VSCODE_RESTART_POLICY
+    restart: ${VSCODE_RESTART_POLICY:-no}
   wordpress:
     image: wordpress:$WORDPRESS_VERSION
     ports:
