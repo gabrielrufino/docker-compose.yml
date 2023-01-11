@@ -141,11 +141,11 @@ services:
       # - ./config/nginx/letsencrypt:/etc/letsencrypt
     restart: $NGINX_RESTART_POLICY
   pgadmin:
-    image: dpage/pgadmin4:$PGADMIN_VERSION
-    container_name: $PGADMIN_CONTAINER_NAME
+    image: dpage/pgadmin4:${PGADMIN_VERSION:-6.18}
+    container_name: ${PGADMIN_CONTAINER_NAME:-}
     environment:
-      PGADMIN_DEFAULT_EMAIL: $PGADMIN_DEFAULT_EMAIL
-      PGADMIN_DEFAULT_PASSWORD: $PGADMIN_DEFAULT_PASSWORD
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-root@gabrielrufino.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-root}
     ports:
       - 16543:80
     volumes:
@@ -155,7 +155,7 @@ services:
       - traefik.http.routers.pgadmin.rule=Host(`pgadmin.$TRAEFIK_BASE_HOST`)
       - traefik.http.routers.pgadmin.tls=true
       - traefik.http.routers.pgadmin.tls.certresolver=letsencrypt
-    restart: $PGADMIN_RESTART_POLICY
+    restart: ${PGADMIN_RESTART_POLICY:-no}
   phpmyadmin:
     image: phpmyadmin:$PHPMYADMIN_VERSION
     environment:
@@ -173,19 +173,21 @@ services:
       - portainer:/data
     restart: $PORTAINER_RESTART_POLICY
   postgres:
-    image: bitnami/postgresql:$POSTGRESQL_VERSION
-    container_name: $POSTGRESQL_CONTAINER_NAME
+    image: bitnami/postgresql:${POSTGRESQL_VERSION:-15.1.0}
+    container_name: ${POSTGRESQL_CONTAINER_NAME:-}
     environment:
-      POSTGRESQL_USER: $POSTGRESQL_USER
-      POSTGRESQL_PASSWORD: $POSTGRESQL_PASSWORD
-      POSTGRESQL_DB: $POSTGRESQL_DB
-      POSTGRESQL_ENABLE_TLS: $POSTGRESQL_ENABLE_TLS
+      POSTGRESQL_USER: ${POSTGRESQL_USER:-root}
+      POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD:-root}
+      POSTGRESQL_DB: ${POSTGRESQL_DB:-postres}
+      POSTGRESQL_ENABLE_TLS: ${POSTGRESQL_ENABLE_TLS:-no}
+      POSTGRESQL_TLS_CERT_FILE: /opt/bitnami/postgresql/certs/postgres.crt
+      POSTGRESQL_TLS_KEY_FILE: /opt/bitnami/postgresql/certs/postgres.key
     ports:
       - 5432:5432
     volumes:
-      - ./volumes/postgres/:/home/shared
+      - ./volumes/postgres/certs:/opt/bitnami/postgresql/certs
       - postgres:/var/lib/postgresql/data
-    restart: $POSTGRESQL_RESTART_POLICY
+    restart: ${POSTGRESQL_RESTART_POLICY:-no}
   prometheus:
     image: prom/prometheus:$PROMETHEUS_VERSION
     ports:
@@ -307,8 +309,8 @@ services:
       - verdaccio:/verdaccio/storage
     restart: $VERDACCIO_RESTART_POLICY
   vscode:
-    image: lscr.io/linuxserver/openvscode-server:$VSCODE_VERSION
-    container_name: $VSCODE_CONTAINER_NAME
+    image: lscr.io/linuxserver/openvscode-server:${VSCODE_VERSION:-1.74.2}
+    container_name: ${VSCODE_CONTAINER_NAME:-}
     ports:
       - 3003:3000
     environment:
@@ -319,12 +321,12 @@ services:
       - ./volumes/vscode:/config
     labels:
       - traefik.enable=true
-      - traefik.http.middlewares.vscode-auth.basicauth.users=$VSCODE_TRAEFIK_USERNAME:$VSCODE_TRAEFIK_PASSWORD
+      - traefik.http.middlewares.vscode-auth.basicauth.users=${VSCODE_TRAEFIK_USERNAME-}:${VSCODE_TRAEFIK_PASSWORD-}
       - traefik.http.routers.vscode.rule=Host(`vscode.$TRAEFIK_BASE_HOST`)
       - traefik.http.routers.vscode.middlewares=vscode-auth
       - traefik.http.routers.vscode.tls=true
       - traefik.http.routers.vscode.tls.certresolver=letsencrypt
-    restart: $VSCODE_RESTART_POLICY
+    restart: ${VSCODE_RESTART_POLICY:-no}
   wordpress:
     image: wordpress:$WORDPRESS_VERSION
     ports:
