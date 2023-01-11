@@ -300,14 +300,14 @@ services:
       - ./volumes/ubuntu/:/home/shared
     restart: $UBUNTU_RESTART_POLICY
   verdaccio:
-    image: verdaccio/verdaccio:$VERDACCIO_VERSION
+    image: verdaccio/verdaccio:${VERDACCIO_VERSION-5.15}
     environment:
       VERDACCIO_PORT: 4873
     ports:
       - 4873:4873
     volumes:
       - verdaccio:/verdaccio/storage
-    restart: $VERDACCIO_RESTART_POLICY
+    restart: ${VERDACCIO_RESTART_POLICY-no}
   vscode:
     image: lscr.io/linuxserver/openvscode-server:${VSCODE_VERSION:-1.74.3}
     container_name: ${VSCODE_CONTAINER_NAME:-}
