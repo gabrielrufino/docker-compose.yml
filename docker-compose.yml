@@ -98,15 +98,16 @@ services:
       - metabase:/metabase-data
     restart: $METABASE_RESTART_POLICY
   mongo:
-    image: mongo:$MONGO_VERSION
+    image: mongo:${MONGO_VERSION-6.0.3}
+    container_name: ${MONGO_CONTAINER_NAME-}
     ports:
       - 27017:27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: $MONGO_INITDB_ROOT_USERNAME
-      MONGO_INITDB_ROOT_PASSWORD: $MONGO_INITDB_ROOT_PASSWORD
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME-root}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD-root}
     volumes:
       - mongo:/data/db
-    restart: $MONGO_RESTART_POLICY
+    restart: ${MONGO_RESTART_POLICY-no}
   mysql:
     image: mysql:$MYSQL_VERSION
     command: |
