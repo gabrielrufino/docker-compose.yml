@@ -180,10 +180,12 @@ services:
       POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD:-root}
       POSTGRESQL_DB: ${POSTGRESQL_DB:-postres}
       POSTGRESQL_ENABLE_TLS: ${POSTGRESQL_ENABLE_TLS:-no}
+      POSTGRESQL_TLS_CERT_FILE: /opt/bitnami/postgresql/certs/postgres.crt
+      POSTGRESQL_TLS_KEY_FILE: /opt/bitnami/postgresql/certs/postgres.key
     ports:
       - 5432:5432
     volumes:
-      - ./volumes/postgres/:/home/shared
+      - ./volumes/postgres/certs:/opt/bitnami/postgresql/certs
       - postgres:/var/lib/postgresql/data
     restart: ${POSTGRESQL_RESTART_POLICY:-no}
   prometheus:
