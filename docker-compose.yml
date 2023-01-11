@@ -309,7 +309,7 @@ services:
       - verdaccio:/verdaccio/storage
     restart: $VERDACCIO_RESTART_POLICY
   vscode:
-    image: lscr.io/linuxserver/openvscode-server:${VSCODE_VERSION:-1.74.2}
+    image: lscr.io/linuxserver/openvscode-server:${VSCODE_VERSION:-1.74.3}
     container_name: ${VSCODE_CONTAINER_NAME:-}
     ports:
       - 3003:3000
@@ -317,6 +317,7 @@ services:
       PUID: 1000
       PGID: 1000
       TZ: Europe/London
+      SUDO_PASSWORD: ${VSCODE_SUDO_PASSWORD-root}
     volumes:
       - ./volumes/vscode:/config
     labels:
