@@ -11,11 +11,11 @@ services:
       com.centurylinklabs.watchtower.enable: 'true'
     restart: ${APPSMITH_RESTART_POLICY-no}
   archlinux:
-    image: archlinux:$ARCHLINUX_VERSION
+    image: archlinux:${ARCHLINUX_VERSION-base-20221225.0.113672}
     tty: true
     volumes:
       - ./volumes/archlinux/:/home/shared
-    restart: $ARCHLINUX_RESTART_POLICY
+    restart: ${ARCHLINUX_RESTART_POLICY-no}
   debian:
     image: debian:$DEBIAN_VERSION
     tty: true
