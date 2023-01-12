@@ -6,7 +6,7 @@ Service running Nextcloud.
 docker compose up -d nextcloud
 ```
 
-## Environment variable
+## Environment variables
 
 | **Name**                 | **Default** |
 | ------------------------ | ----------- |
