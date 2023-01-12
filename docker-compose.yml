@@ -29,7 +29,7 @@ services:
       - ./volumes/fedora/:/home/shared
     restart: $FEDORA_RESTART_POLICY
   gitea:
-    image: gitea/gitea:$GITEA_VERSION
+    image: gitea/gitea:${GITEA_VERSION-1.18.0}
     environment:
       USER_UID: 1000
       USER_GID: 1000
@@ -39,7 +39,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
     ports:
       - 3002:3000
-    restart: $GITEA_RESTART_POLICY
+    restart: ${GITEA_RESTART_POLICY-no}
   grafana:
     image: grafana/grafana:$GRAFANA_VERSION
     ports:
