@@ -191,12 +191,12 @@ services:
       - postgres:/var/lib/postgresql/data
     restart: ${POSTGRESQL_RESTART_POLICY:-no}
   prometheus:
-    image: prom/prometheus:$PROMETHEUS_VERSION
+    image: prom/prometheus:${PROMETHEUS_VERSION-v2.37.1}
     ports:
       - 9090:9090
     volumes:
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-    restart: $PROMETHEUS_RESTART_POLICY
+    restart: ${PROMETHEUS_RESTART_POLICY-no}
   promtail:
     image: grafana/promtail:$PROMTAIL_VERSION
     ports:
