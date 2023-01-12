@@ -296,11 +296,11 @@ services:
       - traefik.http.routers.traefik.tls.certresolver=letsencrypt
     restart: $TRAEFIK_RESTART_POLICY
   ubuntu:
-    image: ubuntu:$UBUNTU_VERSION
+    image: ubuntu:${UBUNTU_VERSION-22.10}
     tty: true
     volumes:
       - ./volumes/ubuntu/:/home/shared
-    restart: $UBUNTU_RESTART_POLICY
+    restart: ${UBUNTU_RESTART_POLICY-no}
   verdaccio:
     image: verdaccio/verdaccio:${VERDACCIO_VERSION-5.15}
     environment:

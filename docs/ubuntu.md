@@ -6,11 +6,13 @@ Service running Ubuntu
 docker compose up -d ubuntu
 ```
 
-Getting in the container bash:
-```bash
-docker compose exec ubuntu /bin/bash
-```
-
 ## Volumes
 
 `./volumes/ubuntu` => `/home/shared`
+
+## Environment variables
+
+| **Name**              | **Default** |
+| --------------------- | ----------- |
+| UBUNTU_VERSION        | 22.10       |
+| UBUNTU_RESTART_POLICY | no          |
