@@ -54,7 +54,7 @@ git pull
 * [Prometheus](./docs/prometheus.md)
 * [RabbitMQ](./docs/rabbitmq.md)
 * [Redis](./docs/redis.md)
-* [RedisInsight](./docs/redis-insight.md)
+* [RedisInsight](./docs/redisinsight.md)
 * [RethinkDB](./docs/rethinkdb.md)
 * [Sonic](./docs/sonic.md)
 * [SQL Server](./docs/sql-server.md)

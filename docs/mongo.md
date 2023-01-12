@@ -6,19 +6,12 @@ Service running MongoDB server
 docker compose up -d mongo
 ```
 
-**User:** root<br />
-**Password:** root
+## Environment variables
 
-Getting in the container bash:
-```bash
-docker compose exec mongo /bin/bash
-```
-
-Getting in the mongo shell:
-```bash
-docker compose exec mongo mongo -u root -p root
-```
-
-## Volumes
-
-`./volumes/mongo` => `/home/shared`
+| **Name**                   | **Default** |
+| -------------------------- | ----------- |
+| MONGO_VERSION              | 6.0.3       |
+| MONGO_CONTAINER_NAME       |             |
+| MONGO_INITDB_ROOT_USERNAME | root        |
+| MONGO_INITDB_ROOT_PASSWORD | root        |
+| MONGO_RESTART_POLICY       | no          |

@@ -6,8 +6,9 @@ Service running Verdaccio
 docker compose up -d verdaccio
 ```
 
-## Volumes
+## Environment variables
 
-`./verdaccio/storage` => `/verdaccio/storage`
-`./verdaccio/config`  => `/verdaccio/conf`
-`./verdaccio/plugins` => `/verdaccio/plugins`
+| **Name**                 | **Default** |
+| ------------------------ | ----------- |
+| VERDACCIO_VERSION        | 5.15        |
+| VERDACCIO_RESTART_POLICY | no          |

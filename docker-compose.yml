@@ -2,26 +2,26 @@ version: '3.9'
 
 services:
   appsmith:
-    image: appsmith/appsmith-ce:$APPSMITH_VERSION
+    image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1.9.1}
     ports:
       - 8085:80
     volumes:
       - appsmith:/appsmith-stacks
     labels:
       com.centurylinklabs.watchtower.enable: 'true'
-    restart: $APPSMITH_RESTART_POLICY
+    restart: ${APPSMITH_RESTART_POLICY-no}
   archlinux:
-    image: archlinux:$ARCHLINUX_VERSION
+    image: archlinux:${ARCHLINUX_VERSION-base-20221225.0.113672}
     tty: true
     volumes:
       - ./volumes/archlinux/:/home/shared
-    restart: $ARCHLINUX_RESTART_POLICY
+    restart: ${ARCHLINUX_RESTART_POLICY-no}
   debian:
-    image: debian:$DEBIAN_VERSION
+    image: debian:${DEBIAN_VERSION-11.6}
     tty: true
     volumes:
       - ./volumes/debian/:/home/shared
-    restart: $DEBIAN_RESTART_POLICY
+    restart: ${DEBIAN_RESTART_POLICY-no}
   fedora:
     image: fedora:$FEDORA_VERSION
     tty: true
@@ -98,32 +98,34 @@ services:
       - metabase:/metabase-data
     restart: $METABASE_RESTART_POLICY
   mongo:
-    image: mongo:$MONGO_VERSION
+    image: mongo:${MONGO_VERSION-6.0.3}
+    container_name: ${MONGO_CONTAINER_NAME-}
     ports:
       - 27017:27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: $MONGO_INITDB_ROOT_USERNAME
-      MONGO_INITDB_ROOT_PASSWORD: $MONGO_INITDB_ROOT_PASSWORD
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME-root}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD-root}
     volumes:
       - mongo:/data/db
-    restart: $MONGO_RESTART_POLICY
+    restart: ${MONGO_RESTART_POLICY-no}
   mysql:
-    image: mysql:$MYSQL_VERSION
+    image: mysql:${MYSQL_VERSION-8.0.31}
+    container_name: ${MYSQL_CONTAINER_NAME-}
     command: |
       --default-authentication-plugin=mysql_native_password
       --character-set-server=utf8mb4
       --collation-server=utf8mb4_general_ci
       --sql-mode=""
     environment:
-      MYSQL_DATABASE: $MYSQL_DATABASE
-      MYSQL_USER: $MYSQL_USER
-      MYSQL_PASSWORD: $MYSQL_PASSWORD
-      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: ${MYSQL_DATABASE-}
+      MYSQL_USER: ${MYSQL_USER-gabrielrufino}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD-12345678}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD-root}
     ports:
       - 3306:3306
     volumes:
       - mysql:/var/lib/mysql
-    restart: $MYSQL_RESTART_POLICY
+    restart: ${MYSQL_RESTART_POLICY-no}
   nextcloud:
     image: nextcloud:$NEXTCLOUD_VERSION
     ports:
@@ -221,8 +223,8 @@ services:
       - 6379:6379
     restart: $REDIS_RESTART_POLICY
   redisinsight:
-    image: redislabs/redisinsight:$REDISINSIGHT_VERSION
-    container_name: $REDISINSIGHT_CONTAINER_NAME
+    image: redislabs/redisinsight:${REDISINSIGHT_VERSION-1.13.1}
+    container_name: ${REDISINSIGHT_CONTAINER_NAME-}
     ports:
       - 8001:8001
     volumes:
@@ -232,7 +234,7 @@ services:
       - traefik.http.routers.redisinsight.rule=Host(`redisinsight.$TRAEFIK_BASE_HOST`)
       - traefik.http.routers.redisinsight.tls=true
       - traefik.http.routers.redisinsight.tls.certresolver=letsencrypt
-    restart: $REDISINSIGHT_RESTART_POLICY
+    restart: ${REDISINSIGHT_RESTART_POLICY-no}
   rethinkdb:
     image: rethinkdb:$RETHINKDB_VERSION
     ports:
@@ -300,14 +302,14 @@ services:
       - ./volumes/ubuntu/:/home/shared
     restart: $UBUNTU_RESTART_POLICY
   verdaccio:
-    image: verdaccio/verdaccio:$VERDACCIO_VERSION
+    image: verdaccio/verdaccio:${VERDACCIO_VERSION-5.15}
     environment:
       VERDACCIO_PORT: 4873
     ports:
       - 4873:4873
     volumes:
       - verdaccio:/verdaccio/storage
-    restart: $VERDACCIO_RESTART_POLICY
+    restart: ${VERDACCIO_RESTART_POLICY-no}
   vscode:
     image: lscr.io/linuxserver/openvscode-server:${VSCODE_VERSION:-1.74.3}
     container_name: ${VSCODE_CONTAINER_NAME:-}
@@ -316,7 +318,7 @@ services:
     environment:
       PUID: 1000
       PGID: 1000
-      TZ: Europe/London
+      TZ: America/Sao_Paulo
       SUDO_PASSWORD: ${VSCODE_SUDO_PASSWORD-root}
     volumes:
       - ./volumes/vscode:/config
