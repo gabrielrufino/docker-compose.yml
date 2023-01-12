@@ -218,10 +218,10 @@ services:
       - rabbitmq:/var/lib/rabbitmq
     restart: $RABBITMQ_RESTART_POLICY
   redis:
-    image: redis:$REDIS_VERSION
+    image: redis:${REDIS_VERSION-7.0.5}
     ports:
       - 6379:6379
-    restart: $REDIS_RESTART_POLICY
+    restart: ${REDIS_RESTART_POLICY-no}
   redisinsight:
     image: redislabs/redisinsight:${REDISINSIGHT_VERSION-1.13.1}
     container_name: ${REDISINSIGHT_CONTAINER_NAME-}
