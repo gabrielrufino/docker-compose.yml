@@ -41,12 +41,12 @@ services:
       - 3002:3000
     restart: ${GITEA_RESTART_POLICY-no}
   grafana:
-    image: grafana/grafana:$GRAFANA_VERSION
+    image: grafana/grafana:${GRAFANA_VERSION-9.1.6}
     ports:
       - 3000:3000
     volumes:
       - grafana:/var/lib/grafana
-    restart: $GRAFANA_RESTART_POLICY
+    restart: ${GRAFANA_RESTART_POLICY-no}
   hoppscotch:
     image: hoppscotch/hoppscotch:$HOPPSCOTCH_VERSION
     container_name: $HOPPSCOTCH_CONTAINER_NAME
