@@ -318,7 +318,7 @@ services:
     environment:
       PUID: 1000
       PGID: 1000
-      TZ: Europe/London
+      TZ: America/Sao_Paulo
       SUDO_PASSWORD: ${VSCODE_SUDO_PASSWORD-root}
     volumes:
       - ./volumes/vscode:/config
