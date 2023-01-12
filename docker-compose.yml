@@ -2,14 +2,14 @@ version: '3.9'
 
 services:
   appsmith:
-    image: appsmith/appsmith-ce:$APPSMITH_VERSION
+    image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1.9.1}
     ports:
       - 8085:80
     volumes:
       - appsmith:/appsmith-stacks
     labels:
       com.centurylinklabs.watchtower.enable: 'true'
-    restart: $APPSMITH_RESTART_POLICY
+    restart: ${APPSMITH_RESTART_POLICY-no}
   archlinux:
     image: archlinux:$ARCHLINUX_VERSION
     tty: true
