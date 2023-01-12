@@ -6,6 +6,9 @@ Service running RethinkDB
 docker compose up -d rethinkdb
 ```
 
-## Volumes
+## Environment variables
 
-`./volumes/rethinkdb` => `/home/shared`
+| **Name**                 | **Default** |
+| ------------------------ | ----------- |
+| RETHINKDB_VERSION        | 2.4.2       |
+| RETHINKDB_RESTART_POLICY | no          |

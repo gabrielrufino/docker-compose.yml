@@ -236,13 +236,13 @@ services:
       - traefik.http.routers.redisinsight.tls.certresolver=letsencrypt
     restart: ${REDISINSIGHT_RESTART_POLICY-no}
   rethinkdb:
-    image: rethinkdb:$RETHINKDB_VERSION
+    image: rethinkdb:${RETHINKDB_VERSION-2.4.2}
     ports:
       - 28015:28015
       - 28016:8080
     volumes:
       - rethinkdb:/data
-    restart: $RETHINKDB_RESTART_POLICY
+    restart: ${RETHINKDB_RESTART_POLICY-no}
   sonarqube:
     image: sonarqube:$SONARQUBE_VERSION
     ports:
