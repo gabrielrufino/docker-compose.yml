@@ -110,6 +110,7 @@ services:
     restart: ${MONGO_RESTART_POLICY-no}
   mysql:
     image: mysql:${MYSQL_VERSION-8.0.31}
+    container_name: ${MYSQL_CONTAINER_NAME-}
     command: |
       --default-authentication-plugin=mysql_native_password
       --character-set-server=utf8mb4

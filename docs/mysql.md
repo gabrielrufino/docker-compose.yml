@@ -11,6 +11,7 @@ docker compose up -d mysql
 | **Name**             | **Default**   |
 | -------------------- | ------------- |
 | MYSQL_VERSION        | 8.0.31        |
+| MYSQL_CONTAINER_NAME |               |
 | MYSQL_DATABASE       |               |
 | MYSQL_USER           | gabrielrufino |
 | MYSQL_PASSWORD       | 12345678      |
