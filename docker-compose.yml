@@ -134,14 +134,14 @@ services:
       - nextcloud:/var/www/html
     restart: ${NEXTCLOUD_RESTART_POLICY-no}
   nginx:
-    image: nginx:$NGINX_VERSION
+    image: nginx:${NGINX_VERSION-1.23.1}
     ports:
       - 8081:80
       # - 443:433
     volumes:
       - ./config/nginx/sites-available:/etc/nginx/sites-available
       # - ./config/nginx/letsencrypt:/etc/letsencrypt
-    restart: $NGINX_RESTART_POLICY
+    restart: ${NGINX_RESTART_POLICY-no}
   pgadmin:
     image: dpage/pgadmin4:${PGADMIN_VERSION:-6.18}
     container_name: ${PGADMIN_CONTAINER_NAME:-}
