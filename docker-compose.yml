@@ -207,16 +207,16 @@ services:
     command: -config.file=/etc/promtail/config.yaml
     restart: $PROMTAIL_RESTART_POLICY
   rabbitmq:
-    image: rabbitmq:$RABBITMQ_VERSION
+    image: rabbitmq:${RABBITMQ_VERSION-3.9.27-management}
     environment:
-      RABBITMQ_DEFAULT_USER: $RABBITMQ_DEFAULT_USER
-      RABBITMQ_DEFAULT_PASS: $RABBITMQ_DEFAULT_PASS
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER-root}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS-root}
     ports:
       - 5672:5672
       - 15672:15672
     volumes:
       - rabbitmq:/var/lib/rabbitmq
-    restart: $RABBITMQ_RESTART_POLICY
+    restart: ${RABBITMQ_RESTART_POLICY-no}
   redis:
     image: redis:${REDIS_VERSION-7.0.5}
     ports:
