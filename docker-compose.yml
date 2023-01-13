@@ -48,8 +48,8 @@ services:
       - grafana:/var/lib/grafana
     restart: ${GRAFANA_RESTART_POLICY-no}
   hoppscotch:
-    image: hoppscotch/hoppscotch:$HOPPSCOTCH_VERSION
-    container_name: $HOPPSCOTCH_CONTAINER_NAME
+    image: hoppscotch/hoppscotch:${HOPPSCOTCH_VERSION-main}
+    container_name: ${HOPPSCOTCH_CONTAINER_NAME-}
     ports:
       - 3004:3000
     labels:
@@ -57,7 +57,7 @@ services:
       - traefik.http.routers.pgadmin.rule=Host(`hoppscotch.$TRAEFIK_BASE_HOST`)
       - traefik.http.routers.pgadmin.tls=true
       - traefik.http.routers.pgadmin.tls.certresolver=letsencrypt
-    restart: $HOPPSCOTCH_RESTART_POLICY
+    restart: ${HOPPSCOTCH_RESTART_POLICY-no}
   kali:
     image: kalilinux/kali-rolling
     tty: true
