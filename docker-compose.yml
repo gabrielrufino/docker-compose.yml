@@ -159,12 +159,12 @@ services:
       - traefik.http.routers.pgadmin.tls.certresolver=letsencrypt
     restart: ${PGADMIN_RESTART_POLICY:-no}
   phpmyadmin:
-    image: phpmyadmin:$PHPMYADMIN_VERSION
+    image: phpmyadmin:${PHPMYADMIN_VERSION-5.2.0}
     environment:
       PMA_ARBITRARY: 1
     ports:
       - 8087:80
-    restart: $PHPMYADMIN_RESTART_POLICY
+    restart: ${PHPMYADMIN_RESTART_POLICY-no}
   portainer:
     image: portainer/portainer-ce:${PORTAINER_VERSION-2.16.2}
     ports:
