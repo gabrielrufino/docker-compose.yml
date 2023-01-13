@@ -78,16 +78,16 @@ services:
       MATOMO_DATABASE_DBNAME: ${MATOMO_DATABASE_DBNAME-}
     restart: ${MATOMO_RESTART_POLICY-no}
   mautic:
-    image: mautic/mautic:$MAUTIC_VERSION
+    image: mautic/mautic:${MAUTIC_VERSION-v4}
     ports:
       - 8082:80
     environment:
-      MAUTIC_DB_HOST: $MAUTIC_DB_HOST
-      MAUTIC_DB_USER: $MAUTIC_DB_USER
-      MAUTIC_DB_PASSWORD: $MAUTIC_DB_PASSWORD
-      MAUTIC_DB_NAME: $MAUTIC_DB_NAME
-      MAUTIC_RUN_CRON_JOBS: $MAUTIC_RUN_CRON_JOBS
-    restart: $MAUTIC_RESTART_POLICY
+      MAUTIC_DB_HOST: ${MAUTIC_DB_HOST-mysql}
+      MAUTIC_DB_USER: ${MAUTIC_DB_USER-root}
+      MAUTIC_DB_PASSWORD: ${MAUTIC_DB_PASSWORD-root}
+      MAUTIC_DB_NAME: ${MAUTIC_DB_NAME-mautic_db}
+      MAUTIC_RUN_CRON_JOBS: ${MAUTIC_RUN_CRON_JOBS-}
+    restart: ${MAUTIC_RESTART_POLICY-no}
   metabase:
     image: metabase/metabase:${METABASE_VERSION-v0.44.3}
     ports:
