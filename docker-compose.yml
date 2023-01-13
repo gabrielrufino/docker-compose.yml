@@ -62,11 +62,11 @@ services:
     image: kalilinux/kali-rolling
     tty: true
   loki:
-    image: grafana/loki:$LOKI_VERSION
+    image: grafana/loki:${LOKI_VERSION-2.6.1}
     ports:
       - 3100:3100
     command: -config.file=/etc/loki/local-config.yaml
-    restart: $LOKI_RESTART_POLICY
+    restart: ${LOKI_RESTART_POLICY-no}
   matomo:
     image: matomo:${MATOMO_VERSION-4.11.0}
     ports:
