@@ -23,13 +23,13 @@ services:
       - ./volumes/debian/:/home/shared
     restart: ${DEBIAN_RESTART_POLICY-no}
   fedora:
-    image: fedora:$FEDORA_VERSION
+    image: fedora:${FEDORA_VERSION-36}
     tty: true
     volumes:
       - ./volumes/fedora/:/home/shared
-    restart: $FEDORA_RESTART_POLICY
+    restart: ${FEDORA_RESTART_POLICY-no}
   gitea:
-    image: gitea/gitea:$GITEA_VERSION
+    image: gitea/gitea:${GITEA_VERSION-1.18.0}
     environment:
       USER_UID: 1000
       USER_GID: 1000
@@ -39,64 +39,64 @@ services:
       - /etc/localtime:/etc/localtime:ro
     ports:
       - 3002:3000
-    restart: $GITEA_RESTART_POLICY
+    restart: ${GITEA_RESTART_POLICY-no}
   grafana:
-    image: grafana/grafana:$GRAFANA_VERSION
+    image: grafana/grafana:${GRAFANA_VERSION-9.1.6}
     ports:
       - 3000:3000
     volumes:
       - grafana:/var/lib/grafana
-    restart: $GRAFANA_RESTART_POLICY
+    restart: ${GRAFANA_RESTART_POLICY-no}
   hoppscotch:
-    image: hoppscotch/hoppscotch:$HOPPSCOTCH_VERSION
-    container_name: $HOPPSCOTCH_CONTAINER_NAME
+    image: hoppscotch/hoppscotch:${HOPPSCOTCH_VERSION-main}
+    container_name: ${HOPPSCOTCH_CONTAINER_NAME-}
     ports:
       - 3004:3000
     labels:
       - traefik.enable=true
-      - traefik.http.routers.pgadmin.rule=Host(`hoppscotch.$TRAEFIK_BASE_HOST`)
+      - traefik.http.routers.pgadmin.rule=Host(`hoppscotch.${TRAEFIK_BASE_HOST-localhost}`)
       - traefik.http.routers.pgadmin.tls=true
       - traefik.http.routers.pgadmin.tls.certresolver=letsencrypt
-    restart: $HOPPSCOTCH_RESTART_POLICY
+    restart: ${HOPPSCOTCH_RESTART_POLICY-no}
   kali:
     image: kalilinux/kali-rolling
     tty: true
   loki:
-    image: grafana/loki:$LOKI_VERSION
+    image: grafana/loki:${LOKI_VERSION-2.6.1}
     ports:
       - 3100:3100
     command: -config.file=/etc/loki/local-config.yaml
-    restart: $LOKI_RESTART_POLICY
+    restart: ${LOKI_RESTART_POLICY-no}
   matomo:
-    image: matomo:$MATOMO_VERSION
+    image: matomo:${MATOMO_VERSION-4.11.0}
     ports:
       - 8086:80
     environment:
-      MATOMO_DATABASE_HOST: $MATOMO_DATABASE_HOST
-      MATOMO_DATABASE_USERNAME: $MATOMO_DATABASE_USERNAME
-      MATOMO_DATABASE_PASSWORD: $MATOMO_DATABASE_PASSWORD
-      MATOMO_DATABASE_DBNAME: $MATOMO_DATABASE_DBNAME
-    restart: $MATOMO_RESTART_POLICY
+      MATOMO_DATABASE_HOST: ${MATOMO_DATABASE_HOST-}
+      MATOMO_DATABASE_USERNAME: ${MATOMO_DATABASE_USERNAME-}
+      MATOMO_DATABASE_PASSWORD: ${MATOMO_DATABASE_PASSWORD-}
+      MATOMO_DATABASE_DBNAME: ${MATOMO_DATABASE_DBNAME-}
+    restart: ${MATOMO_RESTART_POLICY-no}
   mautic:
-    image: mautic/mautic:$MAUTIC_VERSION
+    image: mautic/mautic:${MAUTIC_VERSION-v4}
     ports:
       - 8082:80
     environment:
-      MAUTIC_DB_HOST: $MAUTIC_DB_HOST
-      MAUTIC_DB_USER: $MAUTIC_DB_USER
-      MAUTIC_DB_PASSWORD: $MAUTIC_DB_PASSWORD
-      MAUTIC_DB_NAME: $MAUTIC_DB_NAME
-      MAUTIC_RUN_CRON_JOBS: $MAUTIC_RUN_CRON_JOBS
-    restart: $MAUTIC_RESTART_POLICY
+      MAUTIC_DB_HOST: ${MAUTIC_DB_HOST-mysql}
+      MAUTIC_DB_USER: ${MAUTIC_DB_USER-root}
+      MAUTIC_DB_PASSWORD: ${MAUTIC_DB_PASSWORD-root}
+      MAUTIC_DB_NAME: ${MAUTIC_DB_NAME-mautic_db}
+      MAUTIC_RUN_CRON_JOBS: ${MAUTIC_RUN_CRON_JOBS-}
+    restart: ${MAUTIC_RESTART_POLICY-no}
   metabase:
-    image: metabase/metabase:$METABASE_VERSION
+    image: metabase/metabase:${METABASE_VERSION-v0.44.3}
     ports:
       - 3001:3000
     environment: 
       MB_DB_FILE: /metabase-data/metabase.db
     volumes:
       - metabase:/metabase-data
-    restart: $METABASE_RESTART_POLICY
+    restart: ${METABASE_RESTART_POLICY-no}
   mongo:
     image: mongo:${MONGO_VERSION-6.0.3}
     container_name: ${MONGO_CONTAINER_NAME-}
@@ -127,21 +127,21 @@ services:
       - mysql:/var/lib/mysql
     restart: ${MYSQL_RESTART_POLICY-no}
   nextcloud:
-    image: nextcloud:$NEXTCLOUD_VERSION
+    image: nextcloud:${NEXTCLOUD_VERSION-24.0.6}
     ports:
       - 8083:80
     volumes:
       - nextcloud:/var/www/html
-    restart: $NEXTCLOUD_RESTART_POLICY
+    restart: ${NEXTCLOUD_RESTART_POLICY-no}
   nginx:
-    image: nginx:$NGINX_VERSION
+    image: nginx:${NGINX_VERSION-1.23.1}
     ports:
       - 8081:80
       # - 443:433
     volumes:
       - ./config/nginx/sites-available:/etc/nginx/sites-available
       # - ./config/nginx/letsencrypt:/etc/letsencrypt
-    restart: $NGINX_RESTART_POLICY
+    restart: ${NGINX_RESTART_POLICY-no}
   pgadmin:
     image: dpage/pgadmin4:${PGADMIN_VERSION:-6.18}
     container_name: ${PGADMIN_CONTAINER_NAME:-}
@@ -154,26 +154,26 @@ services:
       - pgadmin:/var/lib/pgadmin
     labels:
       - traefik.enable=true
-      - traefik.http.routers.pgadmin.rule=Host(`pgadmin.$TRAEFIK_BASE_HOST`)
+      - traefik.http.routers.pgadmin.rule=Host(`pgadmin.${TRAEFIK_BASE_HOST-localhost}`)
       - traefik.http.routers.pgadmin.tls=true
       - traefik.http.routers.pgadmin.tls.certresolver=letsencrypt
     restart: ${PGADMIN_RESTART_POLICY:-no}
   phpmyadmin:
-    image: phpmyadmin:$PHPMYADMIN_VERSION
+    image: phpmyadmin:${PHPMYADMIN_VERSION-5.2.0}
     environment:
       PMA_ARBITRARY: 1
     ports:
       - 8087:80
-    restart: $PHPMYADMIN_RESTART_POLICY
+    restart: ${PHPMYADMIN_RESTART_POLICY-no}
   portainer:
-    image: portainer/portainer-ce:$PORTAINER_VERSION
+    image: portainer/portainer-ce:${PORTAINER_VERSION-2.16.2}
     ports:
       - 8000:8000
       - 9000:9000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer:/data
-    restart: $PORTAINER_RESTART_POLICY
+    restart: ${PORTAINER_RESTART_POLICY-no}
   postgres:
     image: bitnami/postgresql:${POSTGRESQL_VERSION:-15.1.0}
     container_name: ${POSTGRESQL_CONTAINER_NAME:-}
@@ -191,37 +191,37 @@ services:
       - postgres:/var/lib/postgresql/data
     restart: ${POSTGRESQL_RESTART_POLICY:-no}
   prometheus:
-    image: prom/prometheus:$PROMETHEUS_VERSION
+    image: prom/prometheus:${PROMETHEUS_VERSION-v2.37.1}
     ports:
       - 9090:9090
     volumes:
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-    restart: $PROMETHEUS_RESTART_POLICY
+    restart: ${PROMETHEUS_RESTART_POLICY-no}
   promtail:
-    image: grafana/promtail:$PROMTAIL_VERSION
+    image: grafana/promtail:${PROMTAIL_VERSION-2.6.1}
     ports:
       - 9080:9080
     volumes:
       - ./config/promtail/config.yaml:/etc/promtail/config.yaml
       - /var/log:/var/log
     command: -config.file=/etc/promtail/config.yaml
-    restart: $PROMTAIL_RESTART_POLICY
+    restart: ${PROMTAIL_RESTART_POLICY-no}
   rabbitmq:
-    image: rabbitmq:$RABBITMQ_VERSION
+    image: rabbitmq:${RABBITMQ_VERSION-3.9.27-management}
     environment:
-      RABBITMQ_DEFAULT_USER: $RABBITMQ_DEFAULT_USER
-      RABBITMQ_DEFAULT_PASS: $RABBITMQ_DEFAULT_PASS
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER-root}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS-root}
     ports:
       - 5672:5672
       - 15672:15672
     volumes:
       - rabbitmq:/var/lib/rabbitmq
-    restart: $RABBITMQ_RESTART_POLICY
+    restart: ${RABBITMQ_RESTART_POLICY-no}
   redis:
-    image: redis:$REDIS_VERSION
+    image: redis:${REDIS_VERSION-7.0.5}
     ports:
       - 6379:6379
-    restart: $REDIS_RESTART_POLICY
+    restart: ${REDIS_RESTART_POLICY-no}
   redisinsight:
     image: redislabs/redisinsight:${REDISINSIGHT_VERSION-1.13.1}
     container_name: ${REDISINSIGHT_CONTAINER_NAME-}
@@ -231,49 +231,49 @@ services:
       - redisinsight:/db
     labels:
       - traefik.enable=true
-      - traefik.http.routers.redisinsight.rule=Host(`redisinsight.$TRAEFIK_BASE_HOST`)
+      - traefik.http.routers.redisinsight.rule=Host(`redisinsight.${TRAEFIK_BASE_HOST-localhost}`)
       - traefik.http.routers.redisinsight.tls=true
       - traefik.http.routers.redisinsight.tls.certresolver=letsencrypt
     restart: ${REDISINSIGHT_RESTART_POLICY-no}
   rethinkdb:
-    image: rethinkdb:$RETHINKDB_VERSION
+    image: rethinkdb:${RETHINKDB_VERSION-2.4.2}
     ports:
       - 28015:28015
       - 28016:8080
     volumes:
       - rethinkdb:/data
-    restart: $RETHINKDB_RESTART_POLICY
+    restart: ${RETHINKDB_RESTART_POLICY-no}
   sonarqube:
-    image: sonarqube:$SONARQUBE_VERSION
+    image: sonarqube:${SONARQUBE_VERSION-9.8.0-community}
     ports:
       - 9001:9000
-    restart: $SONARQUBE_RESTART_POLICY
+    restart: ${SONARQUBE_RESTART_POLICY-no}
   sonic:
-    image: valeriansaliou/sonic:$SONIC_VERSION
+    image: valeriansaliou/sonic:${SONIC_VERSION-v1.4.0}
     ports:
       - 1491:1491
     volumes:
       - ./volumes/sonic/sonic.cfg:/etc/sonic.cfg
       - ./volumes/sonic/store/:/var/lib/sonic/store/
-    restart: $SONIC_RESTART_POLICY
+    restart: ${SONIC_RESTART_POLICY-no}
   sqlserver:
-    image: mcr.microsoft.com/mssql/server:$SQLSERVER_VERSION
+    image: mcr.microsoft.com/mssql/server:${SQLSERVER_VERSION-2019-latest}
     environment:
-        SA_PASSWORD: $SQLSERVER_SA_PASSWORD
+        SA_PASSWORD: ${SQLSERVER_SA_PASSWORD-password@123}
         ACCEPT_EULA: Y
     ports:
       - 1433:1433
-    restart: $SQLSERVER_RESTART_POLICY
+    restart: ${SQLSERVER_RESTART_POLICY-no}
   traefik:
-    image: traefik:$TRAEFIK_VERSION
-    container_name: $TRAEFIK_CONTAINER_NAME
+    image: traefik:${TRAEFIK_VERSION-v2.9.6}
+    container_name: ${TRAEFIK_CONTAINER_NAME-}
     command:
       - --providers.docker
       - --providers.docker.exposedByDefault=false
       - --api.dashboard=true
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
-      - --certificatesresolvers.letsencrypt.acme.email=$TRAEFIK_ACME_EMAIL
+      - --certificatesresolvers.letsencrypt.acme.email=${TRAEFIK_ACME_EMAIL-}
       - --certificatesresolvers.letsencrypt.acme.storage=/etc/traefik/acme/acme.json
       - --certificatesresolvers.letsencrypt.acme.httpchallenge=true
       - --certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web
@@ -288,19 +288,19 @@ services:
       - ./volumes/traefik/acme:/etc/traefik/acme
     labels:
       - traefik.enable=true
-      - traefik.http.middlewares.traefik-auth.basicauth.users=$TRAEFIK_DASHBOARD_USERNAME:$TRAEFIK_DASHBOARD_PASSWORD
-      - traefik.http.routers.traefik.rule=Host(`$TRAEFIK_BASE_HOST`)
+      - traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_DASHBOARD_USERNAME-}:${TRAEFIK_DASHBOARD_PASSWORD-}
+      - traefik.http.routers.traefik.rule=Host(`${TRAEFIK_BASE_HOST-localhost}`)
       - traefik.http.routers.traefik.service=api@internal
       - traefik.http.routers.traefik.middlewares=traefik-auth
       - traefik.http.routers.traefik.tls=true
       - traefik.http.routers.traefik.tls.certresolver=letsencrypt
-    restart: $TRAEFIK_RESTART_POLICY
+    restart: ${TRAEFIK_RESTART_POLICY-no}
   ubuntu:
-    image: ubuntu:$UBUNTU_VERSION
+    image: ubuntu:${UBUNTU_VERSION-22.10}
     tty: true
     volumes:
       - ./volumes/ubuntu/:/home/shared
-    restart: $UBUNTU_RESTART_POLICY
+    restart: ${UBUNTU_RESTART_POLICY-no}
   verdaccio:
     image: verdaccio/verdaccio:${VERDACCIO_VERSION-5.15}
     environment:
@@ -325,18 +325,18 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.middlewares.vscode-auth.basicauth.users=${VSCODE_TRAEFIK_USERNAME-}:${VSCODE_TRAEFIK_PASSWORD-}
-      - traefik.http.routers.vscode.rule=Host(`vscode.$TRAEFIK_BASE_HOST`)
+      - traefik.http.routers.vscode.rule=Host(`vscode.${TRAEFIK_BASE_HOST-localhost}`)
       - traefik.http.routers.vscode.middlewares=vscode-auth
       - traefik.http.routers.vscode.tls=true
       - traefik.http.routers.vscode.tls.certresolver=letsencrypt
     restart: ${VSCODE_RESTART_POLICY:-no}
   wordpress:
-    image: wordpress:$WORDPRESS_VERSION
+    image: wordpress:${WORDPRESS_VERSION-latest}
     ports:
       - 8081:80
     volumes:
       - wordpress:/var/www/html
-    restart: $WORDPRESS_RESTART_POLICY
+    restart: ${WORDPRESS_RESTART_POLICY-no}
 
 volumes:
   appsmith:

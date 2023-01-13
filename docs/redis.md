@@ -5,3 +5,10 @@ Service running Redis
 ```bash
 docker compose up -d redis
 ```
+
+## Environment variables
+
+| **Name**             | **Default** |
+| -------------------- | ----------- |
+| REDIS_VERSION        | 7.0.5       |
+| REDIS_RESTART_POLICY | no          |
