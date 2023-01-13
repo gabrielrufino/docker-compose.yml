@@ -54,7 +54,7 @@ services:
       - 3004:3000
     labels:
       - traefik.enable=true
-      - traefik.http.routers.pgadmin.rule=Host(`hoppscotch.$TRAEFIK_BASE_HOST`)
+      - traefik.http.routers.pgadmin.rule=Host(`hoppscotch.${TRAEFIK_BASE_HOST-localhost}`)
       - traefik.http.routers.pgadmin.tls=true
       - traefik.http.routers.pgadmin.tls.certresolver=letsencrypt
     restart: ${HOPPSCOTCH_RESTART_POLICY-no}
@@ -154,7 +154,7 @@ services:
       - pgadmin:/var/lib/pgadmin
     labels:
       - traefik.enable=true
-      - traefik.http.routers.pgadmin.rule=Host(`pgadmin.$TRAEFIK_BASE_HOST`)
+      - traefik.http.routers.pgadmin.rule=Host(`pgadmin.${TRAEFIK_BASE_HOST-localhost}`)
       - traefik.http.routers.pgadmin.tls=true
       - traefik.http.routers.pgadmin.tls.certresolver=letsencrypt
     restart: ${PGADMIN_RESTART_POLICY:-no}
@@ -198,14 +198,14 @@ services:
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     restart: ${PROMETHEUS_RESTART_POLICY-no}
   promtail:
-    image: grafana/promtail:$PROMTAIL_VERSION
+    image: grafana/promtail:${PROMTAIL_VERSION-2.6.1}
     ports:
       - 9080:9080
     volumes:
       - ./config/promtail/config.yaml:/etc/promtail/config.yaml
       - /var/log:/var/log
     command: -config.file=/etc/promtail/config.yaml
-    restart: $PROMTAIL_RESTART_POLICY
+    restart: ${PROMTAIL_RESTART_POLICY-no}
   rabbitmq:
     image: rabbitmq:${RABBITMQ_VERSION-3.9.27-management}
     environment:
@@ -231,7 +231,7 @@ services:
       - redisinsight:/db
     labels:
       - traefik.enable=true
-      - traefik.http.routers.redisinsight.rule=Host(`redisinsight.$TRAEFIK_BASE_HOST`)
+      - traefik.http.routers.redisinsight.rule=Host(`redisinsight.${TRAEFIK_BASE_HOST-localhost}`)
       - traefik.http.routers.redisinsight.tls=true
       - traefik.http.routers.redisinsight.tls.certresolver=letsencrypt
     restart: ${REDISINSIGHT_RESTART_POLICY-no}
@@ -265,15 +265,15 @@ services:
       - 1433:1433
     restart: ${SQLSERVER_RESTART_POLICY-no}
   traefik:
-    image: traefik:$TRAEFIK_VERSION
-    container_name: $TRAEFIK_CONTAINER_NAME
+    image: traefik:${TRAEFIK_VERSION-v2.9.6}
+    container_name: ${TRAEFIK_CONTAINER_NAME-}
     command:
       - --providers.docker
       - --providers.docker.exposedByDefault=false
       - --api.dashboard=true
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
-      - --certificatesresolvers.letsencrypt.acme.email=$TRAEFIK_ACME_EMAIL
+      - --certificatesresolvers.letsencrypt.acme.email=${TRAEFIK_ACME_EMAIL-}
       - --certificatesresolvers.letsencrypt.acme.storage=/etc/traefik/acme/acme.json
       - --certificatesresolvers.letsencrypt.acme.httpchallenge=true
       - --certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web
@@ -288,13 +288,13 @@ services:
       - ./volumes/traefik/acme:/etc/traefik/acme
     labels:
       - traefik.enable=true
-      - traefik.http.middlewares.traefik-auth.basicauth.users=$TRAEFIK_DASHBOARD_USERNAME:$TRAEFIK_DASHBOARD_PASSWORD
-      - traefik.http.routers.traefik.rule=Host(`$TRAEFIK_BASE_HOST`)
+      - traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_DASHBOARD_USERNAME-}:${TRAEFIK_DASHBOARD_PASSWORD-}
+      - traefik.http.routers.traefik.rule=Host(`${TRAEFIK_BASE_HOST-localhost}`)
       - traefik.http.routers.traefik.service=api@internal
       - traefik.http.routers.traefik.middlewares=traefik-auth
       - traefik.http.routers.traefik.tls=true
       - traefik.http.routers.traefik.tls.certresolver=letsencrypt
-    restart: $TRAEFIK_RESTART_POLICY
+    restart: ${TRAEFIK_RESTART_POLICY-no}
   ubuntu:
     image: ubuntu:${UBUNTU_VERSION-22.10}
     tty: true
@@ -325,7 +325,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.middlewares.vscode-auth.basicauth.users=${VSCODE_TRAEFIK_USERNAME-}:${VSCODE_TRAEFIK_PASSWORD-}
-      - traefik.http.routers.vscode.rule=Host(`vscode.$TRAEFIK_BASE_HOST`)
+      - traefik.http.routers.vscode.rule=Host(`vscode.${TRAEFIK_BASE_HOST-localhost}`)
       - traefik.http.routers.vscode.middlewares=vscode-auth
       - traefik.http.routers.vscode.tls=true
       - traefik.http.routers.vscode.tls.certresolver=letsencrypt
