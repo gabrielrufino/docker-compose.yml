@@ -68,7 +68,7 @@ services:
     command: -config.file=/etc/loki/local-config.yaml
     restart: ${LOKI_RESTART_POLICY-no}
   matomo:
-    image: matomo:${MATOMO_VERSION-4.11.0}
+    image: matomo:${MATOMO_VERSION-4.13.0}
     container_name: ${MATOMO_CONTAINER_NAME-}
     ports:
       - 8086:80
