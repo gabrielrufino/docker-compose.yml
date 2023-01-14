@@ -76,6 +76,11 @@ services:
       MATOMO_DATABASE_USERNAME: ${MATOMO_DATABASE_USERNAME-}
       MATOMO_DATABASE_PASSWORD: ${MATOMO_DATABASE_PASSWORD-}
       MATOMO_DATABASE_DBNAME: ${MATOMO_DATABASE_DBNAME-}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.matomo.rule=Host(`matomo.${TRAEFIK_BASE_HOST-localhost}`)
+      - traefik.http.routers.matomo.tls=true
+      - traefik.http.routers.matomo.tls.certresolver=letsencrypt
     restart: ${MATOMO_RESTART_POLICY-no}
   mautic:
     image: mautic/mautic:${MAUTIC_VERSION-v4}
@@ -96,6 +101,11 @@ services:
       MB_DB_FILE: /metabase-data/metabase.db
     volumes:
       - metabase:/metabase-data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.metabase.rule=Host(`metabase.${TRAEFIK_BASE_HOST-localhost}`)
+      - traefik.http.routers.metabase.tls=true
+      - traefik.http.routers.metabase.tls.certresolver=letsencrypt
     restart: ${METABASE_RESTART_POLICY-no}
   mongo:
     image: mongo:${MONGO_VERSION-6.0.3}

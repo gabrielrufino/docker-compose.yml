@@ -17,8 +17,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Setup environment variables
-        run: cp .env.default .env
       - name: Smoke
         run: sh ./tests/smoke/main.sh
       - name: Integration
