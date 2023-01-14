@@ -68,7 +68,7 @@ services:
     command: -config.file=/etc/loki/local-config.yaml
     restart: ${LOKI_RESTART_POLICY-no}
   matomo:
-    image: matomo:${MATOMO_VERSION-4.11.0}
+    image: matomo:${MATOMO_VERSION-4.13.0}
     container_name: ${MATOMO_CONTAINER_NAME-}
     ports:
       - 8086:80
@@ -92,7 +92,7 @@ services:
       MAUTIC_RUN_CRON_JOBS: ${MAUTIC_RUN_CRON_JOBS-}
     restart: ${MAUTIC_RESTART_POLICY-no}
   metabase:
-    image: metabase/metabase:${METABASE_VERSION-v0.44.3}
+    image: metabase/metabase:${METABASE_VERSION-v0.45.1}
     container_name: ${METABASE_CONTAINER_NAME-}
     ports:
       - 3001:3000
