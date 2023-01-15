@@ -169,6 +169,7 @@ services:
     restart: ${PGADMIN_RESTART_POLICY:-no}
   phpmyadmin:
     image: phpmyadmin:${PHPMYADMIN_VERSION-5.2.0}
+    container_name: ${PHPMYADMIN_CONTAINER_NAME-}
     environment:
       PMA_ARBITRARY: 1
     ports:
@@ -217,6 +218,7 @@ services:
     restart: ${PROMTAIL_RESTART_POLICY-no}
   rabbitmq:
     image: rabbitmq:${RABBITMQ_VERSION-3.9.27-management}
+    container_name: ${RABBITMQ_CONTAINER_NAME-}
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER-root}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS-root}
@@ -228,6 +230,7 @@ services:
     restart: ${RABBITMQ_RESTART_POLICY-no}
   redis:
     image: redis:${REDIS_VERSION-7.0.5}
+    container_name: ${REDIS_CONTAINER_NAME-}
     ports:
       - 6379:6379
     restart: ${REDIS_RESTART_POLICY-no}
@@ -246,6 +249,7 @@ services:
     restart: ${REDISINSIGHT_RESTART_POLICY-no}
   rethinkdb:
     image: rethinkdb:${RETHINKDB_VERSION-2.4.2}
+    container_name: ${RETHINKDB_CONTAINER_NAME-}
     ports:
       - 28015:28015
       - 28016:8080

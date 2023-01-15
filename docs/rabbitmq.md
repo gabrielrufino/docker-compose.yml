@@ -11,6 +11,7 @@ docker compose up -d rabbitmq
 | **Name**                | **Default**       |
 | ----------------------- | ----------------- |
 | RABBITMQ_VERSION        | 3.9.27-management |
+| RABBITMQ_CONTAINER_NAME |                   |
 | RABBITMQ_DEFAULT_USER   | root              |
 | RABBITMQ_DEFAULT_PASS   | root              |
 | RABBITMQ_RESTART_POLICY | no                |
