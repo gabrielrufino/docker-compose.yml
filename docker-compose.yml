@@ -228,6 +228,7 @@ services:
     restart: ${RABBITMQ_RESTART_POLICY-no}
   redis:
     image: redis:${REDIS_VERSION-7.0.5}
+    container_name: ${REDIS_CONTAINER_NAME-}
     ports:
       - 6379:6379
     restart: ${REDIS_RESTART_POLICY-no}
