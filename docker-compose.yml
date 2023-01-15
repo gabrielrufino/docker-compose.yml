@@ -169,6 +169,7 @@ services:
     restart: ${PGADMIN_RESTART_POLICY:-no}
   phpmyadmin:
     image: phpmyadmin:${PHPMYADMIN_VERSION-5.2.0}
+    container_name: ${PHPMYADMIN_CONTAINER_NAME-}
     environment:
       PMA_ARBITRARY: 1
     ports:
