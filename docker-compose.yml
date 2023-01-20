@@ -92,7 +92,7 @@ services:
       MAUTIC_RUN_CRON_JOBS: ${MAUTIC_RUN_CRON_JOBS-}
     restart: ${MAUTIC_RESTART_POLICY-no}
   metabase:
-    image: metabase/metabase:${METABASE_VERSION-v0.45.1}
+    image: metabase/metabase:${METABASE_VERSION-v0.45.2}
     container_name: ${METABASE_CONTAINER_NAME-}
     ports:
       - 3001:3000
