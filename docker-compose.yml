@@ -54,9 +54,9 @@ services:
       - 3004:3000
     labels:
       - traefik.enable=true
-      - traefik.http.routers.pgadmin.rule=Host(`hoppscotch.${TRAEFIK_BASE_HOST-localhost}`)
-      - traefik.http.routers.pgadmin.tls=true
-      - traefik.http.routers.pgadmin.tls.certresolver=letsencrypt
+      - traefik.http.routers.hoppscotch.rule=Host(`hoppscotch.${TRAEFIK_BASE_HOST-localhost}`)
+      - traefik.http.routers.hoppscotch.tls=true
+      - traefik.http.routers.hoppscotch.tls.certresolver=letsencrypt
     restart: ${HOPPSCOTCH_RESTART_POLICY-no}
   kali:
     image: kalilinux/kali-rolling
