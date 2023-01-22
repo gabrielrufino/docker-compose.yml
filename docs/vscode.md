@@ -10,11 +10,12 @@ $ docker compose up -d vscode
 
 ## Environment variables
 
-| **Name**                | **Default** |
-| ----------------------- | ----------- |
-| VSCODE_VERSION          | 1.74.2      |
-| VSCODE_CONTAINER_NAME   |             |
-| VSCODE_SUDO_PASSWORD    | root        |
-| VSCODE_TRAEFIK_USERNAME |             |
-| VSCODE_TRAEFIK_PASSWORD |             |
-| VSCODE_RESTART_POLICY   | no          |
+| **Name**                | **Default**       |
+| ----------------------- | ----------------- |
+| VSCODE_VERSION          | 1.74.2            |
+| VSCODE_CONTAINER_NAME   |                   |
+| VSCODE_SUDO_PASSWORD    | root              |
+| VSCODE_TRAEFIK_USERNAME |                   |
+| VSCODE_TRAEFIK_PASSWORD |                   |
+| VSCODE_TIMEZONE         | America/Sao_Paulo |
+| VSCODE_RESTART_POLICY   | no                |
