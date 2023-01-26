@@ -12,5 +12,5 @@ docker compose up -d redisinsight
 | ----------------------------- | --------------------- |
 | REDISINSIGHT_VERSION          | 1.13.1                |
 | REDISINSIGHT_CONTAINER_NAME   |                       |
-| REDISINSIGHT_RITRUSTEDORIGINS | http://localhost:6379 |
+| REDISINSIGHT_RITRUSTEDORIGINS | http://localhost:8001 |
 | REDISINSIGHT_RESTART_POLICY   | no                    |
