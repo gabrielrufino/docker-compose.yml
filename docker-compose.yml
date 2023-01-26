@@ -240,7 +240,7 @@ services:
     ports:
       - 8001:8001
     environment:
-      RITRUSTEDORIGINS: ${REDISINSIGHT_RITRUSTEDORIGINS-http://localhost:6379}
+      RITRUSTEDORIGINS: ${REDISINSIGHT_RITRUSTEDORIGINS-http://localhost:8001}
     volumes:
       - redisinsight:/db
     labels:
