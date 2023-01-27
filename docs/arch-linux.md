@@ -11,4 +11,5 @@ docker compose up -d archlinux
 | **Name**                 | **Default**            |
 | ------------------------ | ---------------------- |
 | ARCHLINUX_VERSION        | base-20221225.0.113672 |
+| ARCHLINUX_CONTAINER_NAME |                        |
 | ARCHLINUX_RESTART_POLICY | no                     |

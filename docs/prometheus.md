@@ -11,4 +11,5 @@ docker compose up -d prometheus
 | **Name**                  | **Default** |
 | ------------------------- | ----------- |
 | PROMETHEUS_VERSION        | v2.37.1     |
+| PROMETHEUS_CONTAINER_NAME |             |
 | PROMETHEUS_RESTART_POLICY | no          |

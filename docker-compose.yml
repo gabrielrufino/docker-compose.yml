@@ -3,6 +3,7 @@ version: '3.9'
 services:
   appsmith:
     image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1.9.1}
+    container_name: ${APPSMITH_CONTAINER_NAME-}
     ports:
       - 8085:80
     volumes:
@@ -12,24 +13,28 @@ services:
     restart: ${APPSMITH_RESTART_POLICY-no}
   archlinux:
     image: archlinux:${ARCHLINUX_VERSION-base-20221225.0.113672}
+    container_name: ${ARCHLINUX_CONTAINER_NAME-}
     tty: true
     volumes:
       - ./volumes/archlinux/:/home/shared
     restart: ${ARCHLINUX_RESTART_POLICY-no}
   debian:
     image: debian:${DEBIAN_VERSION-11.6}
+    container_name: ${DEBIAN_CONTAINER_NAME-}
     tty: true
     volumes:
       - ./volumes/debian/:/home/shared
     restart: ${DEBIAN_RESTART_POLICY-no}
   fedora:
     image: fedora:${FEDORA_VERSION-36}
+    container_name: ${FEDORA_CONTAINER_NAME-}
     tty: true
     volumes:
       - ./volumes/fedora/:/home/shared
     restart: ${FEDORA_RESTART_POLICY-no}
   gitea:
     image: gitea/gitea:${GITEA_VERSION-1.18.0}
+    container_name: ${GITEA_CONTAINER_NAME-}
     environment:
       USER_UID: 1000
       USER_GID: 1000
@@ -42,6 +47,7 @@ services:
     restart: ${GITEA_RESTART_POLICY-no}
   grafana:
     image: grafana/grafana:${GRAFANA_VERSION-9.1.6}
+    container_name: ${GRAFANA_CONTAINER_NAME-}
     ports:
       - 3000:3000
     volumes:
@@ -59,10 +65,13 @@ services:
       - traefik.http.routers.hoppscotch.tls.certresolver=letsencrypt
     restart: ${HOPPSCOTCH_RESTART_POLICY-no}
   kali:
-    image: kalilinux/kali-rolling
+    image: kalilinux/kali-rolling:${KALI_VERSION-latest}
+    container_name: ${KALI_CONTAINER_NAME-}
     tty: true
+    restart: ${KALI_RESTART_POLICY-no}
   loki:
     image: grafana/loki:${LOKI_VERSION-2.6.1}
+    container_name: ${LOKI_CONTAINER_NAME-}
     ports:
       - 3100:3100
     command: -config.file=/etc/loki/local-config.yaml
@@ -82,6 +91,7 @@ services:
     restart: ${MATOMO_RESTART_POLICY-no}
   mautic:
     image: mautic/mautic:${MAUTIC_VERSION-v4}
+    container_name: ${MAUTIC_CONTAINER_NAME-}
     ports:
       - 8082:80
     environment:
@@ -137,6 +147,7 @@ services:
     restart: ${MYSQL_RESTART_POLICY-no}
   nextcloud:
     image: nextcloud:${NEXTCLOUD_VERSION-24.0.6}
+    container_name: ${NEXTCLOUD_CONTAINER_NAME-}
     ports:
       - 8083:80
     volumes:
@@ -144,6 +155,7 @@ services:
     restart: ${NEXTCLOUD_RESTART_POLICY-no}
   nginx:
     image: nginx:${NGINX_VERSION-1.23.1}
+    container_name: ${NGINX_CONTAINER_NAME-}
     ports:
       - 8081:80
       # - 443:433
@@ -177,6 +189,7 @@ services:
     restart: ${PHPMYADMIN_RESTART_POLICY-no}
   portainer:
     image: portainer/portainer-ce:${PORTAINER_VERSION-2.16.2}
+    container_name: ${PORTAINER_CONTAINER_NAME-}
     ports:
       - 8000:8000
       - 9000:9000
@@ -202,6 +215,7 @@ services:
     restart: ${POSTGRESQL_RESTART_POLICY:-no}
   prometheus:
     image: prom/prometheus:${PROMETHEUS_VERSION-v2.37.1}
+    container_name: ${PROMETHEUS_CONTAINER_NAME-}
     ports:
       - 9090:9090
     volumes:
@@ -209,6 +223,7 @@ services:
     restart: ${PROMETHEUS_RESTART_POLICY-no}
   promtail:
     image: grafana/promtail:${PROMTAIL_VERSION-2.6.1}
+    container_name: ${PROMTAIL_CONTAINER_NAME-}
     ports:
       - 9080:9080
     volumes:
@@ -260,11 +275,13 @@ services:
     restart: ${RETHINKDB_RESTART_POLICY-no}
   sonarqube:
     image: sonarqube:${SONARQUBE_VERSION-9.8.0-community}
+    container_name: ${SONARQUBE_CONTAINER_NAME-}
     ports:
       - 9001:9000
     restart: ${SONARQUBE_RESTART_POLICY-no}
   sonic:
     image: valeriansaliou/sonic:${SONIC_VERSION-v1.4.0}
+    container_name: ${SONIC_CONTAINER_NAME-}
     ports:
       - 1491:1491
     volumes:
@@ -273,6 +290,7 @@ services:
     restart: ${SONIC_RESTART_POLICY-no}
   sqlserver:
     image: mcr.microsoft.com/mssql/server:${SQLSERVER_VERSION-2019-latest}
+    container_name: ${SQLSERVER_CONTAINER_NAME-}
     environment:
         SA_PASSWORD: ${SQLSERVER_SA_PASSWORD-password@123}
         ACCEPT_EULA: Y
@@ -312,12 +330,14 @@ services:
     restart: ${TRAEFIK_RESTART_POLICY-no}
   ubuntu:
     image: ubuntu:${UBUNTU_VERSION-22.10}
+    container_name: ${UBUNTU_CONTAINER_NAME-}
     tty: true
     volumes:
       - ./volumes/ubuntu/:/home/shared
     restart: ${UBUNTU_RESTART_POLICY-no}
   verdaccio:
     image: verdaccio/verdaccio:${VERDACCIO_VERSION-5.15}
+    container_name: ${VERDACCIO_CONTAINER_NAME-}
     environment:
       VERDACCIO_PORT: 4873
     ports:
@@ -347,6 +367,7 @@ services:
     restart: ${VSCODE_RESTART_POLICY:-no}
   wordpress:
     image: wordpress:${WORDPRESS_VERSION-latest}
+    container_name: ${WORDPRESS_CONTAINER_NAME-}
     ports:
       - 8081:80
     volumes:

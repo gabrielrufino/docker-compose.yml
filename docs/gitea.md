@@ -11,4 +11,5 @@ docker compose up -d gitea
 | **Name**             | **Default** |
 | -------------------- | ----------- |
 | GITEA_VERSION        | 1.18.0      |
+| GITEA_CONTAINER_NAME |             |
 | GITEA_RESTART_POLICY | no          |

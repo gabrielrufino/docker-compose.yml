@@ -11,6 +11,7 @@ docker compose up -d mautic
 | **Name**              | **Default** |
 | --------------------- | ----------- |
 | MAUTIC_VERSION        | v4          |
+| MAUTIC_CONTAINER_NAME |             |
 | MAUTIC_DB_HOST        | mysql       |
 | MAUTIC_DB_USER        | root        |
 | MAUTIC_DB_PASSWORD    | root        |
