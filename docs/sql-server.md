@@ -11,5 +11,6 @@ docker compose up -d sqlserver
 | **Name**                 | **Default**  |
 | ------------------------ | ------------ |
 | SQLSERVER_VERSION        | 2019-latest  |
+| SQLSERVER_CONTAINER_NAME |              |
 | SQLSERVER_SA_PASSWORD    | password@123 |
 | SQLSERVER_RESTART_POLICY | no           |

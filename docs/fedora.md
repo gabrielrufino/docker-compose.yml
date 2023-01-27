@@ -11,4 +11,5 @@ docker compose up -d fedora
 | **Name**              | **Default** |
 | --------------------- | ----------- |
 | FEDORA_VERSION        | 36          |
+| FEDORA_CONTAINER_NAME |             |
 | FEDORA_RESTART_POLICY | no          |

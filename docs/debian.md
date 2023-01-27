@@ -11,4 +11,5 @@ docker compose up -d debian
 | **Name**              | **Default** |
 | --------------------- | ----------- |
 | DEBIAN_VERSION        | 11.6        |
+| DEBIAN_CONTAINER_NAME |             |
 | DEBIAN_RESTART_POLICY | no          |

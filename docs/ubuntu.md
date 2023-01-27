@@ -15,4 +15,5 @@ docker compose up -d ubuntu
 | **Name**              | **Default** |
 | --------------------- | ----------- |
 | UBUNTU_VERSION        | 22.10       |
+| UBUNTU_CONTAINER_NAME |             |
 | UBUNTU_RESTART_POLICY | no          |

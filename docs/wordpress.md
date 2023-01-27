@@ -11,4 +11,5 @@ docker compose up -d wordpress
 | **Name**                 | **Default** |
 | ------------------------ | ----------- |
 | WORDPRESS_VERSION        | latest      |
+| WORDPRESS_CONTAINER_NAME |             |
 | WORDPRESS_RESTART_POLICY | no          |

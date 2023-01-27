@@ -6,6 +6,14 @@ Service running Kali
 docker compose up -d kali
 ```
 
+## Environment variables
+
+| **Name**            | **Default** |
+| ------------------- | ----------- |
+| KALI_VERSION        | latest      |
+| KALI_CONTAINER_NAME |             |
+| KALI_RESTART_POLICY | no          |
+
 ## Installing kali tools
 
 ```bash

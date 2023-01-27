@@ -11,4 +11,5 @@ docker compose up -d nginx
 | **Name**             | **Default** |
 | -------------------- | ----------- |
 | NGINX_VERSION        | 1.23.1      |
+| NGINX_CONTAINER_NAME |             |
 | NGINX_RESTART_POLICY | no          |

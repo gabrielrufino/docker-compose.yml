@@ -11,4 +11,5 @@ docker compose up -d promtail
 | **Name**                | **Default** |
 | ----------------------- | ----------- |
 | PROMTAIL_VERSION        | 2.6.1       |
+| PROMTAIL_CONTAINER_NAME |             |
 | PROMTAIL_RESTART_POLICY | no          |
