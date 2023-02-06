@@ -3,7 +3,7 @@
 Service with OpenVSCode.
 
 ```bash
-$ docker compose up -d vscode
+docker compose up -d vscode
 ```
 
 **Port:** 3003
