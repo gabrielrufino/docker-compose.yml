@@ -164,7 +164,7 @@ services:
       # - ./config/nginx/letsencrypt:/etc/letsencrypt
     restart: ${NGINX_RESTART_POLICY-no}
   pgadmin:
-    image: dpage/pgadmin4:${PGADMIN_VERSION:-6.19}
+    image: dpage/pgadmin4:${PGADMIN_VERSION:-6.20}
     container_name: ${PGADMIN_CONTAINER_NAME:-}
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-root@gabrielrufino.com}
