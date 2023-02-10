@@ -164,7 +164,7 @@ services:
       # - ./config/nginx/letsencrypt:/etc/letsencrypt
     restart: ${NGINX_RESTART_POLICY-no}
   pgadmin:
-    image: dpage/pgadmin4:${PGADMIN_VERSION:-6.19}
+    image: dpage/pgadmin4:${PGADMIN_VERSION:-6.20}
     container_name: ${PGADMIN_CONTAINER_NAME:-}
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-root@gabrielrufino.com}
@@ -346,7 +346,7 @@ services:
       - verdaccio:/verdaccio/storage
     restart: ${VERDACCIO_RESTART_POLICY-no}
   vscode:
-    image: lscr.io/linuxserver/openvscode-server:${VSCODE_VERSION:-1.74.3}
+    image: lscr.io/linuxserver/openvscode-server:${VSCODE_VERSION:-1.75.0}
     container_name: ${VSCODE_CONTAINER_NAME:-}
     ports:
       - 3003:3000
