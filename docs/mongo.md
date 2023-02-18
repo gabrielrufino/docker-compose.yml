@@ -10,7 +10,7 @@ docker compose up -d mongo
 
 | **Name**                   | **Default** |
 | -------------------------- | ----------- |
-| MONGO_VERSION              | 6.0.3       |
+| MONGO_VERSION              | 6.0.4       |
 | MONGO_CONTAINER_NAME       |             |
 | MONGO_INITDB_ROOT_USERNAME | root        |
 | MONGO_INITDB_ROOT_PASSWORD | root        |
