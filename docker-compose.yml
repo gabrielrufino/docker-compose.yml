@@ -274,7 +274,7 @@ services:
       - rethinkdb:/data
     restart: ${RETHINKDB_RESTART_POLICY-no}
   sonarqube:
-    image: sonarqube:${SONARQUBE_VERSION-9.8.0-community}
+    image: sonarqube:${SONARQUBE_VERSION-9.9.0-community}
     container_name: ${SONARQUBE_CONTAINER_NAME-}
     ports:
       - 9001:9000
