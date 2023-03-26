@@ -278,6 +278,11 @@ services:
     container_name: ${SONARQUBE_CONTAINER_NAME-}
     ports:
       - 9001:9000
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.sonarqube.rule=Host(`sonarqube.${TRAEFIK_BASE_HOST-localhost}`)
+      - traefik.http.routers.sonarqube.tls=true
+      - traefik.http.routers.sonarqube.tls.certresolver=letsencrypt
     restart: ${SONARQUBE_RESTART_POLICY-no}
   sonic:
     image: valeriansaliou/sonic:${SONIC_VERSION-v1.4.0}
