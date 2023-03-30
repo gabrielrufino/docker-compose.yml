@@ -278,6 +278,8 @@ services:
     container_name: ${SONARQUBE_CONTAINER_NAME-}
     ports:
       - 9001:9000
+    volumes:
+      - sonarqube:/opt/sonarqube/data
     labels:
       - traefik.enable=true
       - traefik.http.routers.sonarqube.rule=Host(`sonarqube.${TRAEFIK_BASE_HOST-localhost}`)
@@ -341,7 +343,7 @@ services:
       - ./volumes/ubuntu/:/home/shared
     restart: ${UBUNTU_RESTART_POLICY-no}
   verdaccio:
-    image: verdaccio/verdaccio:${VERDACCIO_VERSION-5.15}
+    image: verdaccio/verdaccio:${VERDACCIO_VERSION-5.23}
     container_name: ${VERDACCIO_CONTAINER_NAME-}
     environment:
       VERDACCIO_PORT: 4873
@@ -394,5 +396,6 @@ volumes:
   rabbitmq:
   redisinsight:
   rethinkdb:
+  sonarqube:
   verdaccio:
   wordpress:
