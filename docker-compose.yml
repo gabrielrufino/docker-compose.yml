@@ -52,6 +52,11 @@ services:
       - 3000:3000
     volumes:
       - grafana:/var/lib/grafana
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.grafana.rule=Host(`grafana.${TRAEFIK_BASE_HOST-localhost}`)
+      - traefik.http.routers.grafana.tls=true
+      - traefik.http.routers.grafana.tls.certresolver=letsencrypt
     restart: ${GRAFANA_RESTART_POLICY-no}
   hoppscotch:
     image: hoppscotch/hoppscotch:${HOPPSCOTCH_VERSION-main}
