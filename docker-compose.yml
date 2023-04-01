@@ -46,12 +46,17 @@ services:
       - 3002:3000
     restart: ${GITEA_RESTART_POLICY-no}
   grafana:
-    image: grafana/grafana:${GRAFANA_VERSION-9.1.6}
+    image: grafana/grafana:${GRAFANA_VERSION-9.4.7}
     container_name: ${GRAFANA_CONTAINER_NAME-}
     ports:
       - 3000:3000
     volumes:
       - grafana:/var/lib/grafana
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.grafana.rule=Host(`grafana.${TRAEFIK_BASE_HOST-localhost}`)
+      - traefik.http.routers.grafana.tls=true
+      - traefik.http.routers.grafana.tls.certresolver=letsencrypt
     restart: ${GRAFANA_RESTART_POLICY-no}
   hoppscotch:
     image: hoppscotch/hoppscotch:${HOPPSCOTCH_VERSION-main}
@@ -77,7 +82,7 @@ services:
     command: -config.file=/etc/loki/local-config.yaml
     restart: ${LOKI_RESTART_POLICY-no}
   matomo:
-    image: matomo:${MATOMO_VERSION-4.13.3}
+    image: matomo:${MATOMO_VERSION-4.14.1}
     container_name: ${MATOMO_CONTAINER_NAME-}
     ports:
       - 8086:80
@@ -102,7 +107,7 @@ services:
       MAUTIC_RUN_CRON_JOBS: ${MAUTIC_RUN_CRON_JOBS-}
     restart: ${MAUTIC_RESTART_POLICY-no}
   metabase:
-    image: metabase/metabase:${METABASE_VERSION-v0.45.2}
+    image: metabase/metabase:${METABASE_VERSION-v0.46.0}
     container_name: ${METABASE_CONTAINER_NAME-}
     ports:
       - 3001:3000
