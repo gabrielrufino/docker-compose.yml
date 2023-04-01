@@ -10,6 +10,6 @@ docker compose up -d metabase
 
 | **Name**                | **Default** |
 | ----------------------- | ----------- |
-| METABASE_VERSION        | v0.45.2     |
+| METABASE_VERSION        | v0.46.0     |
 | METABASE_CONTAINER_NAME |             |
 | METABASE_RESTART_POLICY | no          |
