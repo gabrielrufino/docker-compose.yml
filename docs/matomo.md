@@ -10,6 +10,6 @@ docker compose up -d matomo
 
 | **Name**                 | **Default** |
 | ------------------------ | ----------- |
-| MATOMO_VERSION           | 4.13.3      |
+| MATOMO_VERSION           | 4.14.1      |
 | MATOMO_CONTAINER_NAME    |             |
 | MATOMO_RESTART_POLICY    | no          |
