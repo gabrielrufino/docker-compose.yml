@@ -10,6 +10,6 @@ docker compose up -d grafana
 
 | **Name**               | **Default** |
 | ---------------------- | ----------- |
-| GRAFANA_VERSION        | 9.1.6       |
+| GRAFANA_VERSION        | 9.4.7       |
 | GRAFANA_CONTAINER_NAME |             |
 | GRAFANA_RESTART_POLICY | no          |
