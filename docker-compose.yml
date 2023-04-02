@@ -227,7 +227,7 @@ services:
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     restart: ${PROMETHEUS_RESTART_POLICY-no}
   promtail:
-    image: grafana/promtail:${PROMTAIL_VERSION-2.6.1}
+    image: grafana/promtail:${PROMTAIL_VERSION-2.7.5}
     container_name: ${PROMTAIL_CONTAINER_NAME-}
     ports:
       - 9080:9080
