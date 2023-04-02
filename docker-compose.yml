@@ -219,7 +219,7 @@ services:
       - postgres:/var/lib/postgresql/data
     restart: ${POSTGRESQL_RESTART_POLICY:-no}
   prometheus:
-    image: prom/prometheus:${PROMETHEUS_VERSION-v2.37.1}
+    image: prom/prometheus:${PROMETHEUS_VERSION-v2.43.0}
     container_name: ${PROMETHEUS_CONTAINER_NAME-}
     ports:
       - 9090:9090
