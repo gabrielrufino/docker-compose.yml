@@ -75,7 +75,7 @@ services:
     tty: true
     restart: ${KALI_RESTART_POLICY-no}
   loki:
-    image: grafana/loki:${LOKI_VERSION-2.6.1}
+    image: grafana/loki:${LOKI_VERSION-2.7.5}
     container_name: ${LOKI_CONTAINER_NAME-}
     ports:
       - 3100:3100
@@ -219,7 +219,7 @@ services:
       - postgres:/var/lib/postgresql/data
     restart: ${POSTGRESQL_RESTART_POLICY:-no}
   prometheus:
-    image: prom/prometheus:${PROMETHEUS_VERSION-v2.37.1}
+    image: prom/prometheus:${PROMETHEUS_VERSION-v2.43.0}
     container_name: ${PROMETHEUS_CONTAINER_NAME-}
     ports:
       - 9090:9090
@@ -227,7 +227,7 @@ services:
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     restart: ${PROMETHEUS_RESTART_POLICY-no}
   promtail:
-    image: grafana/promtail:${PROMTAIL_VERSION-2.6.1}
+    image: grafana/promtail:${PROMTAIL_VERSION-2.7.5}
     container_name: ${PROMTAIL_CONTAINER_NAME-}
     ports:
       - 9080:9080
