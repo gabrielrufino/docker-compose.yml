@@ -75,7 +75,7 @@ services:
     tty: true
     restart: ${KALI_RESTART_POLICY-no}
   loki:
-    image: grafana/loki:${LOKI_VERSION-2.6.1}
+    image: grafana/loki:${LOKI_VERSION-2.7.5}
     container_name: ${LOKI_CONTAINER_NAME-}
     ports:
       - 3100:3100
