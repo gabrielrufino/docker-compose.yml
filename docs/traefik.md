@@ -10,7 +10,7 @@ docker compose up -d traefik
 
 | **Name**                   | **Default**            |
 | -------------------------- | ---------------------- |
-| TRAEFIK_VERSION            | v2.9.6                 |
+| TRAEFIK_VERSION            | v2.9.10                |
 | TRAEFIK_CONTAINER_NAME     |                        |
 | TRAEFIK_BASE_HOST          | localhost              |
 | TRAEFIK_ACME_EMAIL         |                        |
