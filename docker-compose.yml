@@ -237,7 +237,7 @@ services:
     command: -config.file=/etc/promtail/config.yaml
     restart: ${PROMTAIL_RESTART_POLICY-no}
   rabbitmq:
-    image: rabbitmq:${RABBITMQ_VERSION-3.9.27-management}
+    image: rabbitmq:${RABBITMQ_VERSION-3.11.13-management}
     container_name: ${RABBITMQ_CONTAINER_NAME-}
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER-root}
