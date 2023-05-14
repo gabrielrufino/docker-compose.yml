@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/gabrielrufino/docker-compose.yml/actions/workflows/ci.yml/badge.svg)](https://github.com/gabrielrufino/docker-compose.yml/actions/workflows/ci.yml)
 
-My docker development environment
+Services environment for development and production
 
 ## Installing
 
