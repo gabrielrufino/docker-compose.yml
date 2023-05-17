@@ -10,7 +10,7 @@ docker compose up -d pgadmin
 
 | **Name**                 | **Default**            |
 | ------------------------ | ---------------------- |
-| PGADMIN_VERSION          | 7.0                    |
+| PGADMIN_VERSION          | 7.1                    |
 | PGADMIN_CONTAINER_NAME   |                        |
 | PGADMIN_DEFAULT_EMAIL    | root@gabrielrufino.com |
 | PGADMIN_DEFAULT_PASSWORD | root                   |
