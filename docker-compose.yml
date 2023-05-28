@@ -46,7 +46,7 @@ services:
       - 3002:3000
     restart: ${GITEA_RESTART_POLICY-no}
   grafana:
-    image: grafana/grafana:${GRAFANA_VERSION-9.4.7}
+    image: grafana/grafana:${GRAFANA_VERSION-9.5.2}
     container_name: ${GRAFANA_CONTAINER_NAME-}
     ports:
       - 3000:3000
@@ -82,7 +82,7 @@ services:
     command: -config.file=/etc/loki/local-config.yaml
     restart: ${LOKI_RESTART_POLICY-no}
   matomo:
-    image: matomo:${MATOMO_VERSION-4.14.1}
+    image: matomo:${MATOMO_VERSION-4.14.2}
     container_name: ${MATOMO_CONTAINER_NAME-}
     ports:
       - 8086:80
@@ -107,7 +107,7 @@ services:
       MAUTIC_RUN_CRON_JOBS: ${MAUTIC_RUN_CRON_JOBS-}
     restart: ${MAUTIC_RESTART_POLICY-no}
   metabase:
-    image: metabase/metabase:${METABASE_VERSION-v0.46.0}
+    image: metabase/metabase:${METABASE_VERSION-v0.46.4}
     container_name: ${METABASE_CONTAINER_NAME-}
     ports:
       - 3001:3000
@@ -286,7 +286,7 @@ services:
       - rethinkdb:/data
     restart: ${RETHINKDB_RESTART_POLICY-no}
   sonarqube:
-    image: sonarqube:${SONARQUBE_VERSION-9.9.0-community}
+    image: sonarqube:${SONARQUBE_VERSION-9.9.1-community}
     container_name: ${SONARQUBE_CONTAINER_NAME-}
     ports:
       - 9001:9000
