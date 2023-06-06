@@ -15,7 +15,6 @@ docker compose up -d vscode
 | VSCODE_VERSION          | 1.78.2            |
 | VSCODE_CONTAINER_NAME   |                   |
 | VSCODE_SUDO_PASSWORD    | root              |
-| VSCODE_TRAEFIK_USERNAME |                   |
-| VSCODE_TRAEFIK_PASSWORD |                   |
+| VSCODE_CONNECTION_TOKEN | root              |
 | VSCODE_TIMEZONE         | America/Sao_Paulo |
 | VSCODE_RESTART_POLICY   | no                |

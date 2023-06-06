@@ -373,14 +373,13 @@ services:
       PUID: 1000
       PGID: 1000
       TZ: ${VSCODE_TIMEZONE-America/Sao_Paulo}
+      CONNECTION_TOKEN: ${VSCODE_CONNECTION_TOKEN-root}
       SUDO_PASSWORD: ${VSCODE_SUDO_PASSWORD-root}
     volumes:
       - ./volumes/vscode:/config
     labels:
       - traefik.enable=true
-      - traefik.http.middlewares.vscode-auth.basicauth.users=${VSCODE_TRAEFIK_USERNAME-}:${VSCODE_TRAEFIK_PASSWORD-}
       - traefik.http.routers.vscode.rule=Host(`vscode.${TRAEFIK_BASE_HOST-localhost}`)
-      - traefik.http.routers.vscode.middlewares=vscode-auth
       - traefik.http.routers.vscode.tls=true
       - traefik.http.routers.vscode.tls.certresolver=letsencrypt
     restart: ${VSCODE_RESTART_POLICY:-no}
