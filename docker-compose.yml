@@ -376,7 +376,7 @@ services:
       CONNECTION_TOKEN: ${VSCODE_CONNECTION_TOKEN-root}
       SUDO_PASSWORD: ${VSCODE_SUDO_PASSWORD-root}
     volumes:
-      - ./volumes/vscode:/config
+      - ${VSCODE_BASE_FOLDER:-./volumes/vscode}:/config
     labels:
       - traefik.enable=true
       - traefik.http.routers.vscode.rule=Host(`vscode.${TRAEFIK_BASE_HOST-localhost}`)
