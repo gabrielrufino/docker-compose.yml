@@ -169,7 +169,7 @@ services:
       # - ./config/nginx/letsencrypt:/etc/letsencrypt
     restart: ${NGINX_RESTART_POLICY-no}
   pgadmin:
-    image: dpage/pgadmin4:${PGADMIN_VERSION:-7.1}
+    image: dpage/pgadmin4:${PGADMIN_VERSION:-7.5}
     container_name: ${PGADMIN_CONTAINER_NAME:-}
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-root@gabrielrufino.com}
@@ -317,7 +317,7 @@ services:
       - 1433:1433
     restart: ${SQLSERVER_RESTART_POLICY-no}
   traefik:
-    image: traefik:${TRAEFIK_VERSION-v2.10.1}
+    image: traefik:${TRAEFIK_VERSION-v2.10.4}
     container_name: ${TRAEFIK_CONTAINER_NAME-}
     command:
       - --providers.docker
