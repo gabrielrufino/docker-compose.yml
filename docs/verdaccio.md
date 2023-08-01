@@ -10,6 +10,6 @@ docker compose up -d verdaccio
 
 | **Name**                 | **Default** |
 | ------------------------ | ----------- |
-| VERDACCIO_VERSION        | 5.23        |
+| VERDACCIO_VERSION        | 5.26        |
 | VERDACCIO_CONTAINER_NAME |             |
 | VERDACCIO_RESTART_POLICY | no          |
