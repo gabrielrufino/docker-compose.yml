@@ -10,6 +10,6 @@ docker compose up -d loki
 
 | **Name**            | **Default** |
 | ------------------- | ----------- |
-| LOKI_VERSION        | 2.7.5       |
+| LOKI_VERSION        | 2.8.3       |
 | LOKI_CONTAINER_NAME |             |
 | LOKI_RESTART_POLICY | no          |
