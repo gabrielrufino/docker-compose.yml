@@ -151,7 +151,7 @@ services:
       - mysql:/var/lib/mysql
     restart: ${MYSQL_RESTART_POLICY-no}
   nextcloud:
-    image: nextcloud:${NEXTCLOUD_VERSION-24.0.6}
+    image: nextcloud:${NEXTCLOUD_VERSION-27.0.1}
     container_name: ${NEXTCLOUD_CONTAINER_NAME-}
     ports:
       - 8083:80
