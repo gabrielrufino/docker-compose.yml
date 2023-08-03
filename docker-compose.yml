@@ -157,6 +157,11 @@ services:
       - 8083:80
     volumes:
       - nextcloud:/var/www/html
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nextcloud.rule=Host(`nextcloud.${TRAEFIK_BASE_HOST-localhost}`)
+      - traefik.http.routers.nextcloud.tls=true
+      - traefik.http.routers.nextcloud.tls.certresolver=letsencrypt
     restart: ${NEXTCLOUD_RESTART_POLICY-no}
   nginx:
     image: nginx:${NGINX_VERSION-1.23.1}
