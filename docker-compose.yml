@@ -151,12 +151,17 @@ services:
       - mysql:/var/lib/mysql
     restart: ${MYSQL_RESTART_POLICY-no}
   nextcloud:
-    image: nextcloud:${NEXTCLOUD_VERSION-24.0.6}
+    image: nextcloud:${NEXTCLOUD_VERSION-27.0.1}
     container_name: ${NEXTCLOUD_CONTAINER_NAME-}
     ports:
       - 8083:80
     volumes:
       - nextcloud:/var/www/html
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nextcloud.rule=Host(`nextcloud.${TRAEFIK_BASE_HOST-localhost}`)
+      - traefik.http.routers.nextcloud.tls=true
+      - traefik.http.routers.nextcloud.tls.certresolver=letsencrypt
     restart: ${NEXTCLOUD_RESTART_POLICY-no}
   nginx:
     image: nginx:${NGINX_VERSION-1.23.1}
