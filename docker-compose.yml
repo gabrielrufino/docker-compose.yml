@@ -267,7 +267,7 @@ services:
       - 6379:6379
     restart: ${REDIS_RESTART_POLICY-no}
   redisinsight:
-    image: redislabs/redisinsight:${REDISINSIGHT_VERSION-1.13.1}
+    image: redislabs/redisinsight:${REDISINSIGHT_VERSION-1.14.0}
     container_name: ${REDISINSIGHT_CONTAINER_NAME-}
     ports:
       - 8001:8001
