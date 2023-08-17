@@ -12,4 +12,5 @@ docker compose up -d redis
 | -------------------- | ----------- |
 | REDIS_VERSION        | 7.0.5       |
 | REDIS_CONTAINER_NAME |             |
+| REDIS_PASSWORD       |             |
 | REDIS_RESTART_POLICY | no          |
