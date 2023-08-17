@@ -265,6 +265,7 @@ services:
     container_name: ${REDIS_CONTAINER_NAME-}
     ports:
       - 6379:6379
+    command: redis-server --requirepass "${REDIS_PASSWORD-}"
     restart: ${REDIS_RESTART_POLICY-no}
   redisinsight:
     image: redislabs/redisinsight:${REDISINSIGHT_VERSION-1.14.0}
