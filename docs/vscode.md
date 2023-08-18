@@ -12,7 +12,7 @@ docker compose up -d vscode
 
 | **Name**                | **Default**       |
 | ----------------------- | ----------------- |
-| VSCODE_VERSION          | 1.80.1            |
+| VSCODE_VERSION          | 1.81.0            |
 | VSCODE_CONTAINER_NAME   |                   |
 | VSCODE_SUDO_PASSWORD    | root              |
 | VSCODE_CONNECTION_TOKEN | root              |
