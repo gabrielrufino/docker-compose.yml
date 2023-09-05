@@ -208,7 +208,7 @@ services:
       - portainer:/data
     restart: ${PORTAINER_RESTART_POLICY-no}
   postgres:
-    image: bitnami/postgresql:${POSTGRESQL_VERSION:-15.1.0}
+    image: bitnami/postgresql:${POSTGRESQL_VERSION:-15.4.0}
     container_name: ${POSTGRESQL_CONTAINER_NAME:-}
     environment:
       POSTGRESQL_USER: ${POSTGRESQL_USER:-root}
