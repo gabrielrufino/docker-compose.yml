@@ -10,7 +10,7 @@ docker compose up -d mysql
 
 | **Name**             | **Default**   |
 | -------------------- | ------------- |
-| MYSQL_VERSION        | 8.0.31        |
+| MYSQL_VERSION        | 8.1.0         |
 | MYSQL_CONTAINER_NAME |               |
 | MYSQL_DATABASE       |               |
 | MYSQL_USER           | gabrielrufino |
