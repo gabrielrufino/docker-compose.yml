@@ -354,7 +354,7 @@ services:
       - traefik.http.routers.traefik.tls.certresolver=letsencrypt
     restart: ${TRAEFIK_RESTART_POLICY-no}
   ubuntu:
-    image: ubuntu:${UBUNTU_VERSION-22.10}
+    image: ubuntu:${UBUNTU_VERSION-23.10}
     container_name: ${UBUNTU_CONTAINER_NAME-}
     tty: true
     volumes:
