@@ -19,7 +19,7 @@ services:
       - ./volumes/archlinux/:/home/shared
     restart: ${ARCHLINUX_RESTART_POLICY-no}
   debian:
-    image: debian:${DEBIAN_VERSION-11.6}
+    image: debian:${DEBIAN_VERSION-12.2}
     container_name: ${DEBIAN_CONTAINER_NAME-}
     tty: true
     volumes:
