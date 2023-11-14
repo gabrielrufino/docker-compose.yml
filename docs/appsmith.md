@@ -10,6 +10,6 @@ docker compose up -d appsmith
 
 | **Name**                | **Default** |
 | ----------------------- | ----------- |
-| APPSMITH_VERSION        | v1.9.8      |
+| APPSMITH_VERSION        | v1.9.44     |
 | APPSMITH_CONTAINER_NAME |             |
 | APPSMITH_RESTART_POLICY | no          |

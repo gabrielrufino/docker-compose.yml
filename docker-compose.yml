@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   appsmith:
-    image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1.9.8}
+    image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1.9.44}
     container_name: ${APPSMITH_CONTAINER_NAME-}
     ports:
       - 8085:80
