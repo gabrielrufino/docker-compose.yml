@@ -10,7 +10,7 @@ docker compose up -d postgres
 
 | **Name**                  | **Default** |
 | ------------------------- | ----------- |
-| POSTGRESQL_VERSION        | 15.1.0      |
+| POSTGRESQL_VERSION        | 15.5.0      |
 | POSTGRESQL_CONTAINER_NAME |             |
 | POSTGRESQL_USER           | root        |
 | POSTGRESQL_PASSWORD       | root        |
