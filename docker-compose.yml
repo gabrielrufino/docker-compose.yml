@@ -371,7 +371,7 @@ services:
       - verdaccio:/verdaccio/storage
     restart: ${VERDACCIO_RESTART_POLICY-no}
   vscode:
-    image: lscr.io/linuxserver/openvscode-server:${VSCODE_VERSION:-1.81.0}
+    image: lscr.io/linuxserver/openvscode-server:${VSCODE_VERSION:-1.85.1}
     container_name: ${VSCODE_CONTAINER_NAME:-}
     ports:
       - 3003:3000
