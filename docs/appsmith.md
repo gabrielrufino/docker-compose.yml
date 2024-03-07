@@ -1,6 +1,4 @@
-# docker-compose.yml - Appsmith
-
-Service running Appsmith
+# Appsmith
 
 ```bash
 docker compose up -d appsmith
@@ -10,6 +8,6 @@ docker compose up -d appsmith
 
 | **Name**                | **Default** |
 | ----------------------- | ----------- |
-| APPSMITH_VERSION        | v1.9.44     |
+| APPSMITH_VERSION        | v1.14       |
 | APPSMITH_CONTAINER_NAME |             |
 | APPSMITH_RESTART_POLICY | no          |
