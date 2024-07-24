@@ -74,6 +74,20 @@ services:
     container_name: ${KALI_CONTAINER_NAME-}
     tty: true
     restart: ${KALI_RESTART_POLICY-no}
+  linkstack:
+    image: linkstackorg/linkstack
+    container_name: ${LINKSTACK_CONTAINER_NAME-}
+    environment:
+      HTTP_SERVER_NAME: ${LINKSTACK_TRAEFIK_HOST-linkstack.localhost}
+      HTTPS_SERVER_NAME: ${LINKSTACK_TRAEFIK_HOST-linkstack.localhost}
+    ports:
+      - 8082:80
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.matomo.rule=Host(`${LINKSTACK_TRAEFIK_HOST-linkstack.localhost}`)
+      - traefik.http.routers.matomo.tls=true
+      - traefik.http.routers.matomo.tls.certresolver=letsencrypt
+    restart: ${LINKSTACK_RESTART_POLICY-no}
   loki:
     image: grafana/loki:${LOKI_VERSION-2.8.3}
     container_name: ${LOKI_CONTAINER_NAME-}
