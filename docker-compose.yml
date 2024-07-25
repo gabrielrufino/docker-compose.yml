@@ -86,9 +86,9 @@ services:
       - linkstack:/htdocs
     labels:
       - traefik.enable=true
-      - traefik.http.routers.matomo.rule=Host(`${LINKSTACK_TRAEFIK_HOST-linkstack.localhost}`)
-      - traefik.http.routers.matomo.tls=true
-      - traefik.http.routers.matomo.tls.certresolver=letsencrypt
+      - traefik.http.routers.linkstack.rule=Host(`${LINKSTACK_TRAEFIK_HOST-linkstack.localhost}`)
+      - traefik.http.routers.linkstack.tls=true
+      - traefik.http.routers.linkstack.tls.certresolver=letsencrypt
     restart: ${LINKSTACK_RESTART_POLICY-no}
   loki:
     image: grafana/loki:${LOKI_VERSION-2.8.3}
