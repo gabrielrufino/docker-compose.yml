@@ -12,7 +12,7 @@ docker compose up -d traefik
 | -------------------------- | ---------------------- |
 | TRAEFIK_VERSION            | v2.10.5                |
 | TRAEFIK_CONTAINER_NAME     |                        |
-| TRAEFIK_BASE_HOST          | localhost              |
+| TRAEFIK_DASHBOARD_HOST     | traefik.localhost      |
 | TRAEFIK_ACME_EMAIL         |                        |
 | TRAEFIK_DASHBOARD_USERNAME |                        |
 | TRAEFIK_DASHBOARD_PASSWORD |                        |
