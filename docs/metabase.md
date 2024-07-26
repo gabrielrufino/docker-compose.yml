@@ -8,8 +8,9 @@ docker compose up -d metabase
 
 ## Environment variables
 
-| **Name**                | **Default** |
-| ----------------------- | ----------- |
-| METABASE_VERSION        | v0.47.7     |
-| METABASE_CONTAINER_NAME |             |
-| METABASE_RESTART_POLICY | no          |
+| **Name**                | **Default**        |
+| ----------------------- | ------------------ |
+| METABASE_VERSION        | v0.47.7            |
+| METABASE_CONTAINER_NAME |                    |
+| METABASE_TRAEFIK_HOST   | metabase.localhost |
+| METABASE_RESTART_POLICY | no                 |

@@ -14,6 +14,7 @@ docker compose up -d vscode
 | ----------------------- | ----------------- |
 | VSCODE_VERSION          | 1.85.1            |
 | VSCODE_CONTAINER_NAME   |                   |
+| VSCODE_TRAEFIK_HOST     | vscode.localhost  |
 | VSCODE_SUDO_PASSWORD    | root              |
 | VSCODE_CONNECTION_TOKEN | root              |
 | VSCODE_BASE_FOLDER      | ./volumes/vscode  |

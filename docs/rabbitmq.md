@@ -12,6 +12,7 @@ docker compose up -d rabbitmq
 | ----------------------- | ------------------ |
 | RABBITMQ_VERSION        | 3.11.13-management |
 | RABBITMQ_CONTAINER_NAME |                    |
+| RABBITMQ_TRAEFIK_HOST   | rabbitmq.localhost |
 | RABBITMQ_DEFAULT_USER   | root               |
 | RABBITMQ_DEFAULT_PASS   | root               |
 | RABBITMQ_RESTART_POLICY | no                 |

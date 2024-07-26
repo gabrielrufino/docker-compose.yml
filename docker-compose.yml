@@ -54,7 +54,7 @@ services:
       - grafana:/var/lib/grafana
     labels:
       - traefik.enable=true
-      - traefik.http.routers.grafana.rule=Host(`grafana.${TRAEFIK_BASE_HOST-localhost}`)
+      - traefik.http.routers.grafana.rule=Host(`${GRAFANA_TRAEFIK_HOST-grafana.localhost}`)
       - traefik.http.routers.grafana.tls=true
       - traefik.http.routers.grafana.tls.certresolver=letsencrypt
     restart: ${GRAFANA_RESTART_POLICY-no}
@@ -62,10 +62,10 @@ services:
     image: hoppscotch/hoppscotch:${HOPPSCOTCH_VERSION-main}
     container_name: ${HOPPSCOTCH_CONTAINER_NAME-}
     ports:
-      - 3004:3000
+    - 3004:3000
     labels:
       - traefik.enable=true
-      - traefik.http.routers.hoppscotch.rule=Host(`hoppscotch.${TRAEFIK_BASE_HOST-localhost}`)
+      - traefik.http.routers.hoppscotch.rule=Host(`${HOPPSCOTCH_TRAEFIK_HOST-hoppscotch.localhost}`)
       - traefik.http.routers.hoppscotch.tls=true
       - traefik.http.routers.hoppscotch.tls.certresolver=letsencrypt
     restart: ${HOPPSCOTCH_RESTART_POLICY-no}
@@ -74,6 +74,22 @@ services:
     container_name: ${KALI_CONTAINER_NAME-}
     tty: true
     restart: ${KALI_RESTART_POLICY-no}
+  linkstack:
+    image: linkstackorg/linkstack
+    container_name: ${LINKSTACK_CONTAINER_NAME-}
+    environment:
+      HTTP_SERVER_NAME: ${LINKSTACK_TRAEFIK_HOST-linkstack.localhost}
+      HTTPS_SERVER_NAME: ${LINKSTACK_TRAEFIK_HOST-linkstack.localhost}
+    ports:
+      - 8082:80
+    volumes:
+      - linkstack:/htdocs
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.linkstack.rule=Host(`${LINKSTACK_TRAEFIK_HOST-linkstack.localhost}`)
+      - traefik.http.routers.linkstack.tls=true
+      - traefik.http.routers.linkstack.tls.certresolver=letsencrypt
+    restart: ${LINKSTACK_RESTART_POLICY-no}
   loki:
     image: grafana/loki:${LOKI_VERSION-2.8.3}
     container_name: ${LOKI_CONTAINER_NAME-}
@@ -90,7 +106,7 @@ services:
       - matomo:/var/www/html
     labels:
       - traefik.enable=true
-      - traefik.http.routers.matomo.rule=Host(`matomo.${TRAEFIK_BASE_HOST-localhost}`)
+      - traefik.http.routers.matomo.rule=Host(`${MATOMO_TRAEFIK_HOST-matomo.localhost}`)
       - traefik.http.routers.matomo.tls=true
       - traefik.http.routers.matomo.tls.certresolver=letsencrypt
     restart: ${MATOMO_RESTART_POLICY-no}
@@ -117,7 +133,7 @@ services:
       - metabase:/metabase-data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.metabase.rule=Host(`metabase.${TRAEFIK_BASE_HOST-localhost}`)
+      - traefik.http.routers.metabase.rule=Host(`${METABASE_TRAEFIK_HOST-metabase.localhost}`)
       - traefik.http.routers.metabase.tls=true
       - traefik.http.routers.metabase.tls.certresolver=letsencrypt
     restart: ${METABASE_RESTART_POLICY-no}
@@ -159,7 +175,7 @@ services:
       - nextcloud:/var/www/html
     labels:
       - traefik.enable=true
-      - traefik.http.routers.nextcloud.rule=Host(`nextcloud.${TRAEFIK_BASE_HOST-localhost}`)
+      - traefik.http.routers.nextcloud.rule=Host(`${NEXTCLOUD_TRAEFIK_HOST-nextcloud.localhost}`)
       - traefik.http.routers.nextcloud.tls=true
       - traefik.http.routers.nextcloud.tls.certresolver=letsencrypt
     restart: ${NEXTCLOUD_RESTART_POLICY-no}
@@ -185,7 +201,7 @@ services:
       - pgadmin:/var/lib/pgadmin
     labels:
       - traefik.enable=true
-      - traefik.http.routers.pgadmin.rule=Host(`pgadmin.${TRAEFIK_BASE_HOST-localhost}`)
+      - traefik.http.routers.pgadmin.rule=Host(`${PGADMIN_TRAEFIK_HOST-pgadmin.localhost}`)
       - traefik.http.routers.pgadmin.tls=true
       - traefik.http.routers.pgadmin.tls.certresolver=letsencrypt
     restart: ${PGADMIN_RESTART_POLICY:-no}
@@ -254,7 +270,7 @@ services:
       - rabbitmq:/var/lib/rabbitmq
     labels:
       - traefik.enable=true
-      - traefik.http.routers.rabbitmq.rule=Host(`rabbitmq.${TRAEFIK_BASE_HOST-localhost}`)
+      - traefik.http.routers.rabbitmq.rule=Host(.${RABBITMQ_TRAEFIK_HOST-rabbitmq.localhost}`)
       - traefik.http.routers.rabbitmq.service=rabbitmq
       - traefik.http.routers.rabbitmq.tls=true
       - traefik.http.routers.rabbitmq.tls.certresolver=letsencrypt
@@ -278,7 +294,7 @@ services:
       - redisinsight:/db
     labels:
       - traefik.enable=true
-      - traefik.http.routers.redisinsight.rule=Host(`redisinsight.${TRAEFIK_BASE_HOST-localhost}`)
+      - traefik.http.routers.redisinsight.rule=Host(`${REDISINSIGHT_TRAEFIK_HOST-redisinsight.localhost}`)
       - traefik.http.routers.redisinsight.tls=true
       - traefik.http.routers.redisinsight.tls.certresolver=letsencrypt
     restart: ${REDISINSIGHT_RESTART_POLICY-no}
@@ -300,7 +316,7 @@ services:
       - sonarqube:/opt/sonarqube/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.sonarqube.rule=Host(`sonarqube.${TRAEFIK_BASE_HOST-localhost}`)
+      - traefik.http.routers.sonarqube.rule=Host(`${SONARQUBE_TRAEFIK_HOST-sonarqube.localhost}`)
       - traefik.http.routers.sonarqube.tls=true
       - traefik.http.routers.sonarqube.tls.certresolver=letsencrypt
     restart: ${SONARQUBE_RESTART_POLICY-no}
@@ -347,7 +363,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_DASHBOARD_USERNAME-}:${TRAEFIK_DASHBOARD_PASSWORD-}
-      - traefik.http.routers.traefik.rule=Host(`${TRAEFIK_BASE_HOST-localhost}`)
+      - traefik.http.routers.traefik.rule=Host(`${TRAEFIK_DASHBOARD_HOST-traefik.localhost}`)
       - traefik.http.routers.traefik.service=api@internal
       - traefik.http.routers.traefik.middlewares=traefik-auth
       - traefik.http.routers.traefik.tls=true
@@ -385,7 +401,7 @@ services:
       - ${VSCODE_BASE_FOLDER:-./volumes/vscode}:/config
     labels:
       - traefik.enable=true
-      - traefik.http.routers.vscode.rule=Host(`vscode.${TRAEFIK_BASE_HOST-localhost}`)
+      - traefik.http.routers.vscode.rule=Host(`${VSCODE_TRAEFIK_HOST-vscode.localhost}`)
       - traefik.http.routers.vscode.tls=true
       - traefik.http.routers.vscode.tls.certresolver=letsencrypt
     restart: ${VSCODE_RESTART_POLICY:-no}
@@ -417,6 +433,7 @@ volumes:
   appsmith:
   gitea:
   grafana:
+  linkstack:
   matomo:
   metabase:
   mysql:

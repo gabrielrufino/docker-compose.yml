@@ -12,6 +12,7 @@ docker compose up -d pgadmin
 | ------------------------ | ---------------------- |
 | PGADMIN_VERSION          | 8.2                    |
 | PGADMIN_CONTAINER_NAME   |                        |
+| PGADMIN_TRAEFIK_HOST     | pgadmin.localhost      |
 | PGADMIN_DEFAULT_EMAIL    | root@gabrielrufino.com |
 | PGADMIN_DEFAULT_PASSWORD | root                   |
 | PGADMIN_RESTART_POLICY   | no                     |

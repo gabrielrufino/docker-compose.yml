@@ -8,8 +8,9 @@ docker compose up -d matomo
 
 ## Environment variables
 
-| **Name**                 | **Default** |
-| ------------------------ | ----------- |
-| MATOMO_VERSION           | 4.14.2      |
-| MATOMO_CONTAINER_NAME    |             |
-| MATOMO_RESTART_POLICY    | no          |
+| **Name**                 | **Default**      |
+| ------------------------ | ---------------- |
+| MATOMO_VERSION           | 4.14.2           |
+| MATOMO_CONTAINER_NAME    |                  |
+| MATOMO_TRAEFIK_HOST      | matomo.localhost |
+| MATOMO_RESTART_POLICY    | no               |
