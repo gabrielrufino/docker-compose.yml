@@ -214,7 +214,7 @@ services:
       - 8087:80
     restart: ${PHPMYADMIN_RESTART_POLICY-no}
   portainer:
-    image: portainer/portainer-ce:${PORTAINER_VERSION-2.16.2}
+    image: portainer/portainer-ce:${PORTAINER_VERSION-2.20.3}
     container_name: ${PORTAINER_CONTAINER_NAME-}
     ports:
       - 8000:8000
