@@ -31,6 +31,14 @@ cd "[Folder name]"
 git pull
 ```
 
+## Commands
+
+### List services
+
+```sh
+docker compose config --services | sort
+```
+
 ## Services
 
 * [Appsmith](./docs/appsmith.md)
