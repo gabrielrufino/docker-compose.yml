@@ -111,16 +111,16 @@ services:
       - traefik.http.routers.matomo.tls.certresolver=letsencrypt
     restart: ${MATOMO_RESTART_POLICY-no}
   mautic:
-    image: mautic/mautic:${MAUTIC_VERSION-v4}
+    image: mautic/mautic:${MAUTIC_VERSION-5.1.0-fpm}
     container_name: ${MAUTIC_CONTAINER_NAME-}
     ports:
       - 8082:80
     environment:
-      MAUTIC_DB_HOST: ${MAUTIC_DB_HOST-mysql}
-      MAUTIC_DB_USER: ${MAUTIC_DB_USER-root}
-      MAUTIC_DB_PASSWORD: ${MAUTIC_DB_PASSWORD-root}
-      MAUTIC_DB_NAME: ${MAUTIC_DB_NAME-mautic_db}
-      MAUTIC_RUN_CRON_JOBS: ${MAUTIC_RUN_CRON_JOBS-}
+      MYSQL_HOST: ${MAUTIC_MYSQL_HOST-mysql}
+      MYSQL_PORT: ${MAUTIC_MYSQL_PORT-3306}
+      MYSQL_DATABASE: ${MAUTIC_MYSQL_DATABASE-mautic}
+      MYSQL_USER: ${MAUTIC_MYSQL_USER-root}
+      MYSQL_PASSWORD: ${MAUTIC_MYSQL_PASSWORD-root}
     restart: ${MAUTIC_RESTART_POLICY-no}
   metabase:
     image: metabase/metabase:${METABASE_VERSION-v0.47.7}

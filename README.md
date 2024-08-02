@@ -13,7 +13,7 @@ Services environment for development and production
 
 1. Clone repository
 
-```bash
+```sh
 git clone https://github.com/gabrielrufino/docker-compose.yml "[Folder name]"
 ```
 
@@ -21,13 +21,13 @@ git clone https://github.com/gabrielrufino/docker-compose.yml "[Folder name]"
 
 0. Get in the folder
 
-```bash
+```sh
 cd "[Folder name]"
 ```
 
 1. Pull the updates
 
-```bash
+```sh
 git pull
 ```
 
