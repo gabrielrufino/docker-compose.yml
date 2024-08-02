@@ -1,6 +1,6 @@
 services:
   appsmith:
-    image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1.14}
+    image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1.34}
     container_name: ${APPSMITH_CONTAINER_NAME-}
     ports:
       - 8085:80
@@ -17,7 +17,7 @@ services:
       - ./volumes/archlinux/:/home/shared
     restart: ${ARCHLINUX_RESTART_POLICY-no}
   debian:
-    image: debian:${DEBIAN_VERSION-12.2}
+    image: debian:${DEBIAN_VERSION-12.6}
     container_name: ${DEBIAN_CONTAINER_NAME-}
     tty: true
     volumes:
@@ -208,6 +208,11 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer:/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.portainer.rule=Host(`${PORTAINER_TRAEFIK_HOST-portainer.localhost}`)
+      - traefik.http.routers.portainer.tls=true
+      - traefik.http.routers.portainer.tls.certresolver=letsencrypt
     restart: ${PORTAINER_RESTART_POLICY-no}
   postgres:
     image: bitnami/postgresql:${POSTGRESQL_VERSION:-15.5.0}
