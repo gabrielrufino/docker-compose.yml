@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   appsmith:
     image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1.14}
@@ -110,18 +108,6 @@ services:
       - traefik.http.routers.matomo.tls=true
       - traefik.http.routers.matomo.tls.certresolver=letsencrypt
     restart: ${MATOMO_RESTART_POLICY-no}
-  mautic:
-    image: mautic/mautic:${MAUTIC_VERSION-5.1.0-fpm}
-    container_name: ${MAUTIC_CONTAINER_NAME-}
-    ports:
-      - 8082:80
-    environment:
-      MYSQL_HOST: ${MAUTIC_MYSQL_HOST-mysql}
-      MYSQL_PORT: ${MAUTIC_MYSQL_PORT-3306}
-      MYSQL_DATABASE: ${MAUTIC_MYSQL_DATABASE-mautic}
-      MYSQL_USER: ${MAUTIC_MYSQL_USER-root}
-      MYSQL_PASSWORD: ${MAUTIC_MYSQL_PASSWORD-root}
-    restart: ${MAUTIC_RESTART_POLICY-no}
   metabase:
     image: metabase/metabase:${METABASE_VERSION-v0.47.7}
     container_name: ${METABASE_CONTAINER_NAME-}
