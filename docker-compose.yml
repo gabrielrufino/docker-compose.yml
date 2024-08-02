@@ -1,8 +1,6 @@
-version: '3.9'
-
 services:
   appsmith:
-    image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1.14}
+    image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1.34}
     container_name: ${APPSMITH_CONTAINER_NAME-}
     ports:
       - 8085:80
@@ -19,7 +17,7 @@ services:
       - ./volumes/archlinux/:/home/shared
     restart: ${ARCHLINUX_RESTART_POLICY-no}
   debian:
-    image: debian:${DEBIAN_VERSION-12.2}
+    image: debian:${DEBIAN_VERSION-12.6}
     container_name: ${DEBIAN_CONTAINER_NAME-}
     tty: true
     volumes:
@@ -110,18 +108,6 @@ services:
       - traefik.http.routers.matomo.tls=true
       - traefik.http.routers.matomo.tls.certresolver=letsencrypt
     restart: ${MATOMO_RESTART_POLICY-no}
-  mautic:
-    image: mautic/mautic:${MAUTIC_VERSION-v4}
-    container_name: ${MAUTIC_CONTAINER_NAME-}
-    ports:
-      - 8082:80
-    environment:
-      MAUTIC_DB_HOST: ${MAUTIC_DB_HOST-mysql}
-      MAUTIC_DB_USER: ${MAUTIC_DB_USER-root}
-      MAUTIC_DB_PASSWORD: ${MAUTIC_DB_PASSWORD-root}
-      MAUTIC_DB_NAME: ${MAUTIC_DB_NAME-mautic_db}
-      MAUTIC_RUN_CRON_JOBS: ${MAUTIC_RUN_CRON_JOBS-}
-    restart: ${MAUTIC_RESTART_POLICY-no}
   metabase:
     image: metabase/metabase:${METABASE_VERSION-v0.47.7}
     container_name: ${METABASE_CONTAINER_NAME-}
@@ -214,7 +200,7 @@ services:
       - 8087:80
     restart: ${PHPMYADMIN_RESTART_POLICY-no}
   portainer:
-    image: portainer/portainer-ce:${PORTAINER_VERSION-2.16.2}
+    image: portainer/portainer-ce:${PORTAINER_VERSION-2.20.3}
     container_name: ${PORTAINER_CONTAINER_NAME-}
     ports:
       - 8000:8000
@@ -222,6 +208,11 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer:/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.portainer.rule=Host(`${PORTAINER_TRAEFIK_HOST-portainer.localhost}`)
+      - traefik.http.routers.portainer.tls=true
+      - traefik.http.routers.portainer.tls.certresolver=letsencrypt
     restart: ${PORTAINER_RESTART_POLICY-no}
   postgres:
     image: bitnami/postgresql:${POSTGRESQL_VERSION:-15.5.0}
