@@ -124,7 +124,7 @@ services:
       - traefik.http.routers.metabase.tls.certresolver=letsencrypt
     restart: ${METABASE_RESTART_POLICY-no}
   mongo:
-    image: mongo:${MONGO_VERSION-7.0.5}
+    image: mongo:${MONGO_VERSION-7.0.14}
     container_name: ${MONGO_CONTAINER_NAME-}
     ports:
       - 27017:27017
