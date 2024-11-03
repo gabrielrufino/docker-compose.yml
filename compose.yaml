@@ -175,6 +175,14 @@ services:
       - ./config/nginx/sites-available:/etc/nginx/sites-available
       # - ./config/nginx/letsencrypt:/etc/letsencrypt
     restart: ${NGINX_RESTART_POLICY-no}
+  ollama:
+    image: ollama/ollama:${OLLAMA_VERSION-latest}
+    container_name: ${OLLAMA_CONTAINER_NAME-}
+    ports:
+      - 11434:11434
+    volumes:
+      - ollama:/root/.ollama
+    restart: ${OLLAMA_RESTART_POLICY-no}
   pgadmin:
     image: dpage/pgadmin4:${PGADMIN_VERSION:-8.2}
     container_name: ${PGADMIN_CONTAINER_NAME:-}
@@ -430,6 +438,7 @@ volumes:
   mysql:
   mongo:
   nextcloud:
+  ollama:
   pgadmin:
   portainer:
   postgres:
