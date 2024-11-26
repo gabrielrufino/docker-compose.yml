@@ -384,6 +384,11 @@ services:
       - 4873:4873
     volumes:
       - verdaccio:/verdaccio/storage
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.verdaccio.rule=Host(`${VERDACCIO_TRAEFIK_HOST-verdaccio.localhost}`)
+      - traefik.http.routers.verdaccio.tls=true
+      - traefik.http.routers.verdaccio.tls.certresolver=letsencrypt
     restart: ${VERDACCIO_RESTART_POLICY-no}
   vscode:
     image: lscr.io/linuxserver/openvscode-server:${VSCODE_VERSION:-1.85.1}
