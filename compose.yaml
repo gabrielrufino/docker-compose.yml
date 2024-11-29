@@ -182,6 +182,13 @@ services:
       - 11434:11434
     volumes:
       - ollama:/root/.ollama
+    labels:
+      - traefik.enable=true
+      - traefik.http.middlewares.ollama-auth.basicauth.users=${OLLAMA_USERS}
+      - traefik.http.routers.ollama.rule=Host(`${OLLAMA_TRAEFIK_HOST-ollama.localhost}`)
+      - traefik.http.routers.ollama.tls=true
+      - traefik.http.routers.ollama.tls.certresolver=letsencrypt
+      - traefik.http.routers.ollama.middlewares=ollama-auth
     restart: ${OLLAMA_RESTART_POLICY-no}
   pgadmin:
     image: dpage/pgadmin4:${PGADMIN_VERSION:-8.2}
