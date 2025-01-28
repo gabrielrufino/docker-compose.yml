@@ -324,7 +324,7 @@ services:
       INITIAL_API_KEY: ${SHLINK_INITIAL_API_KEY-}
     labels:
       - traefik.enable=true
-      - traefik.http.routers.shlink.rule=Host(`${SHLINK_TRAEFIK_HOST-redisinsight.localhost}`)
+      - traefik.http.routers.shlink.rule=Host(`${SHLINK_TRAEFIK_HOST-shlink.localhost}`)
       - traefik.http.routers.shlink.tls=true
       - traefik.http.routers.shlink.tls.certresolver=letsencrypt
     restart: ${SHLINK_RESTART_POLICY-no}
