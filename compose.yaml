@@ -313,6 +313,21 @@ services:
     volumes:
       - rethinkdb:/data
     restart: ${RETHINKDB_RESTART_POLICY-no}
+  shlink:
+    image: shlinkio/shlink:${SHLINK_VERSION-4.4.1}
+    container_name: ${SHLINK_CONTAINER_NAME-}
+    ports:
+      - 8088:8080
+    environment:
+      DEFAULT_DOMAIN: ${SHLINK_DEFAULT_DOMAIN-}
+      IS_HTTPS_ENABLED: ${SHLINK_IS_HTTPS_ENABLED-}
+      INITIAL_API_KEY: ${SHLINK_INITIAL_API_KEY-}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.shlink.rule=Host(`${SHLINK_TRAEFIK_HOST-shlink.localhost}`)
+      - traefik.http.routers.shlink.tls=true
+      - traefik.http.routers.shlink.tls.certresolver=letsencrypt
+    restart: ${SHLINK_RESTART_POLICY-no}
   sonarqube:
     image: sonarqube:${SONARQUBE_VERSION-9.9.1-community}
     container_name: ${SONARQUBE_CONTAINER_NAME-}
