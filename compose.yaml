@@ -191,7 +191,7 @@ services:
       - traefik.http.routers.ollama.middlewares=ollama-auth
     restart: ${OLLAMA_RESTART_POLICY-no}
   pgadmin:
-    image: dpage/pgadmin4:${PGADMIN_VERSION:-8.2}
+    image: dpage/pgadmin4:${PGADMIN_VERSION:-8.14.0}
     container_name: ${PGADMIN_CONTAINER_NAME:-}
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-root@gabrielrufino.com}
