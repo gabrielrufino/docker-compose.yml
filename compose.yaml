@@ -314,7 +314,7 @@ services:
       - rethinkdb:/data
     restart: ${RETHINKDB_RESTART_POLICY-no}
   shlink:
-    image: shlinkio/shlink:${SHLINK_VERSION-4.4.1}
+    image: shlinkio/shlink:${SHLINK_VERSION-4.4.6}
     container_name: ${SHLINK_CONTAINER_NAME-}
     ports:
       - 8088:8080
