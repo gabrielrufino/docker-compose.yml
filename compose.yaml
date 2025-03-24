@@ -322,6 +322,10 @@ services:
       DEFAULT_DOMAIN: ${SHLINK_DEFAULT_DOMAIN-}
       IS_HTTPS_ENABLED: ${SHLINK_IS_HTTPS_ENABLED-}
       INITIAL_API_KEY: ${SHLINK_INITIAL_API_KEY-}
+      DB_DRIVER: ${SHLINK_DB_DRIVER-}
+      DB_HOST: ${SHLINK_DB_HOST-}
+      DB_USER: ${SHLINK_DB_USER-}
+      DB_PASSWORD: ${SHLINK_DB_PASSWORD-}
     labels:
       - traefik.enable=true
       - traefik.http.routers.shlink.rule=Host(`${SHLINK_TRAEFIK_HOST-shlink.localhost}`)
