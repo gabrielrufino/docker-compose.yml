@@ -176,7 +176,7 @@ services:
       # - ./config/nginx/letsencrypt:/etc/letsencrypt
     restart: ${NGINX_RESTART_POLICY-no}
   ollama:
-    image: ollama/ollama:${OLLAMA_VERSION-latest}
+    image: ollama/ollama:${OLLAMA_VERSION-0.6.2}
     container_name: ${OLLAMA_CONTAINER_NAME-}
     ports:
       - 11434:11434
