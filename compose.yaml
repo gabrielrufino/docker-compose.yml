@@ -190,6 +190,14 @@ services:
       - traefik.http.routers.ollama.tls.certresolver=letsencrypt
       - traefik.http.routers.ollama.middlewares=ollama-auth
     restart: ${OLLAMA_RESTART_POLICY-no}
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    depends_on:
+      - ollama
+    ports:
+      - 3000:8080
+    environment:
+      OLLAMA_BASE_URL: http://ollama:11434
   pgadmin:
     image: dpage/pgadmin4:${PGADMIN_VERSION:-8.14.0}
     container_name: ${PGADMIN_CONTAINER_NAME:-}
