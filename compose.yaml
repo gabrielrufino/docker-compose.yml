@@ -72,6 +72,16 @@ services:
     container_name: ${KALI_CONTAINER_NAME-}
     tty: true
     restart: ${KALI_RESTART_POLICY-no}
+  localstack:
+    image: localstack/localstack:4.3.0
+    ports:
+      - 127.0.0.1:4566:4566
+      - 127.0.0.1:4510-4559:4510-4559
+    environment:
+      DEBUG: ${DEBUG:-0}
+    volumes:
+      - localstack:/var/lib/localstack
+      - /var/run/docker.sock:/var/run/docker.sock
   linkstack:
     image: linkstackorg/linkstack
     container_name: ${LINKSTACK_CONTAINER_NAME-}
@@ -471,6 +481,7 @@ volumes:
   appsmith:
   gitea:
   grafana:
+  localstack:
   linkstack:
   matomo:
   metabase:
