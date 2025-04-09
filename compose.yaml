@@ -202,11 +202,14 @@ services:
       - traefik.http.routers.ollama.middlewares=ollama-auth
     restart: ${OLLAMA_RESTART_POLICY-no}
   open-webui:
-    image: ghcr.io/open-webui/open-webui:main
+    image: ghcr.io/open-webui/open-webui:${OPEN_WEBUI_VERSION-main}
+    container_name: ${OPEN_WEBUI_CONTAINER_NAME-}
     depends_on:
       - ollama
     ports:
       - 3000:8080
+    volumes:
+      - open-webui:/app/backend/data
     environment:
       OLLAMA_BASE_URL: http://ollama:11434
   pgadmin:
@@ -490,6 +493,7 @@ volumes:
   mongo:
   nextcloud:
   ollama:
+  open-webui:
   pgadmin:
   portainer:
   postgres:
