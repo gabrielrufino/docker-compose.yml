@@ -72,6 +72,17 @@ services:
     container_name: ${KALI_CONTAINER_NAME-}
     tty: true
     restart: ${KALI_RESTART_POLICY-no}
+  localstack:
+    image: localstack/localstack:${LOCALSTACK_VERSION-4.3.0}
+    container_name: ${LOCALSTACK_CONTAINER_NAME-}
+    ports:
+      - 127.0.0.1:4566:4566
+      - 127.0.0.1:4510-4559:4510-4559
+    environment:
+      DEBUG: ${DEBUG:-0}
+    volumes:
+      - localstack:/var/lib/localstack
+      - /var/run/docker.sock:/var/run/docker.sock
   linkstack:
     image: linkstackorg/linkstack
     container_name: ${LINKSTACK_CONTAINER_NAME-}
@@ -190,6 +201,17 @@ services:
       - traefik.http.routers.ollama.tls.certresolver=letsencrypt
       - traefik.http.routers.ollama.middlewares=ollama-auth
     restart: ${OLLAMA_RESTART_POLICY-no}
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:${OPEN_WEBUI_VERSION-main}
+    container_name: ${OPEN_WEBUI_CONTAINER_NAME-}
+    depends_on:
+      - ollama
+    ports:
+      - 3000:8080
+    volumes:
+      - open-webui:/app/backend/data
+    environment:
+      OLLAMA_BASE_URL: http://ollama:11434
   pgadmin:
     image: dpage/pgadmin4:${PGADMIN_VERSION:-8.14.0}
     container_name: ${PGADMIN_CONTAINER_NAME:-}
@@ -463,6 +485,7 @@ volumes:
   appsmith:
   gitea:
   grafana:
+  localstack:
   linkstack:
   matomo:
   metabase:
@@ -470,6 +493,7 @@ volumes:
   mongo:
   nextcloud:
   ollama:
+  open-webui:
   pgadmin:
   portainer:
   postgres:
