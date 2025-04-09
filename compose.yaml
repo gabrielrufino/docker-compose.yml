@@ -73,7 +73,8 @@ services:
     tty: true
     restart: ${KALI_RESTART_POLICY-no}
   localstack:
-    image: localstack/localstack:4.3.0
+    image: localstack/localstack:${LOCALSTACK_VERSION-4.3.0}
+    container_name: ${LOCALSTACK_CONTAINER_NAME-}
     ports:
       - 127.0.0.1:4566:4566
       - 127.0.0.1:4510-4559:4510-4559
