@@ -312,10 +312,10 @@ services:
     command: redis-server --requirepass "${REDIS_PASSWORD-}"
     restart: ${REDIS_RESTART_POLICY-no}
   redisinsight:
-    image: redislabs/redisinsight:${REDISINSIGHT_VERSION-1.14.0}
+    image: redislabs/redisinsight:${REDISINSIGHT_VERSION-2.68}
     container_name: ${REDISINSIGHT_CONTAINER_NAME-}
     ports:
-      - 8001:8001
+      - 5540:5540
     environment:
       RITRUSTEDORIGINS: ${REDISINSIGHT_RITRUSTEDORIGINS-http://localhost:8001}
     volumes:
