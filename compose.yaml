@@ -305,17 +305,17 @@ services:
       - traefik.http.services.rabbitmq.loadbalancer.server.port=15672
     restart: ${RABBITMQ_RESTART_POLICY-no}
   redis:
-    image: redis:${REDIS_VERSION-7.0.5}
+    image: redis:${REDIS_VERSION-7.4.3}
     container_name: ${REDIS_CONTAINER_NAME-}
     ports:
       - 6379:6379
     command: redis-server --requirepass "${REDIS_PASSWORD-}"
     restart: ${REDIS_RESTART_POLICY-no}
   redisinsight:
-    image: redislabs/redisinsight:${REDISINSIGHT_VERSION-1.14.0}
+    image: redislabs/redisinsight:${REDISINSIGHT_VERSION-2.68}
     container_name: ${REDISINSIGHT_CONTAINER_NAME-}
     ports:
-      - 8001:8001
+      - 5540:5540
     environment:
       RITRUSTEDORIGINS: ${REDISINSIGHT_RITRUSTEDORIGINS-http://localhost:8001}
     volumes:
