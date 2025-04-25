@@ -305,7 +305,7 @@ services:
       - traefik.http.services.rabbitmq.loadbalancer.server.port=15672
     restart: ${RABBITMQ_RESTART_POLICY-no}
   redis:
-    image: redis:${REDIS_VERSION-7.0.5}
+    image: redis:${REDIS_VERSION-7.4.3}
     container_name: ${REDIS_CONTAINER_NAME-}
     ports:
       - 6379:6379
