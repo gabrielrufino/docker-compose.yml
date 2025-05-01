@@ -171,8 +171,6 @@ services:
       --sql-mode=""
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE-}
-      MYSQL_USER: ${MYSQL_USER-gabrielrufino}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD-12345678}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD-root}
     ports:
       - 3306:3306
