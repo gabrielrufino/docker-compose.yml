@@ -106,6 +106,22 @@ services:
       - 3100:3100
     command: -config.file=/etc/loki/local-config.yaml
     restart: ${LOKI_RESTART_POLICY-no}
+  mautic:
+    image: mautic/mautic:${MAUTIC_VERSION-5.2.5-apache}
+    container_name: ${MAUTIC_CONTAINER_NAME-}
+    ports:
+      - 8084:80
+    environment:
+      MAUTIC_DB_HOST: ${MAUTIC_DB_HOST-mysql}
+      MAUTIC_DB_PORT: ${MAUTIC_DB_PORT-3306}
+      MAUTIC_DB_USER: ${MAUTIC_DB_USER-root}
+      MAUTIC_DB_PASSWORD: ${MAUTIC_DB_PASSWORD-root}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.mautic.rule=Host(`${MAUTIC_TRAEFIK_HOST-mautic.localhost}`)
+      - traefik.http.routers.mautic.tls=true
+      - traefik.http.routers.mautic.tls.certresolver=letsencrypt
+    restart: ${MAUTIC_RESTART_POLICY-no}
   matomo:
     image: matomo:${MATOMO_VERSION-5.1.2}
     container_name: ${MATOMO_CONTAINER_NAME-}
