@@ -44,7 +44,7 @@ services:
       - 3002:3000
     restart: ${GITEA_RESTART_POLICY-no}
   grafana:
-    image: grafana/grafana:${GRAFANA_VERSION-9.5.2}
+    image: grafana/grafana:${GRAFANA_VERSION-11.6.1}
     container_name: ${GRAFANA_CONTAINER_NAME-}
     ports:
       - 3000:3000
@@ -100,7 +100,7 @@ services:
       - traefik.http.routers.linkstack.tls.certresolver=letsencrypt
     restart: ${LINKSTACK_RESTART_POLICY-no}
   loki:
-    image: grafana/loki:${LOKI_VERSION-2.8.3}
+    image: grafana/loki:${LOKI_VERSION-3.5.0}
     container_name: ${LOKI_CONTAINER_NAME-}
     ports:
       - 3100:3100
