@@ -11,3 +11,7 @@
 !/volumes/promtail/log/
 !/volumes/sonic/store
 !/volumes/sonic/sonic.cfg
+
+# Kompose
+kompose
+k8s-manifests
