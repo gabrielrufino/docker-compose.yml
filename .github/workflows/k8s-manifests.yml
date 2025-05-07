@@ -1,0 +1,26 @@
+name: Kubernetes manifests
+description: Outputs kubernetes manifests from docker compose file
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  convert:
+    name: Convert
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Installs kompose
+        run: |
+          curl -L https://github.com/kubernetes/kompose/releases/download/v1.35.0/kompose-linux-amd64 -o kompose
+          sudo chmod +x ./kompose
+      - name: Generate kubernetes manifests
+        run: |
+          mkdir k8s-manifests
+          cd k8s-manifests
+          sudo ../kompose convert -f ../compose.yaml
+      - uses: actions/upload-artifact@v4
+        with:
+          name: k8s-manifests
+          path: k8s-manifests
