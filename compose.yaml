@@ -73,7 +73,7 @@ services:
     tty: true
     restart: ${KALI_RESTART_POLICY-no}
   localstack:
-    image: localstack/localstack:${LOCALSTACK_VERSION-4.3.0}
+    image: localstack/localstack:${LOCALSTACK_VERSION-4.5.0}
     container_name: ${LOCALSTACK_CONTAINER_NAME-}
     ports:
       - 127.0.0.1:4566:4566
@@ -151,7 +151,7 @@ services:
       - traefik.http.routers.metabase.tls.certresolver=letsencrypt
     restart: ${METABASE_RESTART_POLICY-no}
   mongo:
-    image: mongo:${MONGO_VERSION-7.0.14}
+    image: mongo:${MONGO_VERSION-7.0.21}
     container_name: ${MONGO_CONTAINER_NAME-}
     ports:
       - 27017:27017
@@ -319,14 +319,14 @@ services:
       - traefik.http.services.rabbitmq.loadbalancer.server.port=15672
     restart: ${RABBITMQ_RESTART_POLICY-no}
   redis:
-    image: redis:${REDIS_VERSION-7.4.3}
+    image: redis:${REDIS_VERSION-7.4.4}
     container_name: ${REDIS_CONTAINER_NAME-}
     ports:
       - 6379:6379
     command: redis-server --requirepass "${REDIS_PASSWORD-}"
     restart: ${REDIS_RESTART_POLICY-no}
   redisinsight:
-    image: redislabs/redisinsight:${REDISINSIGHT_VERSION-2.68}
+    image: redislabs/redisinsight:${REDISINSIGHT_VERSION-2.70}
     container_name: ${REDISINSIGHT_CONTAINER_NAME-}
     ports:
       - 5540:5540
