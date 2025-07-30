@@ -1,7 +1,6 @@
 services:
   appsmith:
     image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1.34}
-    container_name: ${APPSMITH_CONTAINER_NAME-}
     ports:
       - 8085:80
     volumes:
@@ -11,28 +10,24 @@ services:
     restart: ${APPSMITH_RESTART_POLICY-no}
   archlinux:
     image: archlinux:${ARCHLINUX_VERSION-base-20221225.0.113672}
-    container_name: ${ARCHLINUX_CONTAINER_NAME-}
     tty: true
     volumes:
       - ./volumes/archlinux/:/home/shared
     restart: ${ARCHLINUX_RESTART_POLICY-no}
   debian:
     image: debian:${DEBIAN_VERSION-12.6}
-    container_name: ${DEBIAN_CONTAINER_NAME-}
     tty: true
     volumes:
       - ./volumes/debian/:/home/shared
     restart: ${DEBIAN_RESTART_POLICY-no}
   fedora:
     image: fedora:${FEDORA_VERSION-36}
-    container_name: ${FEDORA_CONTAINER_NAME-}
     tty: true
     volumes:
       - ./volumes/fedora/:/home/shared
     restart: ${FEDORA_RESTART_POLICY-no}
   gitea:
     image: gitea/gitea:${GITEA_VERSION-1.18.0}
-    container_name: ${GITEA_CONTAINER_NAME-}
     environment:
       USER_UID: 1000
       USER_GID: 1000
@@ -45,7 +40,6 @@ services:
     restart: ${GITEA_RESTART_POLICY-no}
   grafana:
     image: grafana/grafana:${GRAFANA_VERSION-11.6.1}
-    container_name: ${GRAFANA_CONTAINER_NAME-}
     ports:
       - 3000:3000
     volumes:
@@ -58,7 +52,6 @@ services:
     restart: ${GRAFANA_RESTART_POLICY-no}
   hoppscotch:
     image: hoppscotch/hoppscotch:${HOPPSCOTCH_VERSION-main}
-    container_name: ${HOPPSCOTCH_CONTAINER_NAME-}
     ports:
     - 3004:3000
     labels:
@@ -69,12 +62,10 @@ services:
     restart: ${HOPPSCOTCH_RESTART_POLICY-no}
   kali:
     image: kalilinux/kali-rolling:${KALI_VERSION-latest}
-    container_name: ${KALI_CONTAINER_NAME-}
     tty: true
     restart: ${KALI_RESTART_POLICY-no}
   localstack:
     image: localstack/localstack:${LOCALSTACK_VERSION-4.6.0}
-    container_name: ${LOCALSTACK_CONTAINER_NAME-}
     ports:
       - 127.0.0.1:4566:4566
       - 127.0.0.1:4510-4559:4510-4559
@@ -85,7 +76,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
   linkstack:
     image: linkstackorg/linkstack
-    container_name: ${LINKSTACK_CONTAINER_NAME-}
     environment:
       HTTP_SERVER_NAME: ${LINKSTACK_TRAEFIK_HOST-linkstack.localhost}
       HTTPS_SERVER_NAME: ${LINKSTACK_TRAEFIK_HOST-linkstack.localhost}
@@ -101,14 +91,12 @@ services:
     restart: ${LINKSTACK_RESTART_POLICY-no}
   loki:
     image: grafana/loki:${LOKI_VERSION-3.5.0}
-    container_name: ${LOKI_CONTAINER_NAME-}
     ports:
       - 3100:3100
     command: -config.file=/etc/loki/local-config.yaml
     restart: ${LOKI_RESTART_POLICY-no}
   mautic:
     image: mautic/mautic:${MAUTIC_VERSION-5.2.5-apache}
-    container_name: ${MAUTIC_CONTAINER_NAME-}
     ports:
       - 8084:80
     environment:
@@ -124,7 +112,6 @@ services:
     restart: ${MAUTIC_RESTART_POLICY-no}
   matomo:
     image: matomo:${MATOMO_VERSION-5.1.2}
-    container_name: ${MATOMO_CONTAINER_NAME-}
     ports:
       - 8086:80
     volumes:
@@ -137,7 +124,6 @@ services:
     restart: ${MATOMO_RESTART_POLICY-no}
   metabase:
     image: metabase/metabase:${METABASE_VERSION-v0.50.21.3}
-    container_name: ${METABASE_CONTAINER_NAME-}
     ports:
       - 3001:3000
     environment: 
@@ -152,7 +138,6 @@ services:
     restart: ${METABASE_RESTART_POLICY-no}
   mongo:
     image: mongo:${MONGO_VERSION-7.0.21}
-    container_name: ${MONGO_CONTAINER_NAME-}
     ports:
       - 27017:27017
     environment:
@@ -163,7 +148,6 @@ services:
     restart: ${MONGO_RESTART_POLICY-no}
   mysql:
     image: mysql:${MYSQL_VERSION-8.1.0}
-    container_name: ${MYSQL_CONTAINER_NAME-}
     command: |
       --default-authentication-plugin=mysql_native_password
       --character-set-server=utf8mb4
@@ -179,7 +163,6 @@ services:
     restart: ${MYSQL_RESTART_POLICY-no}
   nextcloud:
     image: nextcloud:${NEXTCLOUD_VERSION-27.0.1}
-    container_name: ${NEXTCLOUD_CONTAINER_NAME-}
     ports:
       - 8083:80
     volumes:
@@ -192,7 +175,6 @@ services:
     restart: ${NEXTCLOUD_RESTART_POLICY-no}
   nginx:
     image: nginx:${NGINX_VERSION-1.23.1}
-    container_name: ${NGINX_CONTAINER_NAME-}
     ports:
       - 8081:80
       # - 443:433
@@ -202,7 +184,6 @@ services:
     restart: ${NGINX_RESTART_POLICY-no}
   ollama:
     image: ollama/ollama:${OLLAMA_VERSION-0.6.2}
-    container_name: ${OLLAMA_CONTAINER_NAME-}
     ports:
       - 11434:11434
     volumes:
@@ -217,7 +198,6 @@ services:
     restart: ${OLLAMA_RESTART_POLICY-no}
   open-webui:
     image: ghcr.io/open-webui/open-webui:${OPEN_WEBUI_VERSION-main}
-    container_name: ${OPEN_WEBUI_CONTAINER_NAME-}
     depends_on:
       - ollama
     ports:
@@ -228,7 +208,6 @@ services:
       OLLAMA_BASE_URL: http://ollama:11434
   pgadmin:
     image: dpage/pgadmin4:${PGADMIN_VERSION:-8.14.0}
-    container_name: ${PGADMIN_CONTAINER_NAME:-}
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-root@gabrielrufino.com}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-root}
@@ -244,7 +223,6 @@ services:
     restart: ${PGADMIN_RESTART_POLICY:-no}
   phpmyadmin:
     image: phpmyadmin:${PHPMYADMIN_VERSION-5.2.0}
-    container_name: ${PHPMYADMIN_CONTAINER_NAME-}
     environment:
       PMA_ARBITRARY: 1
     ports:
@@ -252,7 +230,6 @@ services:
     restart: ${PHPMYADMIN_RESTART_POLICY-no}
   portainer:
     image: portainer/portainer-ce:${PORTAINER_VERSION-2.20.3}
-    container_name: ${PORTAINER_CONTAINER_NAME-}
     ports:
       - 8000:8000
       - 9000:9000
@@ -267,7 +244,6 @@ services:
     restart: ${PORTAINER_RESTART_POLICY-no}
   postgres:
     image: bitnami/postgresql:${POSTGRESQL_VERSION:-15.5.0}
-    container_name: ${POSTGRESQL_CONTAINER_NAME:-}
     environment:
       POSTGRESQL_USER: ${POSTGRESQL_USER:-root}
       POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD:-root}
@@ -283,7 +259,6 @@ services:
     restart: ${POSTGRESQL_RESTART_POLICY:-no}
   prometheus:
     image: prom/prometheus:${PROMETHEUS_VERSION-v2.43.0}
-    container_name: ${PROMETHEUS_CONTAINER_NAME-}
     ports:
       - 9090:9090
     volumes:
@@ -291,7 +266,6 @@ services:
     restart: ${PROMETHEUS_RESTART_POLICY-no}
   promtail:
     image: grafana/promtail:${PROMTAIL_VERSION-2.7.5}
-    container_name: ${PROMTAIL_CONTAINER_NAME-}
     ports:
       - 9080:9080
     volumes:
@@ -301,7 +275,6 @@ services:
     restart: ${PROMTAIL_RESTART_POLICY-no}
   rabbitmq:
     image: rabbitmq:${RABBITMQ_VERSION-3.11.13-management}
-    container_name: ${RABBITMQ_CONTAINER_NAME-}
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER-root}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS-root}
@@ -320,14 +293,12 @@ services:
     restart: ${RABBITMQ_RESTART_POLICY-no}
   redis:
     image: redis:${REDIS_VERSION-7.4.4}
-    container_name: ${REDIS_CONTAINER_NAME-}
     ports:
       - 6379:6379
     command: redis-server --requirepass "${REDIS_PASSWORD-}"
     restart: ${REDIS_RESTART_POLICY-no}
   redisinsight:
     image: redislabs/redisinsight:${REDISINSIGHT_VERSION-2.70}
-    container_name: ${REDISINSIGHT_CONTAINER_NAME-}
     ports:
       - 5540:5540
     environment:
@@ -342,7 +313,6 @@ services:
     restart: ${REDISINSIGHT_RESTART_POLICY-no}
   rethinkdb:
     image: rethinkdb:${RETHINKDB_VERSION-2.4.2}
-    container_name: ${RETHINKDB_CONTAINER_NAME-}
     ports:
       - 28015:28015
       - 28016:8080
@@ -351,7 +321,6 @@ services:
     restart: ${RETHINKDB_RESTART_POLICY-no}
   shlink:
     image: shlinkio/shlink:${SHLINK_VERSION-4.4.6}
-    container_name: ${SHLINK_CONTAINER_NAME-}
     ports:
       - 8088:8080
     environment:
@@ -370,7 +339,6 @@ services:
     restart: ${SHLINK_RESTART_POLICY-no}
   sonarqube:
     image: sonarqube:${SONARQUBE_VERSION-9.9.1-community}
-    container_name: ${SONARQUBE_CONTAINER_NAME-}
     ports:
       - 9001:9000
     volumes:
@@ -383,7 +351,6 @@ services:
     restart: ${SONARQUBE_RESTART_POLICY-no}
   sonic:
     image: valeriansaliou/sonic:${SONIC_VERSION-v1.4.0}
-    container_name: ${SONIC_CONTAINER_NAME-}
     ports:
       - 1491:1491
     volumes:
@@ -392,7 +359,6 @@ services:
     restart: ${SONIC_RESTART_POLICY-no}
   sqlserver:
     image: mcr.microsoft.com/mssql/server:${SQLSERVER_VERSION-2019-latest}
-    container_name: ${SQLSERVER_CONTAINER_NAME-}
     environment:
         SA_PASSWORD: ${SQLSERVER_SA_PASSWORD-password@123}
         ACCEPT_EULA: Y
@@ -401,7 +367,6 @@ services:
     restart: ${SQLSERVER_RESTART_POLICY-no}
   traefik:
     image: traefik:${TRAEFIK_VERSION-v2.10.5}
-    container_name: ${TRAEFIK_CONTAINER_NAME-}
     command:
       - --providers.docker
       - --providers.docker.exposedByDefault=false
@@ -432,14 +397,12 @@ services:
     restart: ${TRAEFIK_RESTART_POLICY-no}
   ubuntu:
     image: ubuntu:${UBUNTU_VERSION-23.10}
-    container_name: ${UBUNTU_CONTAINER_NAME-}
     tty: true
     volumes:
       - ./volumes/ubuntu/:/home/shared
     restart: ${UBUNTU_RESTART_POLICY-no}
   verdaccio:
     image: verdaccio/verdaccio:${VERDACCIO_VERSION-5.26}
-    container_name: ${VERDACCIO_CONTAINER_NAME-}
     environment:
       VERDACCIO_PORT: 4873
     ports:
@@ -454,7 +417,6 @@ services:
     restart: ${VERDACCIO_RESTART_POLICY-no}
   vscode:
     image: lscr.io/linuxserver/openvscode-server:${VSCODE_VERSION:-1.85.1}
-    container_name: ${VSCODE_CONTAINER_NAME:-}
     ports:
       - 3003:3000
     environment:
@@ -473,7 +435,6 @@ services:
     restart: ${VSCODE_RESTART_POLICY:-no}
   windows:
     image: dockurr/windows
-    container_name: ${WINDOWS_CONTAINER_NAME-}
     environment:
       VERSION: ${WINDOWS_VERSION-win11}
     devices:
@@ -488,7 +449,6 @@ services:
     restart: ${WINDOWS_RESTART_POLICY-no}
   wordpress:
     image: wordpress:${WORDPRESS_VERSION-latest}
-    container_name: ${WORDPRESS_CONTAINER_NAME-}
     ports:
       - 8081:80
     volumes:
