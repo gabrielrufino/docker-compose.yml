@@ -123,7 +123,7 @@ services:
       - traefik.http.routers.matomo.tls.certresolver=letsencrypt
     restart: ${MATOMO_RESTART_POLICY-no}
   metabase:
-    image: metabase/metabase:${METABASE_VERSION-v0.50.21.3}
+    image: metabase/metabase:${METABASE_VERSION-v0.56.2.2}
     ports:
       - 3001:3000
     environment: 
