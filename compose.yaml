@@ -65,10 +65,10 @@ services:
     tty: true
     restart: ${KALI_RESTART_POLICY-no}
   localstack:
-    image: localstack/localstack:${LOCALSTACK_VERSION-4.6.0}
+    image: localstack/localstack:${LOCALSTACK_VERSION-4.7.0}
     ports:
-      - 127.0.0.1:4566:4566
-      - 127.0.0.1:4510-4559:4510-4559
+      - 4566:4566
+      - 4510-4559:4510-4559
     environment:
       DEBUG: ${DEBUG:-0}
     volumes:
