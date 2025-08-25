@@ -70,7 +70,8 @@ services:
       - 4566:4566
       - 4510-4559:4510-4559
     environment:
-      DEBUG: ${DEBUG:-0}
+      GATEWAY_LISTEN: ${LOCALSTACK_GATWAY_LISTEN-}
+      LOCALSTACK_HOST: ${LOCALSTACK_HOST-}
     volumes:
       - localstack:/var/lib/localstack
       - /var/run/docker.sock:/var/run/docker.sock
