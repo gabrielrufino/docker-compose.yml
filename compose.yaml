@@ -70,11 +70,12 @@ services:
       - 4566:4566
       - 4510-4559:4510-4559
     environment:
-      GATEWAY_LISTEN: ${LOCALSTACK_GATWAY_LISTEN-}
+      GATEWAY_LISTEN: ${LOCALSTACK_GATEWAY_LISTEN-}
       LOCALSTACK_HOST: ${LOCALSTACK_HOST-}
     volumes:
       - localstack:/var/lib/localstack
       - /var/run/docker.sock:/var/run/docker.sock
+    restart: ${LOCALSTACK_RESTART_POLICY-no}
   linkstack:
     image: linkstackorg/linkstack
     environment:
@@ -230,7 +231,7 @@ services:
       - 8087:80
     restart: ${PHPMYADMIN_RESTART_POLICY-no}
   portainer:
-    image: portainer/portainer-ce:${PORTAINER_VERSION-2.20.3}
+    image: portainer/portainer-ce:${PORTAINER_VERSION-2.33.0-alpine}
     ports:
       - 8000:8000
       - 9000:9000
@@ -242,6 +243,7 @@ services:
       - traefik.http.routers.portainer.rule=Host(`${PORTAINER_TRAEFIK_HOST-portainer.localhost}`)
       - traefik.http.routers.portainer.tls=true
       - traefik.http.routers.portainer.tls.certresolver=letsencrypt
+      - traefik.http.services.portainer.loadbalancer.server.port=9000
     restart: ${PORTAINER_RESTART_POLICY-no}
   postgres:
     image: bitnami/postgresql:${POSTGRESQL_VERSION:-15.5.0}
