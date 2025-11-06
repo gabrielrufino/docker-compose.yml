@@ -8,8 +8,3 @@ scrape_configs:
       - targets: ['localhost:9090']
         labels:
           namespace: 'Prometheus'
-  # - job_name: Something
-  #   static_configs:
-  #     - targets: ['localhost:3000']
-  #       labels:
-  #         namespace: 'Something'
