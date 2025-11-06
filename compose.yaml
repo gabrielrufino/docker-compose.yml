@@ -92,7 +92,7 @@ services:
       - traefik.http.routers.linkstack.tls.certresolver=letsencrypt
     restart: ${LINKSTACK_RESTART_POLICY-no}
   loki:
-    image: grafana/loki:${LOKI_VERSION-3.5.0}
+    image: grafana/loki:${LOKI_VERSION-3.5.7}
     ports:
       - 3100:3100
     command: -config.file=/etc/loki/local-config.yaml
@@ -230,6 +230,10 @@ services:
     ports:
       - 8087:80
     restart: ${PHPMYADMIN_RESTART_POLICY-no}
+  plantuml:
+    image: plantuml/plantuml-server
+    ports:
+      - 8089:8080
   portainer:
     image: portainer/portainer-ce:${PORTAINER_VERSION-2.33.0-alpine}
     ports:
@@ -246,14 +250,10 @@ services:
       - traefik.http.services.portainer.loadbalancer.server.port=9000
     restart: ${PORTAINER_RESTART_POLICY-no}
   postgres:
-    image: bitnami/postgresql:${POSTGRESQL_VERSION:-15.5.0}
+    image: postgres:${POSTGRESQL_VERSION:-15.5.0}
     environment:
-      POSTGRESQL_USER: ${POSTGRESQL_USER:-root}
-      POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD:-root}
-      POSTGRESQL_DB: ${POSTGRESQL_DB:-postres}
-      POSTGRESQL_ENABLE_TLS: ${POSTGRESQL_ENABLE_TLS:-no}
-      POSTGRESQL_TLS_CERT_FILE: /opt/bitnami/postgresql/certs/postgres.crt
-      POSTGRESQL_TLS_KEY_FILE: /opt/bitnami/postgresql/certs/postgres.key
+      POSTGRES_USER: ${POSTGRESQL_USER:-root}
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD:-root}
     ports:
       - 5432:5432
     volumes:
@@ -261,14 +261,14 @@ services:
       - postgres:/var/lib/postgresql/data
     restart: ${POSTGRESQL_RESTART_POLICY:-no}
   prometheus:
-    image: prom/prometheus:${PROMETHEUS_VERSION-v2.43.0}
+    image: prom/prometheus:${PROMETHEUS_VERSION-v3.7.3}
     ports:
       - 9090:9090
     volumes:
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     restart: ${PROMETHEUS_RESTART_POLICY-no}
   promtail:
-    image: grafana/promtail:${PROMTAIL_VERSION-2.7.5}
+    image: grafana/promtail:${PROMTAIL_VERSION-3.5.7}
     ports:
       - 9080:9080
     volumes:
