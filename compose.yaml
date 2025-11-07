@@ -14,6 +14,30 @@ services:
     volumes:
       - ./volumes/archlinux/:/home/shared
     restart: ${ARCHLINUX_RESTART_POLICY-no}
+  bookstack:
+    image: lscr.io/linuxserver/bookstack:v25.07.3-ls225
+    container_name: ${BOOKSTACK_CONTAINER_NAME-bookstack}
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: Etc/UTC
+      APP_URL: ${BOOKSTACK_APP_URL-http://localhost:6875}
+      APP_KEY: ${BOOKSTACK_APP_KEY-}
+      DB_HOST: ${BOOKSTACK_DB_HOST-mariadb}
+      DB_PORT: ${BOOKSTACK_DB_PORT-3306}
+      DB_USERNAME: ${BOOKSTACK_DB_USERNAME-root}
+      DB_PASSWORD: ${BOOKSTACK_DB_PASSWORD-root}
+      DB_DATABASE: ${BOOKSTACK_DB_DATABASE-bookstack}
+    volumes:
+      - bookstack:/config
+    ports:
+      - 6875:80
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.guides.rule=Host(`${BOOKSTACK_TRAEFIK_HOST-http://localhost:6875}`)
+      - traefik.http.routers.guides.tls=true
+      - traefik.http.routers.guides.tls.certresolver=letsencrypt
+    restart: ${BOOKSTACK_RESTART_POLICY-no}
   debian:
     image: debian:${DEBIAN_VERSION-12.6}
     tty: true
@@ -112,6 +136,16 @@ services:
       - traefik.http.routers.mautic.tls=true
       - traefik.http.routers.mautic.tls.certresolver=letsencrypt
     restart: ${MAUTIC_RESTART_POLICY-no}
+  mariadb:
+    image: mariadb:${MARIADB_VERSION-11}
+    container_name: ${MARIADB_CONTAINER_NAME-mariadb}
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD-root}
+    ports:
+      - 3307:3306
+    volumes:
+      - mariadb:/var/lib/mysql
+    restart: ${MARIADB_RESTART_POLICY-no}
   matomo:
     image: matomo:${MATOMO_VERSION-5.1.2}
     ports:
@@ -460,10 +494,12 @@ services:
 
 volumes:
   appsmith:
+  bookstack:
   gitea:
   grafana:
   localstack:
   linkstack:
+  mariadb:
   matomo:
   metabase:
   mysql:
