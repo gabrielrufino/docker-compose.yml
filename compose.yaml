@@ -403,7 +403,7 @@ services:
       - 1433:1433
     restart: ${SQLSERVER_RESTART_POLICY-no}
   traefik:
-    image: traefik:${TRAEFIK_VERSION-v2.10.5}
+    image: traefik:${TRAEFIK_VERSION-v2.11.31}
     command:
       - --providers.docker
       - --providers.docker.exposedByDefault=false
