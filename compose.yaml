@@ -309,14 +309,13 @@ services:
       - traefik.http.services.portainer.loadbalancer.server.port=9000
     restart: ${PORTAINER_RESTART_POLICY-no}
   postgres:
-    image: postgres:${POSTGRESQL_VERSION:-15.5.0}
+    image: postgres:${POSTGRESQL_VERSION:-15.15}
     environment:
       POSTGRES_USER: ${POSTGRESQL_USER:-root}
       POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD:-root}
     ports:
       - 5432:5432
     volumes:
-      - ./volumes/postgres/certs:/opt/bitnami/postgresql/certs
       - postgres:/var/lib/postgresql/data
     restart: ${POSTGRESQL_RESTART_POLICY:-no}
   prometheus:
