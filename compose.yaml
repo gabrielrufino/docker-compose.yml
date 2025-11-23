@@ -242,6 +242,31 @@ services:
       - open-webui:/app/backend/data
     environment:
       OLLAMA_BASE_URL: http://ollama:11434
+  outline:
+    image: outlinewiki/outline:${OUTLINE_VERSION-1.1.0}
+    ports:
+      - 3006:3000
+    environment:
+      COLLABORATION_URL: ''
+      DATABASE_URL: ${OUTLINE_DATABASE_URL-postgres://root:root@postgres:5432/outline}
+      SECRET_KEY: ${OUTLINE_SECRET_KEY-outline-secret-key}
+      UTILS_SECRET: ${OUTLINE_UTILS_SECRET-outline-utils-secret}
+      URL: ${OUTLINE_URL-http://localhost:3006}
+      SMTP_HOST: ${OUTLINE_SMTP_HOST-}
+      SMTP_PORT: ${OUTLINE_SMTP_PORT-}
+      SMTP_USERNAME: ${OUTLINE_SMTP_USERNAME-}
+      SMTP_PASSWORD: ${OUTLINE_SMTP_PASSWORD-}
+      SMTP_SECURE: ${OUTLINE_SMTP_SECURE-false}
+      SMTP_FROM_EMAIL: ${OUTLINE_SMTP_FROM_EMAIL-}
+      REDIS_URL: ${OUTLINE_REDIS_URL-redis://:@redis:6379}
+      PGSSLMODE: disable
+      FORCE_HTTPS: false
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.outline.rule=Host(`${OUTLINE_TRAEFIK_HOST-outline.localhost}`)
+      - traefik.http.routers.outline.tls=true
+      - traefik.http.routers.outline.tls.certresolver=letsencrypt
+    restart: ${OUTLINE_RESTART_POLICY-no}
   pgadmin:
     image: dpage/pgadmin4:${PGADMIN_VERSION:-8.14.0}
     environment:
@@ -284,14 +309,13 @@ services:
       - traefik.http.services.portainer.loadbalancer.server.port=9000
     restart: ${PORTAINER_RESTART_POLICY-no}
   postgres:
-    image: postgres:${POSTGRESQL_VERSION:-15.5.0}
+    image: postgres:${POSTGRESQL_VERSION:-15.15}
     environment:
       POSTGRES_USER: ${POSTGRESQL_USER:-root}
       POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD:-root}
     ports:
       - 5432:5432
     volumes:
-      - ./volumes/postgres/certs:/opt/bitnami/postgresql/certs
       - postgres:/var/lib/postgresql/data
     restart: ${POSTGRESQL_RESTART_POLICY:-no}
   prometheus:
