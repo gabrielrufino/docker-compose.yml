@@ -116,9 +116,12 @@ services:
       - traefik.http.routers.linkstack.tls.certresolver=letsencrypt
     restart: ${LINKSTACK_RESTART_POLICY-no}
   loki:
-    image: grafana/loki:${LOKI_VERSION-3.5.7}
+    image: grafana/loki:${LOKI_VERSION-3.5.9}
     ports:
       - 3100:3100
+    volumes:
+      - loki-config:/etc/loki
+      - loki-data:/loki
     command: -config.file=/etc/loki/local-config.yaml
     restart: ${LOKI_RESTART_POLICY-no}
   mautic:
@@ -525,6 +528,8 @@ volumes:
   gitea:
   grafana:
   localstack:
+  loki-config:
+  loki-data:
   linkstack:
   mariadb:
   matomo:
