@@ -116,9 +116,12 @@ services:
       - traefik.http.routers.linkstack.tls.certresolver=letsencrypt
     restart: ${LINKSTACK_RESTART_POLICY-no}
   loki:
-    image: grafana/loki:${LOKI_VERSION-3.5.7}
+    image: grafana/loki:${LOKI_VERSION-3.5.9}
     ports:
       - 3100:3100
+    volumes:
+      - loki-config:/etc/loki
+      - loki-data:/loki
     command: -config.file=/etc/loki/local-config.yaml
     restart: ${LOKI_RESTART_POLICY-no}
   mautic:
@@ -247,7 +250,6 @@ services:
     ports:
       - 3006:3000
     environment:
-      COLLABORATION_URL: ''
       DATABASE_URL: ${OUTLINE_DATABASE_URL-postgres://root:root@postgres:5432/outline}
       SECRET_KEY: ${OUTLINE_SECRET_KEY-outline-secret-key}
       UTILS_SECRET: ${OUTLINE_UTILS_SECRET-outline-utils-secret}
@@ -261,6 +263,10 @@ services:
       REDIS_URL: ${OUTLINE_REDIS_URL-redis://:@redis:6379}
       PGSSLMODE: disable
       FORCE_HTTPS: false
+      FILE_STORAGE: local
+      FILE_STORAGE_UPLOAD_MAX_SIZE: 26214400
+    volumes:
+      - outline:/var/www/outline/uploads
     labels:
       - traefik.enable=true
       - traefik.http.routers.outline.rule=Host(`${OUTLINE_TRAEFIK_HOST-outline.localhost}`)
@@ -522,6 +528,8 @@ volumes:
   gitea:
   grafana:
   localstack:
+  loki-config:
+  loki-data:
   linkstack:
   mariadb:
   matomo:
@@ -531,6 +539,7 @@ volumes:
   nextcloud:
   ollama:
   open-webui:
+  outline:
   pgadmin:
   portainer:
   postgres:
