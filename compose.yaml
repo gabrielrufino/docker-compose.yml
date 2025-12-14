@@ -63,7 +63,7 @@ services:
       - 3002:3000
     restart: ${GITEA_RESTART_POLICY-no}
   grafana:
-    image: grafana/grafana:${GRAFANA_VERSION-11.6.1}
+    image: grafana/grafana:${GRAFANA_VERSION-12.3.0}
     ports:
       - 3000:3000
     volumes:
