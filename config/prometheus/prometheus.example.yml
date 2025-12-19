@@ -8,3 +8,6 @@ scrape_configs:
       - targets: ['localhost:9090']
         labels:
           namespace: 'Prometheus'
+  - job_name: Node Exporter
+    static_configs:
+      - targets: ['host.docker.internal:9100']

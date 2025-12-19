@@ -221,6 +221,16 @@ services:
       - ./config/nginx/sites-available:/etc/nginx/sites-available
       # - ./config/nginx/letsencrypt:/etc/letsencrypt
     restart: ${NGINX_RESTART_POLICY-no}
+  node-exporter:
+    image: prom/node-exporter:${NODE_EXPORTER_VERSION-v1.10.2}
+    container_name: ${NODE_EXPORTER_CONTAINER_NAME-node-exporter}
+    command:
+      - '--path.rootfs=/host'
+    network_mode: host
+    pid: host
+    restart: ${NODE_EXPORTER_RESTART_POLICY-no}
+    volumes:
+      - '/:/host:ro,rslave'
   ollama:
     image: ollama/ollama:${OLLAMA_VERSION-0.6.2}
     ports:
@@ -330,6 +340,8 @@ services:
       - 9090:9090
     volumes:
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    extra_hosts:
+      - host.docker.internal:host-gateway
     restart: ${PROMETHEUS_RESTART_POLICY-no}
   promtail:
     image: grafana/promtail:${PROMTAIL_VERSION-3.5.7}
