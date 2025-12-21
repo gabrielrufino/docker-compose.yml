@@ -339,7 +339,7 @@ services:
     ports:
       - 9090:9090
     volumes:
-      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./config/prometheus:/etc/prometheus
     extra_hosts:
       - host.docker.internal:host-gateway
     restart: ${PROMETHEUS_RESTART_POLICY-no}
