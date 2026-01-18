@@ -150,7 +150,7 @@ services:
       - mariadb:/var/lib/mysql
     restart: ${MARIADB_RESTART_POLICY-no}
   matomo:
-    image: matomo:${MATOMO_VERSION-5.1.2}
+    image: matomo:${MATOMO_VERSION-5.6.2}
     ports:
       - 8086:80
     volumes:
