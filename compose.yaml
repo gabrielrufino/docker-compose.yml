@@ -230,11 +230,17 @@ services:
     depends_on:
       - ollama
     ports:
-      - 3000:8080
+      - 3005:8080
     volumes:
       - open-webui:/app/backend/data
     environment:
       OLLAMA_BASE_URL: http://ollama:11434
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.open-webui.rule=Host(`${OPEN_WEBUI_TRAEFIK_HOST-open-webui.localhost}`)
+      - traefik.http.routers.open-webui.tls=true
+      - traefik.http.routers.open-webui.tls.certresolver=letsencrypt
+    restart: ${OPEN_WEBUI_RESTART_POLICY-no}
   outline:
     image: outlinewiki/outline:${OUTLINE_VERSION-1.1.0}
     ports:
