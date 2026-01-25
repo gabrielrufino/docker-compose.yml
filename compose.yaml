@@ -1,12 +1,15 @@
 services:
   appsmith:
-    image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1.34}
+    image: appsmith/appsmith-ee:${APPSMITH_VERSION-v1.95}
     ports:
       - 8085:80
     volumes:
       - appsmith:/appsmith-stacks
     labels:
-      com.centurylinklabs.watchtower.enable: 'true'
+      - traefik.enable=true
+      - traefik.http.routers.appsmith.rule=Host(`${APPSMITH_TRAEFIK_HOST-appsmith.localhost}`)
+      - traefik.http.routers.appsmith.tls=true
+      - traefik.http.routers.appsmith.tls.certresolver=letsencrypt
     restart: ${APPSMITH_RESTART_POLICY-no}
   archlinux:
     image: archlinux:${ARCHLINUX_VERSION-base-20221225.0.113672}
