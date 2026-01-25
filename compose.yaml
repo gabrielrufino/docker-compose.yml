@@ -291,10 +291,6 @@ services:
     ports:
       - 8087:80
     restart: ${PHPMYADMIN_RESTART_POLICY-no}
-  plantuml:
-    image: plantuml/plantuml-server
-    ports:
-      - 8089:8080
   portainer:
     image: portainer/portainer-ce:${PORTAINER_VERSION-2.33.0-alpine}
     ports:
