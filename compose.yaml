@@ -1,6 +1,6 @@
 services:
   appsmith:
-    image: appsmith/appsmith-ee:${APPSMITH_VERSION-v1.95}
+    image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1.99}
     ports:
       - 8085:80
     volumes:
