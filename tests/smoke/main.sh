@@ -5,7 +5,6 @@ npm i -g wait-on
 FILEPATH=$(realpath $0)
 FILEDIR=$(dirname $FILEPATH)
 
-sh $FILEDIR/appsmith.sh && \
 sh $FILEDIR/gitea.sh && \
 sh $FILEDIR/grafana.sh && \
 sh $FILEDIR/localstack.sh && \
