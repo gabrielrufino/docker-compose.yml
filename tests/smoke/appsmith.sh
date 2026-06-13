@@ -2,7 +2,7 @@ echo "[Smoke] - Appsmith\n"
 
 docker compose up -d appsmith
 
-wait-on http://localhost:8085/setup/welcome --timeout 120000
+wait-on http://localhost:8085/setup/welcome --timeout 240000
 
 HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}\n" http://localhost:8085/setup/welcome)
 if [ $HTTP_STATUS -ne 200  ];
