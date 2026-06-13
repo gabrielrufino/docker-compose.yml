@@ -40,8 +40,6 @@ services:
       - /etc/localtime:/etc/localtime:ro
     ports:
       - 3002:3000
-    labels:
-      kompose.volume.type: bind
     restart: ${GITEA_RESTART_POLICY-no}
   grafana:
     image: grafana/grafana:${GRAFANA_VERSION-12.3.0}
@@ -210,7 +208,7 @@ services:
     network_mode: host
     pid: host
     labels:
-      kompose.volume.type: bind
+      kompose.volume.type: hostPath
     restart: ${NODE_EXPORTER_RESTART_POLICY-no}
     volumes:
       - '/:/host:ro,rslave'
@@ -337,7 +335,7 @@ services:
       - /var/log:/var/log
     command: -config.file=/etc/promtail/config.yaml
     labels:
-      kompose.volume.type: bind
+      kompose.volume.type: hostPath
     restart: ${PROMTAIL_RESTART_POLICY-no}
   rabbitmq:
     image: rabbitmq:${RABBITMQ_VERSION-3.11.13-management}
@@ -460,6 +458,7 @@ services:
       - traefik.http.routers.traefik.middlewares=traefik-auth
       - traefik.http.routers.traefik.tls=true
       - traefik.http.routers.traefik.tls.certresolver=letsencrypt
+      - kompose.volume.type=hostPath
     restart: ${TRAEFIK_RESTART_POLICY-no}
   ubuntu:
     image: ubuntu:${UBUNTU_VERSION-23.10}
