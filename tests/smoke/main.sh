@@ -16,5 +16,4 @@ sh $FILEDIR/mongo.sh && \
 sh $FILEDIR/nextcloud.sh && \
 sh $FILEDIR/nginx.sh && \
 sh $FILEDIR/phpmyadmin.sh && \
-sh $FILEDIR/verdaccio.sh && \
-sh $FILEDIR/vscode.sh
+sh $FILEDIR/verdaccio.sh
