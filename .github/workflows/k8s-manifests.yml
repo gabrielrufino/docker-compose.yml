@@ -10,7 +10,7 @@ jobs:
     name: Convert
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Installs kompose
         run: |
           curl -L https://github.com/kubernetes/kompose/releases/download/v1.35.0/kompose-linux-amd64 -o kompose
@@ -20,7 +20,7 @@ jobs:
           mkdir k8s-manifests
           cd k8s-manifests
           sudo ../kompose convert -f ../compose.yaml
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: k8s-manifests
           path: k8s-manifests

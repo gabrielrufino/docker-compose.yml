@@ -1,12 +1,15 @@
 services:
   appsmith:
-    image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1.34}
+    image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1.99}
     ports:
       - 8085:80
     volumes:
       - appsmith:/appsmith-stacks
     labels:
-      com.centurylinklabs.watchtower.enable: 'true'
+      - traefik.enable=true
+      - traefik.http.routers.appsmith.rule=Host(`${APPSMITH_TRAEFIK_HOST-appsmith.localhost}`)
+      - traefik.http.routers.appsmith.tls=true
+      - traefik.http.routers.appsmith.tls.certresolver=letsencrypt
     restart: ${APPSMITH_RESTART_POLICY-no}
   archlinux:
     image: archlinux:${ARCHLINUX_VERSION-base-20221225.0.113672}
@@ -14,30 +17,6 @@ services:
     volumes:
       - ./volumes/archlinux/:/home/shared
     restart: ${ARCHLINUX_RESTART_POLICY-no}
-  bookstack:
-    image: lscr.io/linuxserver/bookstack:v25.07.3-ls225
-    container_name: ${BOOKSTACK_CONTAINER_NAME-bookstack}
-    environment:
-      PUID: 1000
-      PGID: 1000
-      TZ: Etc/UTC
-      APP_URL: ${BOOKSTACK_APP_URL-http://localhost:6875}
-      APP_KEY: ${BOOKSTACK_APP_KEY-}
-      DB_HOST: ${BOOKSTACK_DB_HOST-mariadb}
-      DB_PORT: ${BOOKSTACK_DB_PORT-3306}
-      DB_USERNAME: ${BOOKSTACK_DB_USERNAME-root}
-      DB_PASSWORD: ${BOOKSTACK_DB_PASSWORD-root}
-      DB_DATABASE: ${BOOKSTACK_DB_DATABASE-bookstack}
-    volumes:
-      - bookstack:/config
-    ports:
-      - 6875:80
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.guides.rule=Host(`${BOOKSTACK_TRAEFIK_HOST-http://localhost:6875}`)
-      - traefik.http.routers.guides.tls=true
-      - traefik.http.routers.guides.tls.certresolver=letsencrypt
-    restart: ${BOOKSTACK_RESTART_POLICY-no}
   debian:
     image: debian:${DEBIAN_VERSION-12.6}
     tty: true
@@ -228,11 +207,13 @@ services:
       - '--path.rootfs=/host'
     network_mode: host
     pid: host
+    labels:
+      kompose.volume.type: hostPath
     restart: ${NODE_EXPORTER_RESTART_POLICY-no}
     volumes:
       - '/:/host:ro,rslave'
   ollama:
-    image: ollama/ollama:${OLLAMA_VERSION-0.6.2}
+    image: ollama/ollama:${OLLAMA_VERSION-0.14.3}
     ports:
       - 11434:11434
     volumes:
@@ -250,11 +231,17 @@ services:
     depends_on:
       - ollama
     ports:
-      - 3000:8080
+      - 3005:8080
     volumes:
       - open-webui:/app/backend/data
     environment:
       OLLAMA_BASE_URL: http://ollama:11434
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.open-webui.rule=Host(`${OPEN_WEBUI_TRAEFIK_HOST-open-webui.localhost}`)
+      - traefik.http.routers.open-webui.tls=true
+      - traefik.http.routers.open-webui.tls.certresolver=letsencrypt
+    restart: ${OPEN_WEBUI_RESTART_POLICY-no}
   outline:
     image: outlinewiki/outline:${OUTLINE_VERSION-1.1.0}
     ports:
@@ -305,10 +292,6 @@ services:
     ports:
       - 8087:80
     restart: ${PHPMYADMIN_RESTART_POLICY-no}
-  plantuml:
-    image: plantuml/plantuml-server
-    ports:
-      - 8089:8080
   portainer:
     image: portainer/portainer-ce:${PORTAINER_VERSION-2.33.0-alpine}
     ports:
@@ -351,6 +334,8 @@ services:
       - ./config/promtail/config.yaml:/etc/promtail/config.yaml
       - /var/log:/var/log
     command: -config.file=/etc/promtail/config.yaml
+    labels:
+      kompose.volume.type: hostPath
     restart: ${PROMTAIL_RESTART_POLICY-no}
   rabbitmq:
     image: rabbitmq:${RABBITMQ_VERSION-3.11.13-management}
@@ -416,18 +401,6 @@ services:
       - traefik.http.routers.shlink.tls=true
       - traefik.http.routers.shlink.tls.certresolver=letsencrypt
     restart: ${SHLINK_RESTART_POLICY-no}
-  sonarqube:
-    image: sonarqube:${SONARQUBE_VERSION-9.9.1-community}
-    ports:
-      - 9001:9000
-    volumes:
-      - sonarqube:/opt/sonarqube/data
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.sonarqube.rule=Host(`${SONARQUBE_TRAEFIK_HOST-sonarqube.localhost}`)
-      - traefik.http.routers.sonarqube.tls=true
-      - traefik.http.routers.sonarqube.tls.certresolver=letsencrypt
-    restart: ${SONARQUBE_RESTART_POLICY-no}
   sonic:
     image: valeriansaliou/sonic:${SONIC_VERSION-v1.4.0}
     ports:
@@ -473,6 +446,7 @@ services:
       - traefik.http.routers.traefik.middlewares=traefik-auth
       - traefik.http.routers.traefik.tls=true
       - traefik.http.routers.traefik.tls.certresolver=letsencrypt
+      - kompose.volume.type=hostPath
     restart: ${TRAEFIK_RESTART_POLICY-no}
   ubuntu:
     image: ubuntu:${UBUNTU_VERSION-23.10}
@@ -494,24 +468,6 @@ services:
       - traefik.http.routers.verdaccio.tls=true
       - traefik.http.routers.verdaccio.tls.certresolver=letsencrypt
     restart: ${VERDACCIO_RESTART_POLICY-no}
-  vscode:
-    image: lscr.io/linuxserver/openvscode-server:${VSCODE_VERSION:-1.85.1}
-    ports:
-      - 3003:3000
-    environment:
-      PUID: 1000
-      PGID: 1000
-      TZ: ${VSCODE_TIMEZONE-America/Sao_Paulo}
-      CONNECTION_TOKEN: ${VSCODE_CONNECTION_TOKEN-root}
-      SUDO_PASSWORD: ${VSCODE_SUDO_PASSWORD-root}
-    volumes:
-      - ${VSCODE_BASE_FOLDER:-./volumes/vscode}:/config
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.vscode.rule=Host(`${VSCODE_TRAEFIK_HOST-vscode.localhost}`)
-      - traefik.http.routers.vscode.tls=true
-      - traefik.http.routers.vscode.tls.certresolver=letsencrypt
-    restart: ${VSCODE_RESTART_POLICY:-no}
   windows:
     image: dockurr/windows
     environment:
@@ -536,7 +492,6 @@ services:
 
 volumes:
   appsmith:
-  bookstack:
   gitea:
   grafana:
   localstack:
