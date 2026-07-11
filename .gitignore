@@ -3,6 +3,7 @@ compose.override.yaml
 
 # Config files
 /config/*/*
+!/config/*/.gitkeep
 !/config/nginx/sites-available
 
 # Volumes files
