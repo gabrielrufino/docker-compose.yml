@@ -1,4 +1,12 @@
 services:
+  akhq:
+    image: tchiotludo/akhq
+    configs:
+      - source: akhq_config
+        target: /app/application.yml
+    ports:
+      - 8089:8080
+    restart: ${AKHQ_RESTART_POLICY-no}
   appsmith:
     image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1.99}
     ports:
@@ -63,6 +71,21 @@ services:
       - traefik.http.routers.hoppscotch.tls=true
       - traefik.http.routers.hoppscotch.tls.certresolver=letsencrypt
     restart: ${HOPPSCOTCH_RESTART_POLICY-no}
+  kafka:
+    image: apache/kafka:${KAFKA_VERSION-latest}
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9093
+      KAFKA_LISTENERS: DOCKER://0.0.0.0:29092,LOCAL://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+      KAFKA_ADVERTISED_LISTENERS: DOCKER://kafka:29092,LOCAL://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,DOCKER:PLAINTEXT,LOCAL:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - 9092:9092
+    restart: ${KAFKA_RESTART_POLICY-no}
   kali:
     image: kalilinux/kali-rolling:${KALI_VERSION-latest}
     tty: true
@@ -516,3 +539,12 @@ volumes:
   sonarqube:
   verdaccio:
   wordpress:
+
+configs:
+  akhq_config:
+    content: |
+      akhq:
+        connections:
+          local:
+            properties:
+              bootstrap.servers: "${AKHQ_BOOTSTRAP_SERVERS:-kafka:29092}"
