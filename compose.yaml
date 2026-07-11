@@ -31,6 +31,7 @@ services:
     ports:
       - 8090:8080
     environment:
+      # Note: Requires users.yml in ./config/dozzle/users.yml to start successfully
       DOZZLE_AUTH_PROVIDER: simple
     labels:
       - traefik.enable=true
