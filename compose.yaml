@@ -23,6 +23,19 @@ services:
     volumes:
       - ./volumes/debian/:/home/shared
     restart: ${DEBIAN_RESTART_POLICY-no}
+  dozzle:
+    image: amir20/dozzle:${DOZZLE_VERSION-v10.6.9}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - dozzle:/data
+    ports:
+      - 8090:8080
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.dozzle.rule=Host(`${DOZZLE_TRAEFIK_HOST-dozzle.localhost}`)
+      - traefik.http.routers.dozzle.tls=true
+      - traefik.http.routers.dozzle.tls.certresolver=letsencrypt
+    restart: ${DOZZLE_RESTART_POLICY-no}
   fedora:
     image: fedora:${FEDORA_VERSION-36}
     tty: true
@@ -492,6 +505,7 @@ services:
 
 volumes:
   appsmith:
+  dozzle:
   gitea:
   grafana:
   localstack:
