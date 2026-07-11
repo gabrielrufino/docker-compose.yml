@@ -27,9 +27,11 @@ services:
     image: amir20/dozzle:${DOZZLE_VERSION-v10.6.9}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - dozzle:/data
+      - ./config/dozzle:/data
     ports:
       - 8090:8080
+    environment:
+      DOZZLE_AUTH_PROVIDER: simple
     labels:
       - traefik.enable=true
       - traefik.http.routers.dozzle.rule=Host(`${DOZZLE_TRAEFIK_HOST-dozzle.localhost}`)
@@ -505,7 +507,6 @@ services:
 
 volumes:
   appsmith:
-  dozzle:
   gitea:
   grafana:
   localstack:
