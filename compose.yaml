@@ -1,3 +1,9 @@
+x-logging: &default-logging
+  driver: ${LOG_DRIVER:-json-file}
+  options:
+    max-size: ${LOG_MAX_SIZE:-10m}
+    max-file: ${LOG_MAX_FILE:-5}
+
 services:
   appsmith:
     image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1.99}
@@ -10,18 +16,21 @@ services:
       - traefik.http.routers.appsmith.rule=Host(`${APPSMITH_TRAEFIK_HOST-appsmith.localhost}`)
       - traefik.http.routers.appsmith.tls=true
       - traefik.http.routers.appsmith.tls.certresolver=letsencrypt
+    logging: *default-logging
     restart: ${APPSMITH_RESTART_POLICY-no}
   archlinux:
     image: archlinux:${ARCHLINUX_VERSION-base-20221225.0.113672}
     tty: true
     volumes:
       - ./volumes/archlinux/:/home/shared
+    logging: *default-logging
     restart: ${ARCHLINUX_RESTART_POLICY-no}
   debian:
     image: debian:${DEBIAN_VERSION-12.6}
     tty: true
     volumes:
       - ./volumes/debian/:/home/shared
+    logging: *default-logging
     restart: ${DEBIAN_RESTART_POLICY-no}
   dozzle:
     image: amir20/dozzle:${DOZZLE_VERSION-v10.6.9}
@@ -38,12 +47,14 @@ services:
       - traefik.http.routers.dozzle.rule=Host(`${DOZZLE_TRAEFIK_HOST-dozzle.localhost}`)
       - traefik.http.routers.dozzle.tls=true
       - traefik.http.routers.dozzle.tls.certresolver=letsencrypt
+    logging: *default-logging
     restart: ${DOZZLE_RESTART_POLICY-no}
   fedora:
     image: fedora:${FEDORA_VERSION-36}
     tty: true
     volumes:
       - ./volumes/fedora/:/home/shared
+    logging: *default-logging
     restart: ${FEDORA_RESTART_POLICY-no}
   gitea:
     image: gitea/gitea:${GITEA_VERSION-1.18.0}
@@ -56,6 +67,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
     ports:
       - 3002:3000
+    logging: *default-logging
     restart: ${GITEA_RESTART_POLICY-no}
   grafana:
     image: grafana/grafana:${GRAFANA_VERSION-12.3.0}
@@ -68,6 +80,7 @@ services:
       - traefik.http.routers.grafana.rule=Host(`${GRAFANA_TRAEFIK_HOST-grafana.localhost}`)
       - traefik.http.routers.grafana.tls=true
       - traefik.http.routers.grafana.tls.certresolver=letsencrypt
+    logging: *default-logging
     restart: ${GRAFANA_RESTART_POLICY-no}
   hoppscotch:
     image: hoppscotch/hoppscotch:${HOPPSCOTCH_VERSION-main}
@@ -78,10 +91,12 @@ services:
       - traefik.http.routers.hoppscotch.rule=Host(`${HOPPSCOTCH_TRAEFIK_HOST-hoppscotch.localhost}`)
       - traefik.http.routers.hoppscotch.tls=true
       - traefik.http.routers.hoppscotch.tls.certresolver=letsencrypt
+    logging: *default-logging
     restart: ${HOPPSCOTCH_RESTART_POLICY-no}
   kali:
     image: kalilinux/kali-rolling:${KALI_VERSION-latest}
     tty: true
+    logging: *default-logging
     restart: ${KALI_RESTART_POLICY-no}
   localstack:
     image: localstack/localstack:${LOCALSTACK_VERSION-4.7.0}
@@ -94,6 +109,7 @@ services:
     volumes:
       - localstack:/var/lib/localstack
       - /var/run/docker.sock:/var/run/docker.sock
+    logging: *default-logging
     restart: ${LOCALSTACK_RESTART_POLICY-no}
   linkstack:
     image: linkstackorg/linkstack
@@ -109,6 +125,7 @@ services:
       - traefik.http.routers.linkstack.rule=Host(`${LINKSTACK_TRAEFIK_HOST-linkstack.localhost}`)
       - traefik.http.routers.linkstack.tls=true
       - traefik.http.routers.linkstack.tls.certresolver=letsencrypt
+    logging: *default-logging
     restart: ${LINKSTACK_RESTART_POLICY-no}
   loki:
     image: grafana/loki:${LOKI_VERSION-3.5.9}
@@ -118,6 +135,7 @@ services:
       - loki-config:/etc/loki
       - loki-data:/loki
     command: -config.file=/etc/loki/local-config.yaml
+    logging: *default-logging
     restart: ${LOKI_RESTART_POLICY-no}
   mautic:
     image: mautic/mautic:${MAUTIC_VERSION-5.2.5-apache}
@@ -133,6 +151,7 @@ services:
       - traefik.http.routers.mautic.rule=Host(`${MAUTIC_TRAEFIK_HOST-mautic.localhost}`)
       - traefik.http.routers.mautic.tls=true
       - traefik.http.routers.mautic.tls.certresolver=letsencrypt
+    logging: *default-logging
     restart: ${MAUTIC_RESTART_POLICY-no}
   mariadb:
     image: mariadb:${MARIADB_VERSION-11}
@@ -143,6 +162,7 @@ services:
       - 3307:3306
     volumes:
       - mariadb:/var/lib/mysql
+    logging: *default-logging
     restart: ${MARIADB_RESTART_POLICY-no}
   matomo:
     image: matomo:${MATOMO_VERSION-5.6.2}
@@ -155,6 +175,7 @@ services:
       - traefik.http.routers.matomo.rule=Host(`${MATOMO_TRAEFIK_HOST-matomo.localhost}`)
       - traefik.http.routers.matomo.tls=true
       - traefik.http.routers.matomo.tls.certresolver=letsencrypt
+    logging: *default-logging
     restart: ${MATOMO_RESTART_POLICY-no}
   metabase:
     image: metabase/metabase:${METABASE_VERSION-v0.56.2.2}
@@ -169,6 +190,7 @@ services:
       - traefik.http.routers.metabase.rule=Host(`${METABASE_TRAEFIK_HOST-metabase.localhost}`)
       - traefik.http.routers.metabase.tls=true
       - traefik.http.routers.metabase.tls.certresolver=letsencrypt
+    logging: *default-logging
     restart: ${METABASE_RESTART_POLICY-no}
   mongo:
     image: mongo:${MONGO_VERSION-7.0.21}
@@ -179,6 +201,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD-root}
     volumes:
       - mongo:/data/db
+    logging: *default-logging
     restart: ${MONGO_RESTART_POLICY-no}
   mysql:
     image: mysql:${MYSQL_VERSION-8.1.0}
@@ -194,6 +217,7 @@ services:
       - 3306:3306
     volumes:
       - mysql:/var/lib/mysql
+    logging: *default-logging
     restart: ${MYSQL_RESTART_POLICY-no}
   nextcloud:
     image: nextcloud:${NEXTCLOUD_VERSION-27.0.1}
@@ -206,6 +230,7 @@ services:
       - traefik.http.routers.nextcloud.rule=Host(`${NEXTCLOUD_TRAEFIK_HOST-nextcloud.localhost}`)
       - traefik.http.routers.nextcloud.tls=true
       - traefik.http.routers.nextcloud.tls.certresolver=letsencrypt
+    logging: *default-logging
     restart: ${NEXTCLOUD_RESTART_POLICY-no}
   nginx:
     image: nginx:${NGINX_VERSION-1.23.1}
@@ -215,6 +240,7 @@ services:
     volumes:
       - ./config/nginx/sites-available:/etc/nginx/sites-available
       # - ./config/nginx/letsencrypt:/etc/letsencrypt
+    logging: *default-logging
     restart: ${NGINX_RESTART_POLICY-no}
   node-exporter:
     image: prom/node-exporter:${NODE_EXPORTER_VERSION-v1.10.2}
@@ -225,6 +251,7 @@ services:
     pid: host
     labels:
       kompose.volume.type: hostPath
+    logging: *default-logging
     restart: ${NODE_EXPORTER_RESTART_POLICY-no}
     volumes:
       - '/:/host:ro,rslave'
@@ -241,6 +268,7 @@ services:
       - traefik.http.routers.ollama.tls=true
       - traefik.http.routers.ollama.tls.certresolver=letsencrypt
       - traefik.http.routers.ollama.middlewares=ollama-auth
+    logging: *default-logging
     restart: ${OLLAMA_RESTART_POLICY-no}
   open-webui:
     image: ghcr.io/open-webui/open-webui:${OPEN_WEBUI_VERSION-main}
@@ -257,6 +285,7 @@ services:
       - traefik.http.routers.open-webui.rule=Host(`${OPEN_WEBUI_TRAEFIK_HOST-open-webui.localhost}`)
       - traefik.http.routers.open-webui.tls=true
       - traefik.http.routers.open-webui.tls.certresolver=letsencrypt
+    logging: *default-logging
     restart: ${OPEN_WEBUI_RESTART_POLICY-no}
   outline:
     image: outlinewiki/outline:${OUTLINE_VERSION-1.1.0}
@@ -285,6 +314,7 @@ services:
       - traefik.http.routers.outline.rule=Host(`${OUTLINE_TRAEFIK_HOST-outline.localhost}`)
       - traefik.http.routers.outline.tls=true
       - traefik.http.routers.outline.tls.certresolver=letsencrypt
+    logging: *default-logging
     restart: ${OUTLINE_RESTART_POLICY-no}
   pgadmin:
     image: dpage/pgadmin4:${PGADMIN_VERSION:-8.14.0}
@@ -300,6 +330,7 @@ services:
       - traefik.http.routers.pgadmin.rule=Host(`${PGADMIN_TRAEFIK_HOST-pgadmin.localhost}`)
       - traefik.http.routers.pgadmin.tls=true
       - traefik.http.routers.pgadmin.tls.certresolver=letsencrypt
+    logging: *default-logging
     restart: ${PGADMIN_RESTART_POLICY:-no}
   phpmyadmin:
     image: phpmyadmin:${PHPMYADMIN_VERSION-5.2.0}
@@ -307,6 +338,7 @@ services:
       PMA_ARBITRARY: 1
     ports:
       - 8087:80
+    logging: *default-logging
     restart: ${PHPMYADMIN_RESTART_POLICY-no}
   portainer:
     image: portainer/portainer-ce:${PORTAINER_VERSION-2.33.0-alpine}
@@ -322,6 +354,7 @@ services:
       - traefik.http.routers.portainer.tls=true
       - traefik.http.routers.portainer.tls.certresolver=letsencrypt
       - traefik.http.services.portainer.loadbalancer.server.port=9000
+    logging: *default-logging
     restart: ${PORTAINER_RESTART_POLICY-no}
   postgres:
     image: postgres:${POSTGRESQL_VERSION:-15.15}
@@ -332,6 +365,7 @@ services:
       - 5432:5432
     volumes:
       - postgres:/var/lib/postgresql/data
+    logging: *default-logging
     restart: ${POSTGRESQL_RESTART_POLICY:-no}
   prometheus:
     image: prom/prometheus:${PROMETHEUS_VERSION-v3.7.3}
@@ -341,6 +375,7 @@ services:
       - ./config/prometheus:/etc/prometheus
     extra_hosts:
       - host.docker.internal:host-gateway
+    logging: *default-logging
     restart: ${PROMETHEUS_RESTART_POLICY-no}
   promtail:
     image: grafana/promtail:${PROMTAIL_VERSION-3.5.7}
@@ -352,6 +387,7 @@ services:
     command: -config.file=/etc/promtail/config.yaml
     labels:
       kompose.volume.type: hostPath
+    logging: *default-logging
     restart: ${PROMTAIL_RESTART_POLICY-no}
   rabbitmq:
     image: rabbitmq:${RABBITMQ_VERSION-3.11.13-management}
@@ -370,12 +406,14 @@ services:
       - traefik.http.routers.rabbitmq.tls=true
       - traefik.http.routers.rabbitmq.tls.certresolver=letsencrypt
       - traefik.http.services.rabbitmq.loadbalancer.server.port=15672
+    logging: *default-logging
     restart: ${RABBITMQ_RESTART_POLICY-no}
   redis:
     image: redis:${REDIS_VERSION-7.4.4}
     ports:
       - 6379:6379
     command: redis-server --requirepass "${REDIS_PASSWORD-}"
+    logging: *default-logging
     restart: ${REDIS_RESTART_POLICY-no}
   redisinsight:
     image: redislabs/redisinsight:${REDISINSIGHT_VERSION-2.70}
@@ -390,6 +428,7 @@ services:
       - traefik.http.routers.redisinsight.rule=Host(`${REDISINSIGHT_TRAEFIK_HOST-redisinsight.localhost}`)
       - traefik.http.routers.redisinsight.tls=true
       - traefik.http.routers.redisinsight.tls.certresolver=letsencrypt
+    logging: *default-logging
     restart: ${REDISINSIGHT_RESTART_POLICY-no}
   rethinkdb:
     image: rethinkdb:${RETHINKDB_VERSION-2.4.2}
@@ -398,6 +437,7 @@ services:
       - 28016:8080
     volumes:
       - rethinkdb:/data
+    logging: *default-logging
     restart: ${RETHINKDB_RESTART_POLICY-no}
   shlink:
     image: shlinkio/shlink:${SHLINK_VERSION-4.4.6}
@@ -416,6 +456,7 @@ services:
       - traefik.http.routers.shlink.rule=Host(`${SHLINK_TRAEFIK_HOST-shlink.localhost}`)
       - traefik.http.routers.shlink.tls=true
       - traefik.http.routers.shlink.tls.certresolver=letsencrypt
+    logging: *default-logging
     restart: ${SHLINK_RESTART_POLICY-no}
   sonic:
     image: valeriansaliou/sonic:${SONIC_VERSION-v1.4.0}
@@ -424,6 +465,7 @@ services:
     volumes:
       - ./volumes/sonic/sonic.cfg:/etc/sonic.cfg
       - ./volumes/sonic/store/:/var/lib/sonic/store/
+    logging: *default-logging
     restart: ${SONIC_RESTART_POLICY-no}
   sqlserver:
     image: mcr.microsoft.com/mssql/server:${SQLSERVER_VERSION-2019-latest}
@@ -432,6 +474,7 @@ services:
         ACCEPT_EULA: Y
     ports:
       - 1433:1433
+    logging: *default-logging
     restart: ${SQLSERVER_RESTART_POLICY-no}
   traefik:
     image: traefik:${TRAEFIK_VERSION-v2.11.31}
@@ -463,12 +506,14 @@ services:
       - traefik.http.routers.traefik.tls=true
       - traefik.http.routers.traefik.tls.certresolver=letsencrypt
       - kompose.volume.type=hostPath
+    logging: *default-logging
     restart: ${TRAEFIK_RESTART_POLICY-no}
   ubuntu:
     image: ubuntu:${UBUNTU_VERSION-23.10}
     tty: true
     volumes:
       - ./volumes/ubuntu/:/home/shared
+    logging: *default-logging
     restart: ${UBUNTU_RESTART_POLICY-no}
   verdaccio:
     image: verdaccio/verdaccio:${VERDACCIO_VERSION-5.26}
@@ -483,6 +528,7 @@ services:
       - traefik.http.routers.verdaccio.rule=Host(`${VERDACCIO_TRAEFIK_HOST-verdaccio.localhost}`)
       - traefik.http.routers.verdaccio.tls=true
       - traefik.http.routers.verdaccio.tls.certresolver=letsencrypt
+    logging: *default-logging
     restart: ${VERDACCIO_RESTART_POLICY-no}
   windows:
     image: dockurr/windows
@@ -497,6 +543,7 @@ services:
       - 3389:3389/tcp
       - 3389:3389/udp
     stop_grace_period: 2m
+    logging: *default-logging
     restart: ${WINDOWS_RESTART_POLICY-no}
   wordpress:
     image: wordpress:${WORDPRESS_VERSION-latest}
@@ -504,6 +551,7 @@ services:
       - 8081:80
     volumes:
       - wordpress:/var/www/html
+    logging: *default-logging
     restart: ${WORDPRESS_RESTART_POLICY-no}
 
 volumes:
