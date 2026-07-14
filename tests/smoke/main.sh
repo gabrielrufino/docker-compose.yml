@@ -12,6 +12,7 @@ sh $FILEDIR/loki.sh && \
 sh $FILEDIR/matomo.sh && \
 sh $FILEDIR/metabase.sh && \
 sh $FILEDIR/mongo.sh && \
+sh $FILEDIR/mysql.sh && \
 sh $FILEDIR/nextcloud.sh && \
 sh $FILEDIR/nginx.sh && \
 sh $FILEDIR/phpmyadmin.sh && \
