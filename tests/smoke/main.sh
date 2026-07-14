@@ -9,6 +9,7 @@ sh $FILEDIR/gitea.sh && \
 sh $FILEDIR/grafana.sh && \
 sh $FILEDIR/localstack.sh && \
 sh $FILEDIR/loki.sh && \
+sh $FILEDIR/mariadb.sh && \
 sh $FILEDIR/matomo.sh && \
 sh $FILEDIR/metabase.sh && \
 sh $FILEDIR/mongo.sh && \
