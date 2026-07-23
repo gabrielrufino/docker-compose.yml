@@ -1,9 +1,8 @@
-echo "[Smoke] - Postgres\n"
+printf "[Smoke] - Postgres\n"
 
 docker compose up -d postgres
 
-wait-on tcp:localhost:5432 --timeout 60000
-if [ $? -ne 0 ]; then
+if ! wait-on tcp:localhost:5432 --timeout 60000; then
   docker compose down -v
   echo "[Fail]"
   exit 1
