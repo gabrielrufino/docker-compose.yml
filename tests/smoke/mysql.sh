@@ -1,0 +1,15 @@
+echo "[Smoke] - Mysql\n"
+
+docker compose up -d mysql
+
+wait-on tcp:localhost:3306 --timeout 60000
+
+if [ $? -ne 0 ];
+  then
+    docker compose down -v
+    echo "[Fail]"
+    exit 1
+fi
+
+docker compose down -v
+echo "[Pass]"
