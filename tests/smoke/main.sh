@@ -19,4 +19,5 @@ sh $FILEDIR/nginx.sh && \
 sh $FILEDIR/phpmyadmin.sh && \
 sh $FILEDIR/redis.sh && \
 sh $FILEDIR/postgres.sh && \
-sh $FILEDIR/verdaccio.sh
+sh $FILEDIR/verdaccio.sh && \
+sh $FILEDIR/shlink.sh
