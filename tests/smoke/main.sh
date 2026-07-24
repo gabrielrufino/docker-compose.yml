@@ -9,10 +9,14 @@ sh $FILEDIR/gitea.sh && \
 sh $FILEDIR/grafana.sh && \
 sh $FILEDIR/localstack.sh && \
 sh $FILEDIR/loki.sh && \
+sh $FILEDIR/mariadb.sh && \
 sh $FILEDIR/matomo.sh && \
 sh $FILEDIR/metabase.sh && \
 sh $FILEDIR/mongo.sh && \
+sh $FILEDIR/mysql.sh && \
 sh $FILEDIR/nextcloud.sh && \
 sh $FILEDIR/nginx.sh && \
 sh $FILEDIR/phpmyadmin.sh && \
+sh $FILEDIR/redis.sh && \
+sh $FILEDIR/postgres.sh && \
 sh $FILEDIR/verdaccio.sh
