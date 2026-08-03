@@ -20,4 +20,5 @@ sh $FILEDIR/phpmyadmin.sh && \
 sh $FILEDIR/redis.sh && \
 sh $FILEDIR/postgres.sh && \
 sh $FILEDIR/verdaccio.sh && \
-sh $FILEDIR/shlink.sh
+sh $FILEDIR/shlink.sh && \
+sh $FILEDIR/dozzle.sh
