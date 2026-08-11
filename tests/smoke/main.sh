@@ -1,6 +1,8 @@
 echo "---- Smoke tests ----"
 
-npm i -g wait-on
+if ! command -v wait-on >/dev/null 2>&1; then
+  npm i -g wait-on
+fi
 
 FILEPATH=$(realpath $0)
 FILEDIR=$(dirname $FILEPATH)
