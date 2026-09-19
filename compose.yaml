@@ -88,6 +88,29 @@ services:
       - traefik.http.routers.grafana.tls.certresolver=letsencrypt
     logging: *default-logging
     restart: ${GRAFANA_RESTART_POLICY-no}
+  hermes:
+    image: nousresearch/hermes-agent:${HERMES_VERSION-latest}
+    command: gateway run
+    ports:
+      - 8642:8642
+      - 9119:9119
+    environment:
+      HERMES_DASHBOARD: ${HERMES_DASHBOARD-1}
+      HERMES_DASHBOARD_BASIC_AUTH_USERNAME: ${HERMES_DASHBOARD_BASIC_AUTH_USERNAME-admin}
+      HERMES_DASHBOARD_BASIC_AUTH_PASSWORD: ${HERMES_DASHBOARD_BASIC_AUTH_PASSWORD-admin}
+      HERMES_GATEWAY_BOOTSTRAP_STATE: ${HERMES_GATEWAY_BOOTSTRAP_STATE-running}
+      HERMES_UID: ${HERMES_UID-10000}
+      HERMES_GID: ${HERMES_GID-10000}
+    volumes:
+      - hermes:/opt/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.hermes.rule=Host(`${HERMES_TRAEFIK_HOST-hermes.localhost}`)
+      - traefik.http.routers.hermes.tls=true
+      - traefik.http.routers.hermes.tls.certresolver=letsencrypt
+      - traefik.http.services.hermes.loadbalancer.server.port=9119
+    logging: *default-logging
+    restart: ${HERMES_RESTART_POLICY-no}
   hoppscotch:
     image: hoppscotch/hoppscotch:${HOPPSCOTCH_VERSION-main}
     ports:
@@ -564,6 +587,7 @@ volumes:
   appsmith:
   gitea:
   grafana:
+  hermes:
   localstack:
   loki-config:
   loki-data:
