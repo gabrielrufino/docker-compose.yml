@@ -6,7 +6,7 @@ x-logging: &default-logging
 
 services:
   appsmith:
-    image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1.99}
+    image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1}
     ports:
       - 8085:80
     volumes:
@@ -26,14 +26,14 @@ services:
     logging: *default-logging
     restart: ${ARCHLINUX_RESTART_POLICY-no}
   debian:
-    image: debian:${DEBIAN_VERSION-12.6}
+    image: debian:${DEBIAN_VERSION-12}
     tty: true
     volumes:
       - ./volumes/debian/:/home/shared
     logging: *default-logging
     restart: ${DEBIAN_RESTART_POLICY-no}
   dozzle:
-    image: amir20/dozzle:${DOZZLE_VERSION-v10.6.9}
+    image: amir20/dozzle:${DOZZLE_VERSION-v10}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./config/dozzle:/data
@@ -88,6 +88,29 @@ services:
       - traefik.http.routers.grafana.tls.certresolver=letsencrypt
     logging: *default-logging
     restart: ${GRAFANA_RESTART_POLICY-no}
+  hermes:
+    image: nousresearch/hermes-agent:${HERMES_VERSION-latest}
+    command: gateway run
+    ports:
+      - 8642:8642
+      - 9119:9119
+    environment:
+      HERMES_DASHBOARD: ${HERMES_DASHBOARD-1}
+      HERMES_DASHBOARD_BASIC_AUTH_USERNAME: ${HERMES_DASHBOARD_BASIC_AUTH_USERNAME-admin}
+      HERMES_DASHBOARD_BASIC_AUTH_PASSWORD: ${HERMES_DASHBOARD_BASIC_AUTH_PASSWORD-admin}
+      HERMES_GATEWAY_BOOTSTRAP_STATE: ${HERMES_GATEWAY_BOOTSTRAP_STATE-running}
+      HERMES_UID: ${HERMES_UID-10000}
+      HERMES_GID: ${HERMES_GID-10000}
+    volumes:
+      - hermes:/opt/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.hermes.rule=Host(`${HERMES_TRAEFIK_HOST-hermes.localhost}`)
+      - traefik.http.routers.hermes.tls=true
+      - traefik.http.routers.hermes.tls.certresolver=letsencrypt
+      - traefik.http.services.hermes.loadbalancer.server.port=9119
+    logging: *default-logging
+    restart: ${HERMES_RESTART_POLICY-no}
   hoppscotch:
     image: hoppscotch/hoppscotch:${HOPPSCOTCH_VERSION-main}
     ports:
@@ -134,7 +157,7 @@ services:
     logging: *default-logging
     restart: ${LINKSTACK_RESTART_POLICY-no}
   loki:
-    image: grafana/loki:${LOKI_VERSION-3.5.9}
+    image: grafana/loki:${LOKI_VERSION-3}
     ports:
       - 3100:3100
     volumes:
@@ -144,7 +167,7 @@ services:
     logging: *default-logging
     restart: ${LOKI_RESTART_POLICY-no}
   mautic:
-    image: mautic/mautic:${MAUTIC_VERSION-5.2.5-apache}
+    image: mautic/mautic:${MAUTIC_VERSION-5-apache}
     ports:
       - 8084:80
     environment:
@@ -171,7 +194,7 @@ services:
     logging: *default-logging
     restart: ${MARIADB_RESTART_POLICY-no}
   matomo:
-    image: matomo:${MATOMO_VERSION-5.6.2}
+    image: matomo:${MATOMO_VERSION-5}
     ports:
       - 8086:80
     volumes:
@@ -199,7 +222,7 @@ services:
     logging: *default-logging
     restart: ${METABASE_RESTART_POLICY-no}
   mongo:
-    image: mongo:${MONGO_VERSION-7.0.21}
+    image: mongo:${MONGO_VERSION-7}
     ports:
       - 27017:27017
     environment:
@@ -210,7 +233,7 @@ services:
     logging: *default-logging
     restart: ${MONGO_RESTART_POLICY-no}
   mysql:
-    image: mysql:${MYSQL_VERSION-8.1.0}
+    image: mysql:${MYSQL_VERSION-8}
     command: |
       --default-authentication-plugin=mysql_native_password
       --character-set-server=utf8mb4
@@ -226,7 +249,7 @@ services:
     logging: *default-logging
     restart: ${MYSQL_RESTART_POLICY-no}
   nextcloud:
-    image: nextcloud:${NEXTCLOUD_VERSION-27.0.1}
+    image: nextcloud:${NEXTCLOUD_VERSION-27}
     ports:
       - 8083:80
     volumes:
@@ -239,7 +262,7 @@ services:
     logging: *default-logging
     restart: ${NEXTCLOUD_RESTART_POLICY-no}
   nginx:
-    image: nginx:${NGINX_VERSION-1.23.1}
+    image: nginx:${NGINX_VERSION-1}
     ports:
       - 8081:80
       # - 443:433
@@ -249,7 +272,7 @@ services:
     logging: *default-logging
     restart: ${NGINX_RESTART_POLICY-no}
   node-exporter:
-    image: prom/node-exporter:${NODE_EXPORTER_VERSION-v1.10.2}
+    image: prom/node-exporter:${NODE_EXPORTER_VERSION-v1}
     container_name: ${NODE_EXPORTER_CONTAINER_NAME-node-exporter}
     command:
       - '--path.rootfs=/host'
@@ -323,7 +346,7 @@ services:
     logging: *default-logging
     restart: ${OUTLINE_RESTART_POLICY-no}
   pgadmin:
-    image: dpage/pgadmin4:${PGADMIN_VERSION:-8.14.0}
+    image: dpage/pgadmin4:${PGADMIN_VERSION:-8}
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-root@gabrielrufino.com}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-root}
@@ -339,7 +362,7 @@ services:
     logging: *default-logging
     restart: ${PGADMIN_RESTART_POLICY:-no}
   phpmyadmin:
-    image: phpmyadmin:${PHPMYADMIN_VERSION-5.2.0}
+    image: phpmyadmin:${PHPMYADMIN_VERSION-5}
     environment:
       PMA_ARBITRARY: 1
     ports:
@@ -363,7 +386,7 @@ services:
     logging: *default-logging
     restart: ${PORTAINER_RESTART_POLICY-no}
   postgres:
-    image: postgres:${POSTGRESQL_VERSION:-15.15}
+    image: postgres:${POSTGRESQL_VERSION:-15}
     environment:
       POSTGRES_USER: ${POSTGRESQL_USER:-root}
       POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD:-root}
@@ -374,7 +397,7 @@ services:
     logging: *default-logging
     restart: ${POSTGRESQL_RESTART_POLICY:-no}
   prometheus:
-    image: prom/prometheus:${PROMETHEUS_VERSION-v3.7.3}
+    image: prom/prometheus:${PROMETHEUS_VERSION-v3}
     ports:
       - 9090:9090
     volumes:
@@ -384,7 +407,7 @@ services:
     logging: *default-logging
     restart: ${PROMETHEUS_RESTART_POLICY-no}
   promtail:
-    image: grafana/promtail:${PROMTAIL_VERSION-3.5.7}
+    image: grafana/promtail:${PROMTAIL_VERSION-3}
     ports:
       - 9080:9080
     volumes:
@@ -396,7 +419,7 @@ services:
     logging: *default-logging
     restart: ${PROMTAIL_RESTART_POLICY-no}
   rabbitmq:
-    image: rabbitmq:${RABBITMQ_VERSION-3.11.13-management}
+    image: rabbitmq:${RABBITMQ_VERSION-3-management}
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER-root}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS-root}
@@ -415,7 +438,7 @@ services:
     logging: *default-logging
     restart: ${RABBITMQ_RESTART_POLICY-no}
   redis:
-    image: redis:${REDIS_VERSION-7.4.4}
+    image: redis:${REDIS_VERSION-7}
     ports:
       - 6379:6379
     command: redis-server --requirepass "${REDIS_PASSWORD-}"
@@ -437,7 +460,7 @@ services:
     logging: *default-logging
     restart: ${REDISINSIGHT_RESTART_POLICY-no}
   rethinkdb:
-    image: rethinkdb:${RETHINKDB_VERSION-2.4.2}
+    image: rethinkdb:${RETHINKDB_VERSION-2}
     ports:
       - 28015:28015
       - 28016:8080
@@ -446,7 +469,7 @@ services:
     logging: *default-logging
     restart: ${RETHINKDB_RESTART_POLICY-no}
   shlink:
-    image: shlinkio/shlink:${SHLINK_VERSION-4.4.6}
+    image: shlinkio/shlink:${SHLINK_VERSION-4}
     ports:
       - 8088:8080
     environment:
@@ -483,7 +506,7 @@ services:
     logging: *default-logging
     restart: ${SQLSERVER_RESTART_POLICY-no}
   traefik:
-    image: traefik:${TRAEFIK_VERSION-v2.11.31}
+    image: traefik:${TRAEFIK_VERSION-v2}
     command:
       - --providers.docker
       - --providers.docker.exposedByDefault=false
@@ -522,7 +545,7 @@ services:
     logging: *default-logging
     restart: ${UBUNTU_RESTART_POLICY-no}
   verdaccio:
-    image: verdaccio/verdaccio:${VERDACCIO_VERSION-5.26}
+    image: verdaccio/verdaccio:${VERDACCIO_VERSION-5}
     environment:
       VERDACCIO_PORT: 4873
     ports:
@@ -564,6 +587,7 @@ volumes:
   appsmith:
   gitea:
   grafana:
+  hermes:
   localstack:
   loki-config:
   loki-data:
