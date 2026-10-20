@@ -15,7 +15,11 @@ cleanup() {
   fi
 }
 
-echo 'admin:' > config/dozzle/users.yml
+cat > config/dozzle/users.yml << 'EOF'
+- username: admin
+  password: ""
+  readonly: false
+EOF
 
 if ! docker compose up -d --wait dozzle; then
   cleanup
