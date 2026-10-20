@@ -1,8 +1,6 @@
 printf "[Smoke] - Hermes\n"
 
-docker compose up -d hermes
-
-if ! wait-on http-get://localhost:9119 --timeout 60000; then
+if ! docker compose up -d --wait hermes; then
   docker compose down -v
   echo "[Fail]"
   exit 1
