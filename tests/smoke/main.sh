@@ -5,6 +5,7 @@ FILEDIR=$(dirname $FILEPATH)
 
 sh $FILEDIR/gitea.sh && \
 sh $FILEDIR/grafana.sh && \
+sh $FILEDIR/hermes.sh && \
 sh $FILEDIR/localstack.sh && \
 sh $FILEDIR/loki.sh && \
 sh $FILEDIR/mariadb.sh && \
