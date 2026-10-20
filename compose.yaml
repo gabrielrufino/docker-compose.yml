@@ -42,6 +42,7 @@ services:
     environment:
       # Note: Requires users.yml in ./config/dozzle/users.yml to start successfully
       DOZZLE_AUTH_PROVIDER: simple
+      DOZZLE_ENABLE_MCP: true
     labels:
       - traefik.enable=true
       - traefik.http.routers.dozzle.rule=Host(`${DOZZLE_TRAEFIK_HOST-dozzle.localhost}`)
