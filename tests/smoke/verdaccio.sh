@@ -1,8 +1,10 @@
 echo "[Smoke] - Verdaccio\n"
 
-docker compose up -d verdaccio
-
-wait-on http://localhost:4873 --timeout 60000
+if ! docker compose up -d --wait verdaccio; then
+  docker compose down -v
+  echo "[Fail]"
+  exit 1
+fi
 
 HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}\n" http://localhost:4873)
 if [ $HTTP_STATUS -ne 200  ];

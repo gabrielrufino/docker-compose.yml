@@ -1,20 +1,34 @@
-echo "[Smoke] - Dozzle\n"
+printf "[Smoke] - Dozzle\n"
+
+HAD_USERS_FILE=0
+if [ -f config/dozzle/users.yml ]; then
+  HAD_USERS_FILE=1
+  cp config/dozzle/users.yml config/dozzle/users.yml.bak
+fi
+
+cleanup() {
+  docker compose down -v
+  if [ "$HAD_USERS_FILE" -eq 1 ]; then
+    mv config/dozzle/users.yml.bak config/dozzle/users.yml
+  else
+    rm -f config/dozzle/users.yml
+  fi
+}
 
 echo 'admin:' > config/dozzle/users.yml
 
-docker compose up -d dozzle
-
-wait-on tcp:localhost:8090 --timeout 60000
-
-HTTP_STATUS=$(curl -L -o /dev/null -s -w "%{http_code}\n" http://localhost:8090/)
-if [ $HTTP_STATUS -ne 200  ];
-  then
-    docker compose down -v
-    rm config/dozzle/users.yml
-    echo "[Fail]"
-    exit 1
+if ! docker compose up -d --wait dozzle; then
+  cleanup
+  echo "[Fail]"
+  exit 1
 fi
 
-docker compose down -v
-rm config/dozzle/users.yml
+HTTP_STATUS=$(curl -L -o /dev/null -s -w "%{http_code}\n" http://localhost:8090/)
+if [ "$HTTP_STATUS" -ne 200 ]; then
+  cleanup
+  echo "[Fail]"
+  exit 1
+fi
+
+cleanup
 echo "[Pass]"

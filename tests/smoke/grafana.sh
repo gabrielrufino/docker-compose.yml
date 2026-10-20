@@ -1,8 +1,10 @@
 echo "[Smoke] - Grafana\n"
 
-docker compose up -d grafana
-
-wait-on http://localhost:3000/login --timeout 60000
+if ! docker compose up -d --wait grafana; then
+  docker compose down -v
+  echo "[Fail]"
+  exit 1
+fi
 
 HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}\n" http://localhost:3000/login)
 if [ $HTTP_STATUS -ne 200  ];
