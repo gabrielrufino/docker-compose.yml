@@ -1,11 +1,13 @@
 services:
   akhq:
-    image: tchiotludo/akhq
+    image: tchiotludo/akhq:${AKHQ_VERSION-latest}
     configs:
       - source: akhq_config
         target: /app/application.yml
     ports:
       - 8089:8080
+    depends_on:
+      - kafka
     restart: ${AKHQ_RESTART_POLICY-no}
   appsmith:
     image: appsmith/appsmith-ce:${APPSMITH_VERSION-v1.99}
@@ -76,15 +78,21 @@ services:
     environment:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
-      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9093
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
       KAFKA_LISTENERS: DOCKER://0.0.0.0:29092,LOCAL://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
       KAFKA_ADVERTISED_LISTENERS: DOCKER://kafka:29092,LOCAL://localhost:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,DOCKER:PLAINTEXT,LOCAL:PLAINTEXT
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_CLUSTER_ID: '4L62xd2TIG67_5YgZgDcJA'
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
     ports:
       - 9092:9092
+    volumes:
+      - kafka:/var/lib/kafka/data
     restart: ${KAFKA_RESTART_POLICY-no}
   kali:
     image: kalilinux/kali-rolling:${KALI_VERSION-latest}
@@ -517,6 +525,7 @@ volumes:
   appsmith:
   gitea:
   grafana:
+  kafka:
   localstack:
   loki-config:
   loki-data:
@@ -547,4 +556,4 @@ configs:
         connections:
           local:
             properties:
-              bootstrap.servers: "${AKHQ_BOOTSTRAP_SERVERS:-kafka:29092}"
+              bootstrap.servers: "${AKHQ_BOOTSTRAP_SERVERS-kafka:29092}"
